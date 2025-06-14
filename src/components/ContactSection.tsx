@@ -56,42 +56,24 @@ const ContactSection = () => {
         {/* Section header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold cyber-text mb-6">
-            Terminal de Contacto
+            Conectemos
           </h2>
           <p className="text-xl text-quantum-silver max-w-3xl mx-auto">
-            Establece una conexión directa conmigo a través del protocolo de comunicación cuántica
+            ¿Tienes un proyecto en mente? Hablemos sobre cómo puedo ayudarte a llevarlo al siguiente nivel
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Terminal simulator */}
-          <div className="cyber-glass rounded-lg p-6">
-            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-cyber-lime/30">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="ml-4 text-quantum-silver font-mono text-sm">terminal.exe</span>
-            </div>
-            
-            <div className="h-80 overflow-y-auto font-mono text-sm">
-              {terminalLines.map((line, index) => (
-                <div key={index} className="text-cyber-lime mb-2">
-                  {line}
-                </div>
-              ))}
-              <div className="flex items-center text-cyber-lime">
-                <span>{'> '}</span>
-                <span className="animate-pulse">_</span>
-              </div>
-            </div>
-          </div>
-
           {/* Contact form */}
-          <div className="cyber-glass rounded-lg p-6">
+          <div className="cyber-glass rounded-lg p-8">
+            <h3 className="text-2xl font-space-grotesk font-bold text-quantum-silver mb-6">
+              Envíame un mensaje
+            </h3>
+            
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-quantum-silver font-space-grotesk font-medium mb-2">
-                  Identificación
+                  Nombre
                 </label>
                 <input
                   type="text"
@@ -106,7 +88,7 @@ const ContactSection = () => {
 
               <div>
                 <label className="block text-quantum-silver font-space-grotesk font-medium mb-2">
-                  Canal de Comunicación
+                  Email
                 </label>
                 <input
                   type="email"
@@ -121,7 +103,7 @@ const ContactSection = () => {
 
               <div>
                 <label className="block text-quantum-silver font-space-grotesk font-medium mb-2">
-                  Transmisión de Datos
+                  Mensaje
                 </label>
                 <textarea
                   name="message"
@@ -135,48 +117,79 @@ const ContactSection = () => {
               </div>
 
               <CyberButton
-                type="submit"
                 size="lg"
                 disabled={isSubmitting}
                 className="w-full"
               >
                 {isSubmitting ? (
                   <>
-                    <span className="animate-pulse">Transmitiendo...</span>
+                    <span className="animate-pulse">Enviando...</span>
                     <div className="w-4 h-4 border-2 border-void-black border-t-transparent rounded-full animate-spin ml-2" />
                   </>
                 ) : (
-                  'Enviar Transmisión'
+                  'Enviar Mensaje'
                 )}
               </CyberButton>
             </form>
           </div>
-        </div>
 
-        {/* Contact info */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div className="text-center cyber-glass rounded-lg p-6">
-            <div className="w-12 h-12 bg-cyber-lime/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-cyber-lime text-xl">📧</span>
+          {/* Contact info & stats */}
+          <div className="space-y-8">
+            {/* Professional stats */}
+            <div className="cyber-glass rounded-lg p-8">
+              <h3 className="text-2xl font-space-grotesk font-bold text-quantum-silver mb-6">
+                Experiencia
+              </h3>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="text-center">
+                  <div className="text-4xl font-space-grotesk font-bold cyber-text mb-2">2+</div>
+                  <p className="text-quantum-silver text-sm">Años de experiencia</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-space-grotesk font-bold cyber-text mb-2">10+</div>
+                  <p className="text-quantum-silver text-sm">Proyectos completados</p>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-space-grotesk font-semibold text-quantum-silver mb-2">Email</h3>
-            <p className="text-cyber-lime">contacto@alexcyber.dev</p>
-          </div>
 
-          <div className="text-center cyber-glass rounded-lg p-6">
-            <div className="w-12 h-12 bg-cyber-lime/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-cyber-lime text-xl">🌐</span>
-            </div>
-            <h3 className="text-xl font-space-grotesk font-semibold text-quantum-silver mb-2">LinkedIn</h3>
-            <p className="text-cyber-lime">linkedin.com/in/alexcyber</p>
-          </div>
+            {/* Contact methods */}
+            <div className="space-y-4">
+              <div className="cyber-glass rounded-lg p-6 hover:border-cyber-lime transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-cyber-lime/20 rounded-full flex items-center justify-center">
+                    <span className="text-cyber-lime text-xl">📧</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-space-grotesk font-semibold text-quantum-silver">Email</h4>
+                    <p className="text-cyber-lime">anderson.gonzalez.dev@gmail.com</p>
+                  </div>
+                </div>
+              </div>
 
-          <div className="text-center cyber-glass rounded-lg p-6">
-            <div className="w-12 h-12 bg-cyber-lime/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-cyber-lime text-xl">📱</span>
+              <div className="cyber-glass rounded-lg p-6 hover:border-cyber-lime transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-cyber-lime/20 rounded-full flex items-center justify-center">
+                    <span className="text-cyber-lime text-xl">💼</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-space-grotesk font-semibold text-quantum-silver">LinkedIn</h4>
+                    <p className="text-cyber-lime">linkedin.com/in/anderson-gonzalez</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="cyber-glass rounded-lg p-6 hover:border-cyber-lime transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-cyber-lime/20 rounded-full flex items-center justify-center">
+                    <span className="text-cyber-lime text-xl">⚡</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-space-grotesk font-semibold text-quantum-silver">Respuesta rápida</h4>
+                    <p className="text-quantum-silver">Usualmente respondo en 24 horas</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-space-grotesk font-semibold text-quantum-silver mb-2">WhatsApp</h3>
-            <p className="text-cyber-lime">+1 (555) 123-4567</p>
           </div>
         </div>
       </div>
