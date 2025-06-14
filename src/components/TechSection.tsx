@@ -118,11 +118,11 @@ const TechSection = () => {
         {/* Stats section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
           <div className="text-center">
-            <div className="text-4xl font-space-grotesk font-bold cyber-text mb-2">50+</div>
+            <div className="text-4xl font-space-grotesk font-bold cyber-text mb-2">10+</div>
             <div className="text-quantum-silver">Proyectos Completados</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-space-grotesk font-bold cyber-text mb-2">5+</div>
+            <div className="text-4xl font-space-grotesk font-bold cyber-text mb-2">2+</div>
             <div className="text-quantum-silver">Años de Experiencia</div>
           </div>
           <div className="text-center">
