@@ -6,23 +6,6 @@ import GlitchText from './GlitchText';
 import CyberButton from './CyberButton';
 
 const HeroSection = () => {
-  const [typewriterText, setTypewriterText] = useState('');
-  const fullText = "Desarrollador Full Stack | 2+ años de experiencia | 10+ proyectos completados";
-
-  useEffect(() => {
-    let currentIndex = 0;
-    const interval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setTypewriterText(fullText.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -62,16 +45,6 @@ const HeroSection = () => {
           <div className="inline-block bg-cyber-lime/10 border border-cyber-lime/30 rounded-full px-6 py-3 mb-6">
             <p className="text-cyber-lime font-space-grotesk font-semibold text-lg">
               Desarrollador Full Stack
-            </p>
-          </div>
-        </div>
-
-        {/* Enhanced typewriter description */}
-        <div className="mb-12">
-          <div className="cyber-glass rounded-lg p-6 max-w-4xl mx-auto">
-            <p className="text-lg md:text-xl text-quantum-silver font-inter leading-relaxed">
-              {typewriterText}
-              <span className="animate-pulse text-cyber-lime ml-1">|</span>
             </p>
           </div>
         </div>
