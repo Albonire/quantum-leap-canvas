@@ -1,12 +1,52 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import CyberCursor from '@/components/CyberCursor';
+import ParticleBackground from '@/components/ParticleBackground';
+import MatrixRain from '@/components/MatrixRain';
+import HeroSection from '@/components/HeroSection';
+import TechSection from '@/components/TechSection';
+import ProjectsSection from '@/components/ProjectsSection';
+import ContactSection from '@/components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-cyber-gradient relative overflow-hidden">
+      {/* Background effects */}
+      <MatrixRain />
+      <ParticleBackground />
+      <CyberCursor />
+      
+      {/* Matrix dots pattern */}
+      <div className="fixed inset-0 matrix-dots pointer-events-none z-0" />
+      
+      {/* Main content */}
+      <main className="relative z-10">
+        <HeroSection />
+        <TechSection />
+        <ProjectsSection />
+        <ContactSection />
+      </main>
+      
+      {/* Footer */}
+      <footer className="relative z-10 py-8 px-6 border-t border-cyber-lime/20">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-quantum-silver font-inter">
+            © 2024 Alex Cyber. Desarrollado con{' '}
+            <span className="text-cyber-lime animate-pulse">❤️</span>
+            {' '}y tecnología del futuro.
+          </p>
+          <div className="mt-4 flex justify-center gap-6">
+            <a href="#" className="text-quantum-silver hover:text-cyber-lime transition-colors">
+              GitHub
+            </a>
+            <a href="#" className="text-quantum-silver hover:text-cyber-lime transition-colors">
+              LinkedIn
+            </a>
+            <a href="#" className="text-quantum-silver hover:text-cyber-lime transition-colors">
+              Twitter
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

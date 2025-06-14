@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,6 +53,14 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Cyber theme colors
+				'deep-emerald': '#0a5f38',
+				'cyber-lime': '#a4ff00',
+				'neural-gray': '#1a1f2d',
+				'quantum-silver': '#e0e5ec',
+				'void-black': '#0d1117',
+				'matrix-green': '#00ff41',
+				'neon-cyan': '#00ffff',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -62,6 +71,10 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			fontFamily: {
+				'space-grotesk': ['Space Grotesk', 'sans-serif'],
+				'inter': ['Inter', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +97,95 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'glow-pulse': {
+					'0%, 100%': {
+						boxShadow: '0 0 20px #a4ff00, 0 0 40px #a4ff00, 0 0 60px #a4ff00'
+					},
+					'50%': {
+						boxShadow: '0 0 10px #a4ff00, 0 0 20px #a4ff00, 0 0 30px #a4ff00'
+					}
+				},
+				'particle-float': {
+					'0%': {
+						transform: 'translateY(0px) rotate(0deg)',
+						opacity: '1'
+					},
+					'100%': {
+						transform: 'translateY(-100px) rotate(360deg)',
+						opacity: '0'
+					}
+				},
+				'matrix-rain': {
+					'0%': {
+						transform: 'translateY(-100vh)',
+						opacity: '0'
+					},
+					'10%': {
+						opacity: '1'
+					},
+					'90%': {
+						opacity: '1'
+					},
+					'100%': {
+						transform: 'translateY(100vh)',
+						opacity: '0'
+					}
+				},
+				'glitch': {
+					'0%': {
+						transform: 'translate(0)'
+					},
+					'20%': {
+						transform: 'translate(-2px, 2px)'
+					},
+					'40%': {
+						transform: 'translate(-2px, -2px)'
+					},
+					'60%': {
+						transform: 'translate(2px, 2px)'
+					},
+					'80%': {
+						transform: 'translate(2px, -2px)'
+					},
+					'100%': {
+						transform: 'translate(0)'
+					}
+				},
+				'holographic': {
+					'0%': {
+						backgroundPosition: '0% 50%'
+					},
+					'50%': {
+						backgroundPosition: '100% 50%'
+					},
+					'100%': {
+						backgroundPosition: '0% 50%'
+					}
+				},
+				'cyber-scan': {
+					'0%': {
+						transform: 'translateX(-100%)'
+					},
+					'100%': {
+						transform: 'translateX(100%)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+				'particle-float': 'particle-float 3s ease-in-out infinite',
+				'matrix-rain': 'matrix-rain 2s linear infinite',
+				'glitch': 'glitch 0.3s ease-in-out infinite',
+				'holographic': 'holographic 3s ease-in-out infinite',
+				'cyber-scan': 'cyber-scan 2s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'cyber-gradient': 'linear-gradient(135deg, #0d1117, #1a1f2d, #0a5f38)',
+				'holographic': 'linear-gradient(45deg, #a4ff00, #00ffff, #a4ff00, #00ffff)',
+				'neural-mesh': 'radial-gradient(circle at 20% 80%, #0a5f38 0%, transparent 50%), radial-gradient(circle at 80% 20%, #1a1f2d 0%, transparent 50%), radial-gradient(circle at 40% 40%, #a4ff00 0%, transparent 50%)'
 			}
 		}
 	},
