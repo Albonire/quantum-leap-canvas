@@ -45,6 +45,24 @@ const ContactSection = () => {
           </p>
         </div>
 
+        {/* Command Console */}
+        <div className="cyber-glass rounded-lg p-6 mb-12 max-w-3xl mx-auto">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            <span className="text-quantum-silver text-sm ml-4 font-mono">anderson@terminal:~$</span>
+          </div>
+          <div className="font-mono text-sm text-quantum-silver space-y-2">
+            <div className="text-cyber-lime">$ cat about.txt</div>
+            <div>Desarrollador Full Stack especializado en crear experiencias digitales únicas</div>
+            <div className="text-cyber-lime">$ ls skills/</div>
+            <div>React TypeScript Node.js Python PostgreSQL Docker AWS</div>
+            <div className="text-cyber-lime">$ echo "¿Listo para colaborar?"</div>
+            <div className="text-matrix-green animate-pulse">¿Listo para colaborar?</div>
+          </div>
+        </div>
+
         {/* Contact form - centered and simplified */}
         <div className="cyber-glass rounded-lg p-8 max-w-2xl mx-auto">
           <h3 className="text-2xl font-space-grotesk font-bold text-quantum-silver mb-6 text-center">
