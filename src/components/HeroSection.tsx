@@ -70,22 +70,6 @@ const HeroSection = () => {
           </CyberButton>
         </div>
 
-        {/* Professional highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-16">
-          <div className="cyber-glass rounded-lg p-4 hover:border-cyber-lime transition-colors">
-            <div className="text-2xl font-space-grotesk font-bold cyber-text">2+</div>
-            <p className="text-quantum-silver text-sm">Años experiencia</p>
-          </div>
-          <div className="cyber-glass rounded-lg p-4 hover:border-cyber-lime transition-colors">
-            <div className="text-2xl font-space-grotesk font-bold cyber-text">10+</div>
-            <p className="text-quantum-silver text-sm">Proyectos completados</p>
-          </div>
-          <div className="cyber-glass rounded-lg p-4 hover:border-cyber-lime transition-colors">
-            <div className="text-2xl font-space-grotesk font-bold cyber-text">100%</div>
-            <p className="text-quantum-silver text-sm">Satisfacción cliente</p>
-          </div>
-        </div>
-
         {/* Enhanced scroll indicator */}
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
           <div className="w-6 h-10 border-2 border-cyber-lime rounded-full flex justify-center animate-pulse">
