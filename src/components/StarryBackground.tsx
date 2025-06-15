@@ -20,43 +20,80 @@ const StarryBackground = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Star properties
+    // Star properties with movement
     const stars: Array<{
       x: number;
       y: number;
-      baseX: number;
-      baseY: number;
+      z: number;
       radius: number;
       alpha: number;
       twinkleSpeed: number;
       twinklePhase: number;
       brightness: number;
+      velocityX: number;
+      velocityY: number;
+      velocityZ: number;
     }> = [];
 
-    // Create stars with more natural distribution
+    // Galaxy properties
+    const galaxies: Array<{
+      x: number;
+      y: number;
+      rotation: number;
+      rotationSpeed: number;
+      size: number;
+      alpha: number;
+      arms: number;
+      color: { r: number; g: number; b: number };
+    }> = [];
+
+    // Create moving stars
     const createStars = () => {
-      const numStars = Math.floor((canvas.width * canvas.height) / 4000);
+      const numStars = Math.floor((canvas.width * canvas.height) / 3000);
       stars.length = 0;
       
       for (let i = 0; i < numStars; i++) {
-        const baseX = Math.random() * canvas.width;
-        const baseY = Math.random() * canvas.height;
-        
         stars.push({
-          x: baseX,
-          y: baseY,
-          baseX: baseX,
-          baseY: baseY,
-          radius: Math.random() * 1.5 + 0.3, // Smaller, more realistic stars
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          z: Math.random() * 1000,
+          radius: Math.random() * 1.8 + 0.2,
           alpha: Math.random() * 0.8 + 0.2,
-          twinkleSpeed: Math.random() * 0.005 + 0.001, // Slower, more natural twinkling
+          twinkleSpeed: Math.random() * 0.008 + 0.002,
           twinklePhase: Math.random() * Math.PI * 2,
-          brightness: Math.random() * 0.5 + 0.5, // Different star brightnesses
+          brightness: Math.random() * 0.6 + 0.4,
+          velocityX: (Math.random() - 0.5) * 0.3,
+          velocityY: (Math.random() - 0.5) * 0.3,
+          velocityZ: Math.random() * 0.5 + 0.1,
+        });
+      }
+    };
+
+    // Create spiral galaxies
+    const createGalaxies = () => {
+      const numGalaxies = 3;
+      galaxies.length = 0;
+      
+      for (let i = 0; i < numGalaxies; i++) {
+        galaxies.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() * 0.002 + 0.001) * (Math.random() > 0.5 ? 1 : -1),
+          size: Math.random() * 80 + 40,
+          alpha: Math.random() * 0.15 + 0.05,
+          arms: Math.floor(Math.random() * 3) + 2,
+          color: {
+            r: Math.random() * 50 + 100,
+            g: Math.random() * 50 + 150,
+            b: Math.random() * 100 + 200
+          }
         });
       }
     };
 
     createStars();
+    createGalaxies();
 
     // Animation loop
     const animate = () => {
@@ -66,50 +103,117 @@ const StarryBackground = () => {
 
       const time = Date.now() * 0.0001;
 
-      // Draw and animate stars
-      stars.forEach((star, index) => {
-        // Very subtle movement - like distant parallax
-        const parallaxX = Math.sin(time * 0.1 + index * 0.1) * 0.3;
-        const parallaxY = Math.cos(time * 0.15 + index * 0.15) * 0.2;
+      // Draw and animate galaxies
+      galaxies.forEach((galaxy) => {
+        galaxy.rotation += galaxy.rotationSpeed;
         
-        star.x = star.baseX + parallaxX;
-        star.y = star.baseY + parallaxY;
-
-        // Natural twinkling using sine wave
-        star.twinklePhase += star.twinkleSpeed;
-        const twinkle = (Math.sin(star.twinklePhase) + 1) * 0.5; // 0 to 1
-        const currentAlpha = star.alpha * star.brightness * (0.3 + twinkle * 0.7);
-
-        // Draw star core
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha})`;
-        ctx.fill();
-
-        // Add subtle glow for brighter stars
-        if (star.brightness > 0.7 && currentAlpha > 0.5) {
+        ctx.save();
+        ctx.translate(galaxy.x, galaxy.y);
+        ctx.rotate(galaxy.rotation);
+        
+        // Draw spiral arms
+        for (let arm = 0; arm < galaxy.arms; arm++) {
+          const armAngle = (arm * Math.PI * 2) / galaxy.arms;
+          
           ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius * 2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha * 0.1})`;
-          ctx.fill();
+          for (let i = 0; i < 100; i++) {
+            const t = i / 100;
+            const radius = t * galaxy.size;
+            const angle = armAngle + t * Math.PI * 4;
+            
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius * 0.3; // Flatten the spiral
+            
+            const alpha = galaxy.alpha * (1 - t * 0.8);
+            
+            if (i === 0) {
+              ctx.moveTo(x, y);
+            } else {
+              ctx.lineTo(x, y);
+            }
+          }
+          
+          const gradient = ctx.createLinearGradient(-galaxy.size, 0, galaxy.size, 0);
+          gradient.addColorStop(0, `rgba(${galaxy.color.r}, ${galaxy.color.g}, ${galaxy.color.b}, 0)`);
+          gradient.addColorStop(0.5, `rgba(${galaxy.color.r}, ${galaxy.color.g}, ${galaxy.color.b}, ${galaxy.alpha})`);
+          gradient.addColorStop(1, `rgba(${galaxy.color.r}, ${galaxy.color.g}, ${galaxy.color.b}, 0)`);
+          
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = 2;
+          ctx.stroke();
         }
+        
+        // Galaxy center glow
+        const centerGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, galaxy.size * 0.3);
+        centerGradient.addColorStop(0, `rgba(${galaxy.color.r + 50}, ${galaxy.color.g + 50}, ${galaxy.color.b}, ${galaxy.alpha * 2})`);
+        centerGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        
+        ctx.beginPath();
+        ctx.arc(0, 0, galaxy.size * 0.3, 0, Math.PI * 2);
+        ctx.fillStyle = centerGradient;
+        ctx.fill();
+        
+        ctx.restore();
+      });
 
-        // Very bright stars get a soft cross pattern
-        if (star.brightness > 0.9 && currentAlpha > 0.8) {
-          ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.3})`;
-          ctx.lineWidth = 0.5;
-          
-          // Vertical line
+      // Draw and animate stars
+      stars.forEach((star) => {
+        // Move stars through 3D space
+        star.x += star.velocityX;
+        star.y += star.velocityY;
+        star.z -= star.velocityZ;
+
+        // Wrap around screen edges
+        if (star.x < -10) star.x = canvas.width + 10;
+        if (star.x > canvas.width + 10) star.x = -10;
+        if (star.y < -10) star.y = canvas.height + 10;
+        if (star.y > canvas.height + 10) star.y = -10;
+        if (star.z <= 0) star.z = 1000;
+
+        // Calculate star size based on distance (3D effect)
+        const scale = 1000 / star.z;
+        const x = star.x;
+        const y = star.y;
+        const radius = star.radius * scale;
+
+        // Natural twinkling
+        star.twinklePhase += star.twinkleSpeed;
+        const twinkle = (Math.sin(star.twinklePhase) + 1) * 0.5;
+        const currentAlpha = star.alpha * star.brightness * (0.4 + twinkle * 0.6) * scale;
+
+        // Only draw visible stars
+        if (radius > 0.1 && currentAlpha > 0.01) {
+          // Draw star core
           ctx.beginPath();
-          ctx.moveTo(star.x, star.y - star.radius * 3);
-          ctx.lineTo(star.x, star.y + star.radius * 3);
-          ctx.stroke();
-          
-          // Horizontal line
-          ctx.beginPath();
-          ctx.moveTo(star.x - star.radius * 3, star.y);
-          ctx.lineTo(star.x + star.radius * 3, star.y);
-          ctx.stroke();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(currentAlpha, 1)})`;
+          ctx.fill();
+
+          // Add glow for closer/brighter stars
+          if (star.brightness > 0.7 && currentAlpha > 0.4) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius * 3, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(currentAlpha * 0.15, 0.3)})`;
+            ctx.fill();
+          }
+
+          // Bright stars get cross pattern
+          if (star.brightness > 0.9 && currentAlpha > 0.6 && radius > 0.8) {
+            ctx.strokeStyle = `rgba(255, 255, 255, ${Math.min(currentAlpha * 0.4, 0.6)})`;
+            ctx.lineWidth = 0.5;
+            
+            // Vertical line
+            ctx.beginPath();
+            ctx.moveTo(x, y - radius * 4);
+            ctx.lineTo(x, y + radius * 4);
+            ctx.stroke();
+            
+            // Horizontal line
+            ctx.beginPath();
+            ctx.moveTo(x - radius * 4, y);
+            ctx.lineTo(x + radius * 4, y);
+            ctx.stroke();
+          }
         }
       });
 
