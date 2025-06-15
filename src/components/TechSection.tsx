@@ -38,10 +38,10 @@ const TechSection = () => {
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold text-charcoal dark:text-cyber-lime mb-6">
+          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold text-gray-900 dark:text-cyber-lime mb-6">
             Arsenal Tecnológico
           </h2>
-          <p className="text-xl text-steel-gray dark:text-quantum-silver max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-quantum-silver max-w-2xl mx-auto font-medium">
             Dominando las tecnologías que impulsan el futuro digital
           </p>
         </div>
@@ -54,8 +54,8 @@ const TechSection = () => {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-2 rounded-full font-space-grotesk font-medium transition-all duration-300 ${
                 selectedCategory === category
-                  ? 'bg-sage-accent dark:bg-cyber-lime text-charcoal dark:text-void-black'
-                  : 'bg-white/40 dark:bg-neural-gray/50 text-charcoal dark:text-quantum-silver hover:bg-sage-accent/20 dark:hover:bg-cyber-lime/20 hover:text-sage-accent dark:hover:text-cyber-lime border border-sage-accent/20 dark:border-transparent'
+                  ? 'bg-sage-accent dark:bg-cyber-lime text-white dark:text-void-black shadow-lg'
+                  : 'bg-white/70 dark:bg-neural-gray/50 text-gray-700 dark:text-quantum-silver hover:bg-sage-accent/20 dark:hover:bg-cyber-lime/20 hover:text-sage-accent dark:hover:text-cyber-lime border border-sage-accent/30 dark:border-transparent'
               }`}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -68,20 +68,20 @@ const TechSection = () => {
           {filteredSkills.map((skill) => (
             <div
               key={skill.name}
-              className="relative group bg-white/40 dark:bg-black/20 backdrop-blur-md p-6 rounded-lg border border-sage-accent/20 dark:border-cyber-lime/20 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 shadow-sm"
+              className="relative group bg-white/70 dark:bg-black/20 backdrop-blur-md p-6 rounded-lg border border-sage-accent/30 dark:border-cyber-lime/20 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 shadow-sm"
               onMouseEnter={() => setHoveredSkill(skill.name)}
               onMouseLeave={() => setHoveredSkill(null)}
             >
               {/* Skill name and percentage */}
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-space-grotesk font-semibold text-charcoal dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
+                <h3 className="text-xl font-space-grotesk font-semibold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
                   {skill.name}
                 </h3>
                 <span className="text-sage-accent dark:text-cyber-lime font-bold">{skill.level}%</span>
               </div>
 
               {/* Progress bar */}
-              <div className="relative h-2 bg-steel-gray/30 dark:bg-neural-gray rounded-full overflow-hidden">
+              <div className="relative h-2 bg-gray-300 dark:bg-neural-gray rounded-full overflow-hidden">
                 <div
                   className="absolute top-0 left-0 h-full bg-gradient-to-r from-sage-accent to-mint-accent dark:from-cyber-lime dark:to-matrix-green transition-all duration-1000 ease-out"
                   style={{
@@ -118,16 +118,16 @@ const TechSection = () => {
         {/* Stats section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
           <div className="text-center">
-            <div className="text-4xl font-space-grotesk font-bold text-charcoal dark:text-cyber-lime mb-2">10+</div>
-            <div className="text-steel-gray dark:text-quantum-silver">Proyectos Completados</div>
+            <div className="text-4xl font-space-grotesk font-bold text-gray-900 dark:text-cyber-lime mb-2">10+</div>
+            <div className="text-gray-600 dark:text-quantum-silver font-medium">Proyectos Completados</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-space-grotesk font-bold text-charcoal dark:text-cyber-lime mb-2">2+</div>
-            <div className="text-steel-gray dark:text-quantum-silver">Años de Experiencia</div>
+            <div className="text-4xl font-space-grotesk font-bold text-gray-900 dark:text-cyber-lime mb-2">2+</div>
+            <div className="text-gray-600 dark:text-quantum-silver font-medium">Años de Experiencia</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-space-grotesk font-bold text-charcoal dark:text-cyber-lime mb-2">24/7</div>
-            <div className="text-steel-gray dark:text-quantum-silver">Disponibilidad</div>
+            <div className="text-4xl font-space-grotesk font-bold text-gray-900 dark:text-cyber-lime mb-2">24/7</div>
+            <div className="text-gray-600 dark:text-quantum-silver font-medium">Disponibilidad</div>
           </div>
         </div>
       </div>

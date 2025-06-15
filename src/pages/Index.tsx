@@ -28,19 +28,19 @@ const Index = () => {
       {/* Footer */}
       <footer className="relative z-10 py-8 px-6 border-t border-sage-accent/30 dark:border-cyber-lime/20">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-charcoal dark:text-quantum-silver font-inter">
+          <p className="text-gray-800 dark:text-quantum-silver font-inter font-medium">
             © 2024 Anderson González. Desarrollado con{' '}
             <span className="text-sage-accent dark:text-cyber-lime animate-pulse">❤️</span>
             {' '}y tecnología del futuro.
           </p>
           <div className="mt-4 flex justify-center gap-6">
-            <a href="#" className="text-charcoal dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors">
+            <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium">
               GitHub
             </a>
-            <a href="#" className="text-charcoal dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors">
+            <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium">
               LinkedIn
             </a>
-            <a href="#" className="text-charcoal dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors">
+            <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium">
               Twitter
             </a>
           </div>

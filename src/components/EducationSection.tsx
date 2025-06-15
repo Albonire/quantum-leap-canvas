@@ -72,10 +72,10 @@ const EducationSection = () => {
       <div className="max-w-4xl mx-auto">
         {/* Section header - más compacto */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-space-grotesk font-bold text-charcoal dark:text-cyber-lime mb-3">
+          <h2 className="text-3xl md:text-4xl font-space-grotesk font-bold text-gray-900 dark:text-cyber-lime mb-3">
             Mi Formación
           </h2>
-          <p className="text-base text-steel-gray dark:text-quantum-silver/80 max-w-2xl mx-auto">
+          <p className="text-base text-gray-600 dark:text-quantum-silver/80 max-w-2xl mx-auto font-medium">
             El camino del aprendizaje continuo en tecnología
           </p>
         </div>
@@ -89,23 +89,23 @@ const EducationSection = () => {
               onClick={() => setSelectedEducation(selectedEducation?.id === education.id ? null : education)}
             >
               <div className={`
-                bg-white/40 dark:bg-black/20 backdrop-blur-md p-4 md:p-5 rounded-lg border transition-all duration-300 shadow-sm
+                bg-white/70 dark:bg-black/20 backdrop-blur-md p-4 md:p-5 rounded-lg border transition-all duration-300 shadow-sm
                 ${selectedEducation?.id === education.id 
                   ? 'border-sage-accent dark:border-cyber-lime bg-sage-accent/10 dark:bg-cyber-lime/10 shadow-lg shadow-sage-accent/20 dark:shadow-cyber-lime/20' 
-                  : 'border-sage-accent/20 dark:border-cyber-lime/20 group-hover:border-sage-accent/40 dark:group-hover:border-cyber-lime/40'
+                  : 'border-sage-accent/30 dark:border-cyber-lime/20 group-hover:border-sage-accent/60 dark:group-hover:border-cyber-lime/40'
                 }
               `}>
                 {/* Header compacto */}
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-4">
                     <span className={`
-                      px-3 py-1 rounded-full text-sm font-bold text-charcoal dark:text-void-black
+                      px-3 py-1 rounded-full text-sm font-bold text-white dark:text-void-black
                       ${getTypeColor(education.type)}
                     `}>
                       {education.year}
                     </span>
                     <div>
-                      <h3 className="text-lg font-space-grotesk font-bold text-charcoal dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
+                      <h3 className="text-lg font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
                         {education.title}
                       </h3>
                       <p className="text-sage-accent dark:text-cyber-lime font-medium text-sm">
@@ -123,8 +123,8 @@ const EducationSection = () => {
                   overflow-hidden transition-all duration-300
                   ${selectedEducation?.id === education.id ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}
                 `}>
-                  <div className="pt-2 border-t border-sage-accent/20 dark:border-cyber-lime/20">
-                    <p className="text-steel-gray dark:text-quantum-silver/80 text-sm leading-relaxed">
+                  <div className="pt-2 border-t border-sage-accent/30 dark:border-cyber-lime/20">
+                    <p className="text-gray-600 dark:text-quantum-silver/80 text-sm leading-relaxed font-medium">
                       {education.description}
                     </p>
                   </div>
@@ -132,7 +132,7 @@ const EducationSection = () => {
                 
                 {/* Indicador más sutil */}
                 <div className="mt-2 text-center">
-                  <span className="text-xs text-steel-gray/40 dark:text-quantum-silver/40">
+                  <span className="text-xs text-gray-400 dark:text-quantum-silver/40">
                     {selectedEducation?.id === education.id ? '▲' : '▼'}
                   </span>
                 </div>

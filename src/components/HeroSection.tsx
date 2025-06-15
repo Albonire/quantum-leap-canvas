@@ -29,10 +29,10 @@ const HeroSection = () => {
       <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
         {/* Professional greeting */}
         <div className="mb-8">
-          <p className="text-lg md:text-xl text-charcoal dark:text-quantum-silver font-inter mb-4 tracking-wide">
+          <p className="text-lg md:text-xl text-gray-700 dark:text-quantum-silver font-inter mb-4 tracking-wide font-medium">
             Hola, soy
           </p>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-space-grotesk font-bold mb-4 text-charcoal dark:text-quantum-silver">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-space-grotesk font-bold mb-4 text-gray-900 dark:text-quantum-silver">
             <GlitchText trigger="auto" intensity="medium">
               Anderson
             </GlitchText>
@@ -42,7 +42,7 @@ const HeroSection = () => {
           </h2>
           
           {/* Professional title with enhanced styling */}
-          <div className="inline-block bg-sage-accent/10 dark:bg-cyber-lime/10 border border-sage-accent/30 dark:border-cyber-lime/30 rounded-full px-6 py-3 mb-8">
+          <div className="inline-block bg-sage-accent/20 dark:bg-cyber-lime/10 border border-sage-accent/50 dark:border-cyber-lime/30 rounded-full px-6 py-3 mb-8">
             <p className="text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold text-lg">
               Desarrollador Full Stack
             </p>
@@ -51,14 +51,14 @@ const HeroSection = () => {
 
         {/* Personal Description */}
         <div className="mb-12 max-w-4xl mx-auto">
-          <div className="bg-white/30 dark:bg-black/20 backdrop-blur-md rounded-2xl p-8 border border-sage-accent/20 dark:border-emerald-accent/20 shadow-lg">
-            <p className="text-lg md:text-xl text-charcoal dark:text-pearl-white/90 font-inter leading-relaxed mb-4">
+          <div className="bg-white/60 dark:bg-black/20 backdrop-blur-md rounded-2xl p-8 border border-sage-accent/30 dark:border-emerald-accent/20 shadow-lg">
+            <p className="text-lg md:text-xl text-gray-800 dark:text-pearl-white/90 font-inter leading-relaxed mb-4 font-medium">
               Soy un desarrollador apasionado por crear soluciones digitales innovadoras. 
               Con experiencia en tecnologías modernas como <span className="text-sage-accent dark:text-cyber-lime font-semibold">React</span>, 
               <span className="text-sage-accent dark:text-cyber-lime font-semibold"> Node.js</span> y <span className="text-sage-accent dark:text-cyber-lime font-semibold">Python</span>, 
               me especializo en construir aplicaciones web escalables y experiencias de usuario excepcionales.
             </p>
-            <p className="text-base md:text-lg text-steel-gray dark:text-silver-mist font-inter leading-relaxed">
+            <p className="text-base md:text-lg text-gray-600 dark:text-silver-mist font-inter leading-relaxed font-medium">
               Mi enfoque se centra en la calidad del código, las mejores prácticas de desarrollo 
               y la colaboración efectiva en equipos multidisciplinarios. Siempre busco aprender 
               nuevas tecnologías y enfrentar desafíos que me permitan crecer profesionalmente.
