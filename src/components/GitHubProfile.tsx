@@ -1,19 +1,22 @@
 
-import React, { useState, useEffect } from 'react';
-import { ExternalLink, MapPin, Users, GitFork, Star, Calendar } from 'lucide-react';
-import { format, subDays, eachDayOfInterval, isToday, parseISO } from 'date-fns';
+'use client';
+
+import { useState, useEffect } from 'react';
+import { Github, Star, GitFork, ExternalLink, Calendar, MapPin, Users, Book } from 'lucide-react';
+import CyberButton from './CyberButton';
 
 interface GitHubUser {
   login: string;
   name: string;
-  avatar_url: string;
   bio: string;
-  location: string;
+  avatar_url: string;
+  html_url: string;
   public_repos: number;
   followers: number;
   following: number;
+  location: string;
   created_at: string;
-  html_url: string;
+  company: string;
 }
 
 interface GitHubRepo {
@@ -21,29 +24,21 @@ interface GitHubRepo {
   name: string;
   description: string;
   html_url: string;
-  language: string;
   stargazers_count: number;
   forks_count: number;
+  language: string;
   updated_at: string;
-}
-
-interface ContributionDay {
-  date: string;
-  count: number;
 }
 
 const GitHubProfile = () => {
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
-  const [contributions, setContributions] = useState<ContributionDay[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchGitHubData = async () => {
       try {
-        setLoading(true);
-        
         // Fetch user data
         const userResponse = await fetch('https://api.github.com/users/Albonire');
         if (!userResponse.ok) throw new Error('Failed to fetch user data');
@@ -56,12 +51,9 @@ const GitHubProfile = () => {
         const reposData = await reposResponse.json();
         setRepos(reposData);
 
-        // Generate mock contribution data (since GitHub's contribution API requires authentication)
-        generateMockContributions();
-
+        setLoading(false);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
+        setError(err instanceof Error ? err.message : 'Unknown error');
         setLoading(false);
       }
     };
@@ -69,239 +61,205 @@ const GitHubProfile = () => {
     fetchGitHubData();
   }, []);
 
-  const generateMockContributions = () => {
-    const endDate = new Date();
-    const startDate = subDays(endDate, 365);
-    const days = eachDayOfInterval({ start: startDate, end: endDate });
-    
-    const contributionData = days.map(day => ({
-      date: format(day, 'yyyy-MM-dd'),
-      count: Math.floor(Math.random() * 6) // 0-5 contributions per day
-    }));
-    
-    setContributions(contributionData);
-  };
-
-  const getContributionColor = (count: number) => {
-    if (count === 0) return 'bg-gray-100 dark:bg-gray-800';
-    if (count <= 1) return 'bg-sage-accent/30 dark:bg-cyber-lime/30';
-    if (count <= 2) return 'bg-sage-accent/50 dark:bg-cyber-lime/50';
-    if (count <= 3) return 'bg-sage-accent/70 dark:bg-cyber-lime/70';
-    return 'bg-sage-accent dark:bg-cyber-lime';
-  };
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('es-ES', {
       year: 'numeric',
-      month: 'short'
+      month: 'long'
     });
   };
 
-  const totalContributions = contributions.reduce((sum, day) => sum + day.count, 0);
-
   if (loading) {
     return (
-      <section className="py-20 px-6" id="github">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm rounded-2xl p-8 border border-sage-accent/20 dark:border-cyber-lime/20 shadow-lg">
-            <div className="animate-pulse">
-              <div className="h-8 bg-sage-accent/20 dark:bg-cyber-lime/20 rounded mb-4 w-64 mx-auto"></div>
-              <div className="h-4 bg-sage-accent/20 dark:bg-cyber-lime/20 rounded mb-8 w-96 mx-auto"></div>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="h-48 bg-sage-accent/20 dark:bg-cyber-lime/20 rounded"></div>
-                <div className="h-48 bg-sage-accent/20 dark:bg-cyber-lime/20 rounded"></div>
-                <div className="h-48 bg-sage-accent/20 dark:bg-cyber-lime/20 rounded"></div>
-              </div>
-            </div>
-          </div>
+      <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8">
+        <div className="flex items-center justify-center">
+          <div className="w-8 h-8 border-4 border-sage-accent dark:border-cyber-lime border-t-transparent rounded-full animate-spin"></div>
+          <span className="ml-3 text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold">
+            Cargando perfil de GitHub...
+          </span>
         </div>
-      </section>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <section className="py-20 px-6" id="github">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm rounded-2xl p-8 border border-red-200 dark:border-red-400/20 shadow-lg text-center">
-            <p className="text-red-600 dark:text-red-400">Error loading GitHub profile: {error}</p>
-          </div>
-        </div>
-      </section>
+      <div className="bg-red-100 dark:bg-red-900/20 border-2 border-red-500 rounded-lg p-8">
+        <p className="text-red-600 dark:text-red-400 text-center font-space-grotesk font-semibold">
+          Error al cargar el perfil: {error}
+        </p>
+      </div>
     );
   }
 
   if (!user) return null;
 
   return (
-    <section className="py-20 px-6" id="github">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-16 px-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-4">
-            Mi Perfil de{' '}
-            <span className="text-sage-accent dark:text-cyber-lime">GitHub</span>
+          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold mb-6 text-sage-accent dark:text-cyber-lime">
+            Mi GitHub
           </h2>
-          <p className="text-lg text-gray-600 dark:text-silver-mist font-inter max-w-2xl mx-auto">
-            Explora mis proyectos y contribuciones en código abierto
+          <p className="text-xl max-w-2xl mx-auto font-medium text-black dark:text-quantum-silver">
+            Explora mis proyectos y contribuciones en el código
           </p>
         </div>
 
-        <div className="bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm rounded-2xl p-8 border border-sage-accent/20 dark:border-cyber-lime/20 shadow-lg">
-          {/* Profile Header */}
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
-            <div className="relative">
+        {/* GitHub Profile Card */}
+        <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
+            {/* Avatar and basic info */}
+            <div className="flex flex-col items-center md:items-start">
               <img
                 src={user.avatar_url}
                 alt={user.name}
-                className="w-32 h-32 rounded-full border-4 border-sage-accent dark:border-cyber-lime shadow-lg"
+                className="w-32 h-32 rounded-full border-4 border-sage-accent dark:border-cyber-lime shadow-lg mb-4"
               />
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-sage-accent dark:bg-cyber-lime rounded-full flex items-center justify-center">
-                <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+              <div className="text-center md:text-left">
+                <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-2">
+                  {user.name}
+                </h3>
+                <p className="text-sage-accent dark:text-cyber-lime font-mono font-semibold mb-2">
+                  @{user.login}
+                </p>
+                {user.bio && (
+                  <p className="text-gray-800 dark:text-quantum-silver/90 max-w-md mb-4 font-medium">
+                    {user.bio}
+                  </p>
+                )}
               </div>
             </div>
 
-            <div className="flex-1 text-center md:text-left">
-              <h3 className="text-2xl md:text-3xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-2">
-                {user.name || user.login}
-              </h3>
-              <p className="text-sage-accent dark:text-cyber-lime font-inter font-medium mb-3">
-                @{user.login}
-              </p>
-              {user.bio && (
-                <p className="text-gray-700 dark:text-silver-mist font-inter mb-4 leading-relaxed">
-                  {user.bio}
-                </p>
-              )}
-              
-              <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-4">
+            {/* Stats and info */}
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Stats */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Book className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
+                  <span className="text-gray-900 dark:text-quantum-silver font-medium">
+                    {user.public_repos} repositorios públicos
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Users className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
+                  <span className="text-gray-900 dark:text-quantum-silver font-medium">
+                    {user.followers} seguidores • {user.following} siguiendo
+                  </span>
+                </div>
                 {user.location && (
-                  <div className="flex items-center gap-1 text-gray-600 dark:text-silver-mist">
-                    <MapPin size={16} />
-                    <span className="font-inter">{user.location}</span>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
+                    <span className="text-gray-900 dark:text-quantum-silver font-medium">
+                      {user.location}
+                    </span>
                   </div>
                 )}
-                <div className="flex items-center gap-1 text-gray-600 dark:text-silver-mist">
-                  <Calendar size={16} />
-                  <span className="font-inter">Desde {formatDate(user.created_at)}</span>
+                <div className="flex items-center gap-3">
+                  <Calendar className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
+                  <span className="text-gray-900 dark:text-quantum-silver font-medium">
+                    Desde {formatDate(user.created_at)}
+                  </span>
                 </div>
               </div>
 
-              <div className="flex justify-center md:justify-start gap-6 mb-6">
-                <div className="text-center">
-                  <div className="text-2xl font-space-grotesk font-bold text-sage-accent dark:text-cyber-lime">
-                    {user.public_repos}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-silver-mist font-inter">Repositorios</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-space-grotesk font-bold text-sage-accent dark:text-cyber-lime">
-                    {user.followers}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-silver-mist font-inter">Seguidores</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-space-grotesk font-bold text-sage-accent dark:text-cyber-lime">
-                    {user.following}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-silver-mist font-inter">Siguiendo</div>
-                </div>
-              </div>
-
-              <a
-                href={user.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-sage-accent dark:bg-cyber-lime text-white dark:text-charcoal px-6 py-3 rounded-lg font-inter font-medium hover:bg-sage-accent/80 dark:hover:bg-cyber-lime/80 transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                Ver perfil completo
-                <ExternalLink size={18} />
-              </a>
-            </div>
-          </div>
-
-          {/* Contribution Calendar */}
-          <div className="border-t border-sage-accent/20 dark:border-cyber-lime/20 pt-8 mb-8">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-              <h4 className="text-xl font-space-grotesk font-semibold text-gray-900 dark:text-quantum-silver mb-2 sm:mb-0">
-                {totalContributions} contribuciones en el último año
-              </h4>
-              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-silver-mist">
-                <span>Menos</span>
-                <div className="flex gap-1">
-                  <div className="w-3 h-3 rounded-sm bg-gray-100 dark:bg-gray-800"></div>
-                  <div className="w-3 h-3 rounded-sm bg-sage-accent/30 dark:bg-cyber-lime/30"></div>
-                  <div className="w-3 h-3 rounded-sm bg-sage-accent/50 dark:bg-cyber-lime/50"></div>
-                  <div className="w-3 h-3 rounded-sm bg-sage-accent/70 dark:bg-cyber-lime/70"></div>
-                  <div className="w-3 h-3 rounded-sm bg-sage-accent dark:bg-cyber-lime"></div>
-                </div>
-                <span>Más</span>
-              </div>
-            </div>
-            
-            <div className="overflow-x-auto">
-              <div className="inline-block min-w-full">
-                <div className="grid grid-cols-53 gap-1" style={{ gridTemplateColumns: 'repeat(53, 1fr)', width: '100%', minWidth: '800px' }}>
-                  {contributions.map((day, index) => (
-                    <div
-                      key={day.date}
-                      className={`w-3 h-3 rounded-sm ${getContributionColor(day.count)} transition-all duration-200 hover:scale-110 cursor-pointer`}
-                      title={`${day.count} contribuciones en ${day.date}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Repositories Grid */}
-          <div className="border-t border-sage-accent/20 dark:border-cyber-lime/20 pt-8">
-            <h4 className="text-xl font-space-grotesk font-semibold text-gray-900 dark:text-quantum-silver mb-6">
-              Repositorios Recientes
-            </h4>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {repos.map((repo) => (
-                <a
-                  key={repo.id}
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-white/60 dark:bg-black/20 backdrop-blur-sm rounded-lg p-6 border border-sage-accent/30 dark:border-cyber-lime/20 hover:border-sage-accent/50 dark:hover:border-cyber-lime/40 transition-all duration-300 hover:transform hover:scale-105 shadow-md hover:shadow-lg"
+              {/* Action button */}
+              <div className="flex items-center justify-center md:justify-end">
+                <CyberButton
+                  size="lg"
+                  onClick={() => window.open(user.html_url, '_blank')}
+                  className="group"
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <h5 className="font-space-grotesk font-semibold text-gray-900 dark:text-quantum-silver truncate">
-                      {repo.name}
-                    </h5>
-                    <ExternalLink size={16} className="text-sage-accent dark:text-cyber-lime flex-shrink-0 ml-2" />
-                  </div>
-                  
-                  {repo.description && (
-                    <p className="text-sm text-gray-600 dark:text-silver-mist font-inter mb-4 line-clamp-2">
-                      {repo.description}
-                    </p>
-                  )}
-                  
-                  <div className="flex items-center justify-between text-xs text-gray-500 dark:text-silver-mist">
-                    <div className="flex items-center gap-3">
-                      {repo.language && (
-                        <span className="flex items-center gap-1">
-                          <div className="w-3 h-3 rounded-full bg-sage-accent dark:bg-cyber-lime"></div>
-                          {repo.language}
-                        </span>
-                      )}
-                      <span className="flex items-center gap-1">
-                        <Star size={12} />
+                  <Github className="w-5 h-5 mr-2" />
+                  Ver perfil completo
+                  <ExternalLink className="w-4 h-4 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
+                </CyberButton>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Recent Repositories */}
+        <div className="mb-8">
+          <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
+            Repositorios Recientes
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {repos.map((repo) => (
+              <div
+                key={repo.id}
+                className="bg-white/60 dark:bg-neural-gray/40 backdrop-blur-md border-2 border-sage-accent/30 dark:border-cyber-lime/20 rounded-lg p-6 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 group hover:scale-105 shadow-lg"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h4 className="text-lg font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
+                    {repo.name}
+                  </h4>
+                  <ExternalLink 
+                    className="w-4 h-4 text-gray-600 dark:text-quantum-silver/60 group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors cursor-pointer"
+                    onClick={() => window.open(repo.html_url, '_blank')}
+                  />
+                </div>
+                
+                {repo.description && (
+                  <p className="text-gray-700 dark:text-quantum-silver/80 text-sm mb-4 line-clamp-2 font-medium">
+                    {repo.description}
+                  </p>
+                )}
+
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-4">
+                    {repo.language && (
+                      <span className="text-sage-accent dark:text-cyber-lime font-mono font-semibold">
+                        {repo.language}
+                      </span>
+                    )}
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      <span className="text-gray-700 dark:text-quantum-silver/80 font-medium">
                         {repo.stargazers_count}
                       </span>
-                      <span className="flex items-center gap-1">
-                        <GitFork size={12} />
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <GitFork className="w-4 h-4 text-gray-500 dark:text-quantum-silver/60" />
+                      <span className="text-gray-700 dark:text-quantum-silver/80 font-medium">
                         {repo.forks_count}
                       </span>
                     </div>
-                    <span>Actualizado {formatDate(repo.updated_at)}</span>
                   </div>
-                </a>
-              ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Call to action */}
+        <div className="text-center">
+          <div className="bg-sage-accent/15 dark:bg-neural-gray/30 border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 backdrop-blur-sm">
+            <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-4">
+              ¿Listo para colaborar?
+            </h3>
+            <p className="text-gray-800 dark:text-quantum-silver/90 mb-6 max-w-2xl mx-auto font-medium">
+              Si tienes algún proyecto interesante o quieres contribuir a alguno de mis repositorios, 
+              no dudes en contactarme. ¡Siempre estoy abierto a nuevas colaboraciones!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <CyberButton
+                size="lg"
+                onClick={() => window.open('https://github.com/Albonire', '_blank')}
+              >
+                <Github className="w-5 h-5 mr-2" />
+                Explorar GitHub
+              </CyberButton>
+              <CyberButton
+                variant="secondary"
+                size="lg"
+                onClick={() => {
+                  const element = document.getElementById('contact');
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Iniciar Proyecto
+              </CyberButton>
             </div>
           </div>
         </div>
