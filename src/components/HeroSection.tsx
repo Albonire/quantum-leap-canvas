@@ -47,7 +47,7 @@ const HeroSection = () => {
       </div>
 
       {/* Main content with zoom in effect */}
-      <div className={`relative z-10 text-center max-w-5xl mx-auto px-6 transition-all duration-1000 ease-out ${
+      <div className={`relative z-10 text-center max-w-5xl mx-auto px-6 mt-24 transition-all duration-1000 ease-out ${
         isLoaded 
           ? 'scale-100 opacity-100' 
           : 'scale-95 opacity-0'
