@@ -56,7 +56,7 @@ const educationData: Education[] = [
 ];
 
 const EducationSection = () => {
-  const [selectedEducation, setSelectedEducation] = useState<Education | null>(educationData[0]);
+  const [selectedEducation, setSelectedEducation] = useState<Education | null>(null);
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -77,122 +77,100 @@ const EducationSection = () => {
   };
 
   return (
-    <section id="education" className="py-20 px-6 relative">
-      <div className="max-w-6xl mx-auto">
+    <section id="education" className="py-16 px-6 relative">
+      <div className="max-w-4xl mx-auto">
         {/* Section header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold cyber-text mb-6">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-space-grotesk font-bold cyber-text mb-4">
             Mi Formación
           </h2>
-          <p className="text-xl text-quantum-silver max-w-2xl mx-auto">
+          <p className="text-lg text-quantum-silver/80 max-w-2xl mx-auto">
             El camino del aprendizaje continuo en tecnología
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Timeline */}
-          <div className="relative">
-            <h3 className="text-2xl font-space-grotesk font-bold text-cyber-lime mb-8">
-              Línea Temporal
-            </h3>
-            
-            {/* Timeline line */}
-            <div className="absolute left-6 top-20 bottom-0 w-0.5 bg-gradient-to-b from-cyber-lime via-matrix-green to-cyber-lime opacity-50" />
-            
-            <div className="space-y-8">
-              {educationData.map((education, index) => (
+        {/* Timeline */}
+        <div className="relative">
+          {/* Central timeline line */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-cyber-lime via-matrix-green to-neon-cyan opacity-30" />
+          
+          <div className="space-y-8">
+            {educationData.map((education, index) => (
+              <div
+                key={education.id}
+                className={`relative flex items-center ${
+                  index % 2 === 0 ? 'justify-start' : 'justify-end'
+                }`}
+              >
+                {/* Timeline connector */}
+                <div className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-2 border-cyber-lime z-10 ${
+                  selectedEducation?.id === education.id 
+                    ? 'bg-cyber-lime shadow-lg shadow-cyber-lime/50 scale-125' 
+                    : 'bg-neural-gray'
+                }`} />
+                
+                {/* Content card */}
                 <div
-                  key={education.id}
-                  className={`relative flex items-center cursor-pointer group transition-all duration-300 ${
-                    selectedEducation?.id === education.id ? 'scale-105' : 'hover:scale-102'
-                  }`}
-                  onClick={() => setSelectedEducation(education)}
+                  className={`
+                    w-5/12 cursor-pointer transition-all duration-300 group
+                    ${index % 2 === 0 ? 'mr-auto pr-8' : 'ml-auto pl-8'}
+                    ${selectedEducation?.id === education.id ? 'scale-105' : 'hover:scale-102'}
+                  `}
+                  onClick={() => setSelectedEducation(selectedEducation?.id === education.id ? null : education)}
                 >
-                  {/* Timeline dot */}
                   <div className={`
-                    relative z-10 w-12 h-12 rounded-full border-2 border-cyber-lime flex items-center justify-center
-                    transition-all duration-300 ${
-                      selectedEducation?.id === education.id 
-                        ? 'bg-cyber-lime scale-110 shadow-lg shadow-cyber-lime/50' 
-                        : 'bg-neural-gray group-hover:bg-cyber-lime/20'
+                    cyber-glass p-6 rounded-lg border transition-all duration-300
+                    ${selectedEducation?.id === education.id 
+                      ? 'border-cyber-lime bg-cyber-lime/10 shadow-lg shadow-cyber-lime/20' 
+                      : 'border-cyber-lime/20 group-hover:border-cyber-lime/40'
                     }
                   `}>
-                    <span className="text-lg">
-                      {selectedEducation?.id === education.id ? '✨' : getTypeIcon(education.type)}
-                    </span>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className={`ml-6 cyber-glass p-4 rounded-lg flex-1 transition-all duration-300 ${
-                    selectedEducation?.id === education.id ? 'border-cyber-lime bg-cyber-lime/5' : ''
-                  }`}>
-                    <div className="flex items-center gap-3 mb-2">
+                    {/* Year badge */}
+                    <div className="flex items-center justify-between mb-4">
                       <span className={`
-                        px-3 py-1 rounded-full text-xs font-bold text-void-black
+                        px-4 py-2 rounded-full text-sm font-bold text-void-black
                         ${getTypeColor(education.type)}
                       `}>
                         {education.year}
                       </span>
-                      <span className="text-cyber-lime text-sm font-medium capitalize">
-                        {education.type}
+                      <span className="text-2xl">
+                        {getTypeIcon(education.type)}
                       </span>
                     </div>
-                    <h4 className="font-space-grotesk font-semibold text-quantum-silver group-hover:text-cyber-lime transition-colors">
+                    
+                    {/* Content */}
+                    <h3 className="text-xl font-space-grotesk font-bold text-quantum-silver mb-2 group-hover:text-cyber-lime transition-colors">
                       {education.title}
-                    </h4>
-                    <p className="text-sm text-quantum-silver/70 mt-1">
+                    </h3>
+                    <p className="text-cyber-lime font-medium mb-3">
                       {education.institution}
                     </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Detailed view */}
-          <div className="lg:sticky lg:top-8 lg:self-start">
-            <h3 className="text-2xl font-space-grotesk font-bold text-cyber-lime mb-8">
-              Detalles
-            </h3>
-            
-            {selectedEducation && (
-              <div className="cyber-glass p-8 rounded-lg border-cyber-lime/30">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className={`
-                    w-16 h-16 rounded-full flex items-center justify-center text-2xl
-                    ${getTypeColor(selectedEducation.type)}
-                  `}>
-                    {getTypeIcon(selectedEducation.type)}
-                  </div>
-                  <div>
-                    <span className={`
-                      px-4 py-1 rounded-full text-sm font-bold text-void-black
-                      ${getTypeColor(selectedEducation.type)}
+                    
+                    {/* Expandable description */}
+                    <div className={`
+                      overflow-hidden transition-all duration-300
+                      ${selectedEducation?.id === education.id ? 'max-h-32 opacity-100' : 'max-h-0 opacity-0'}
                     `}>
-                      {selectedEducation.year}
-                    </span>
+                      <div className="pt-3 border-t border-cyber-lime/20">
+                        <p className="text-quantum-silver/80 text-sm leading-relaxed">
+                          {education.description}
+                        </p>
+                        <span className="inline-block mt-2 px-2 py-1 text-xs font-medium bg-cyber-lime/20 text-cyber-lime rounded capitalize">
+                          {education.type}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Click indicator */}
+                    <div className="mt-3 text-center">
+                      <span className="text-xs text-quantum-silver/60">
+                        {selectedEducation?.id === education.id ? 'Click para contraer' : 'Click para expandir'}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                
-                <h4 className="text-2xl font-space-grotesk font-bold text-quantum-silver mb-3">
-                  {selectedEducation.title}
-                </h4>
-                
-                <p className="text-cyber-lime font-medium mb-4">
-                  {selectedEducation.institution}
-                </p>
-                
-                <p className="text-quantum-silver/80 leading-relaxed">
-                  {selectedEducation.description}
-                </p>
-                
-                <div className="mt-6 pt-6 border-t border-cyber-lime/20">
-                  <span className="inline-block px-3 py-1 text-xs font-inter font-medium bg-cyber-lime/20 text-cyber-lime rounded-full capitalize">
-                    {selectedEducation.type}
-                  </span>
                 </div>
               </div>
-            )}
+            ))}
           </div>
         </div>
       </div>
