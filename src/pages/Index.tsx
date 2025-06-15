@@ -1,4 +1,5 @@
 
+import { useState, useEffect } from 'react';
 import CyberCursor from '@/components/CyberCursor';
 import StarryBackground from '@/components/StarryBackground';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -8,8 +9,19 @@ import TechSection from '@/components/TechSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import GitHubProfile from '@/components/GitHubProfile';
 import ContactSection from '@/components/ContactSection';
+import LoadingScreen from '@/components/LoadingScreen';
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
+  if (isLoading) {
+    return <LoadingScreen onLoadingComplete={handleLoadingComplete} />;
+  }
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-cream via-pearl-white to-cream dark:bg-void-black transition-colors duration-300">
       {/* Background effects */}
