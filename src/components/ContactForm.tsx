@@ -15,10 +15,6 @@ import CyberButton from "./CyberButton";
 const ContactForm = () => {
   const { form, onSubmit, isSubmitting } = useContactForm();
 
-  const handleSubmit = (data: any) => {
-    onSubmit(data);
-  };
-
   return (
     <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
       <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
@@ -26,7 +22,7 @@ const ContactForm = () => {
       </h3>
       
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="flex-1 flex flex-col">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 flex flex-col">
           <div className="flex-1 space-y-4">
             <FormField
               control={form.control}
@@ -92,10 +88,10 @@ const ContactForm = () => {
 
           <div className="mt-6 space-y-4">
             <CyberButton
+              type="submit"
               size="lg"
               disabled={isSubmitting}
               className="w-full"
-              onClick={() => form.handleSubmit(handleSubmit)()}
             >
               {isSubmitting ? (
                 <>
