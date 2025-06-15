@@ -51,7 +51,7 @@ const StarryBackground = () => {
           baseY: baseY,
           radius: Math.random() * 1.5 + 0.3,
           alpha: Math.random() * 0.8 + 0.2,
-          twinkleSpeed: Math.random() * 0.015 + 0.008,
+          twinkleSpeed: Math.random() * 0.04 + 0.02, // Increased twinkle speed
           twinklePhase: Math.random() * Math.PI * 2,
           brightness: Math.random() * 0.5 + 0.5,
         });
@@ -67,21 +67,21 @@ const StarryBackground = () => {
       ctx.fillStyle = backgroundColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      const time = Date.now() * 0.0005;
+      const time = Date.now() * 0.001; // Increased time multiplier for faster movement
 
       // Draw and animate stars
       stars.forEach((star, index) => {
-        // Faster, more noticeable movement
-        const parallaxX = Math.sin(time * 0.4 + index * 0.1) * 2.5;
-        const parallaxY = Math.cos(time * 0.5 + index * 0.15) * 1.8;
+        // Much more noticeable movement
+        const parallaxX = Math.sin(time * 0.8 + index * 0.1) * 6; // Increased movement range
+        const parallaxY = Math.cos(time * 1.0 + index * 0.15) * 4; // Increased movement range
         
         star.x = star.baseX + parallaxX;
         star.y = star.baseY + parallaxY;
 
-        // Natural twinkling using sine wave
+        // More dramatic twinkling using sine wave
         star.twinklePhase += star.twinkleSpeed;
         const twinkle = (Math.sin(star.twinklePhase) + 1) * 0.5;
-        const currentAlpha = star.alpha * star.brightness * (0.3 + twinkle * 0.7);
+        const currentAlpha = star.alpha * star.brightness * (0.1 + twinkle * 0.9); // More dramatic alpha variation
 
         // Star color based on theme - más visible en tema claro
         const starColor = theme === 'dark' ? '255, 255, 255' : '120, 120, 120';
@@ -92,29 +92,29 @@ const StarryBackground = () => {
         ctx.fillStyle = `rgba(${starColor}, ${currentAlpha})`;
         ctx.fill();
 
-        // Add subtle glow for brighter stars
-        if (star.brightness > 0.7 && currentAlpha > 0.5) {
+        // Enhanced glow for brighter stars
+        if (star.brightness > 0.7 && currentAlpha > 0.3) {
           ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius * 2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${starColor}, ${currentAlpha * 0.15})`;
+          ctx.arc(star.x, star.y, star.radius * 2.5, 0, Math.PI * 2); // Larger glow
+          ctx.fillStyle = `rgba(${starColor}, ${currentAlpha * 0.25})`;
           ctx.fill();
         }
 
-        // Very bright stars get a soft cross pattern
-        if (star.brightness > 0.9 && currentAlpha > 0.8) {
-          ctx.strokeStyle = `rgba(${starColor}, ${currentAlpha * 0.4})`;
-          ctx.lineWidth = 0.5;
+        // More prominent cross pattern for very bright stars
+        if (star.brightness > 0.9 && currentAlpha > 0.6) {
+          ctx.strokeStyle = `rgba(${starColor}, ${currentAlpha * 0.6})`; // More visible cross
+          ctx.lineWidth = 0.8; // Thicker lines
           
           // Vertical line
           ctx.beginPath();
-          ctx.moveTo(star.x, star.y - star.radius * 3);
-          ctx.lineTo(star.x, star.y + star.radius * 3);
+          ctx.moveTo(star.x, star.y - star.radius * 4);
+          ctx.lineTo(star.x, star.y + star.radius * 4);
           ctx.stroke();
           
           // Horizontal line
           ctx.beginPath();
-          ctx.moveTo(star.x - star.radius * 3, star.y);
-          ctx.lineTo(star.x + star.radius * 3, star.y);
+          ctx.moveTo(star.x - star.radius * 4, star.y);
+          ctx.lineTo(star.x + star.radius * 4, star.y);
           ctx.stroke();
         }
       });
