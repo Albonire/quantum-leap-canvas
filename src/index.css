@@ -1,10 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Import Space Grotesk font */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
@@ -154,6 +154,7 @@
   .cyber-glass {
     background: rgba(26, 31, 46, 0.30);
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(16, 185, 129, 0.15);
     box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
     transition: all 0.3s ease;
