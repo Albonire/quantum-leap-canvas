@@ -89,11 +89,11 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Personal Description with enhanced blur and transparency */}
+        {/* Personal Description with enhanced semi-transparent blur effect */}
         <div className={`mb-12 max-w-4xl mx-auto transition-all duration-700 delay-600 ${
           isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <div className="bg-white/40 dark:bg-black/30 backdrop-blur-lg rounded-2xl p-8 border border-white/30 dark:border-white/10 shadow-2xl shadow-sage-accent/10 dark:shadow-cyber-lime/5">
+          <div className="bg-white/20 dark:bg-black/20 backdrop-blur-xl rounded-2xl p-8 border border-white/20 dark:border-white/10 shadow-2xl shadow-sage-accent/5 dark:shadow-cyber-lime/5">
             <p className="text-lg md:text-xl text-gray-900 dark:text-pearl-white/95 font-inter leading-relaxed mb-4 font-medium">
               Soy un desarrollador apasionado por crear soluciones digitales innovadoras. 
               Con experiencia en tecnologías modernas como <span className="text-sage-accent dark:text-cyber-lime font-semibold">React</span>, 
