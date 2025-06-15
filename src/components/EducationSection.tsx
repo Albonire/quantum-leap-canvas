@@ -67,111 +67,78 @@ const EducationSection = () => {
     }
   };
 
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'degree': return '🎓';
-      case 'certification': return '📜';
-      case 'course': return '💻';
-      default: return '🎓';
-    }
-  };
-
   return (
-    <section id="education" className="py-16 px-6 relative">
+    <section id="education" className="py-12 px-6 relative">
       <div className="max-w-4xl mx-auto">
-        {/* Section header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-space-grotesk font-bold cyber-text mb-4">
+        {/* Section header - más compacto */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-space-grotesk font-bold cyber-text mb-3">
             Mi Formación
           </h2>
-          <p className="text-lg text-quantum-silver/80 max-w-2xl mx-auto">
+          <p className="text-base text-quantum-silver/80 max-w-2xl mx-auto">
             El camino del aprendizaje continuo en tecnología
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Central timeline line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-cyber-lime via-matrix-green to-neon-cyan opacity-30" />
-          
-          <div className="space-y-8">
-            {educationData.map((education, index) => (
-              <div
-                key={education.id}
-                className={`relative flex items-center ${
-                  index % 2 === 0 ? 'justify-start' : 'justify-end'
-                }`}
-              >
-                {/* Timeline connector */}
-                <div className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-2 border-cyber-lime z-10 ${
-                  selectedEducation?.id === education.id 
-                    ? 'bg-cyber-lime shadow-lg shadow-cyber-lime/50 scale-125' 
-                    : 'bg-neural-gray'
-                }`} />
-                
-                {/* Content card */}
-                <div
-                  className={`
-                    w-5/12 cursor-pointer transition-all duration-300 group
-                    ${index % 2 === 0 ? 'mr-auto pr-8' : 'ml-auto pl-8'}
-                    ${selectedEducation?.id === education.id ? 'scale-105' : 'hover:scale-102'}
-                  `}
-                  onClick={() => setSelectedEducation(selectedEducation?.id === education.id ? null : education)}
-                >
-                  <div className={`
-                    cyber-glass p-6 rounded-lg border transition-all duration-300
-                    ${selectedEducation?.id === education.id 
-                      ? 'border-cyber-lime bg-cyber-lime/10 shadow-lg shadow-cyber-lime/20' 
-                      : 'border-cyber-lime/20 group-hover:border-cyber-lime/40'
-                    }
-                  `}>
-                    {/* Year badge */}
-                    <div className="flex items-center justify-between mb-4">
-                      <span className={`
-                        px-4 py-2 rounded-full text-sm font-bold text-void-black
-                        ${getTypeColor(education.type)}
-                      `}>
-                        {education.year}
-                      </span>
-                      <span className="text-2xl">
-                        {getTypeIcon(education.type)}
-                      </span>
-                    </div>
-                    
-                    {/* Content */}
-                    <h3 className="text-xl font-space-grotesk font-bold text-quantum-silver mb-2 group-hover:text-cyber-lime transition-colors">
-                      {education.title}
-                    </h3>
-                    <p className="text-cyber-lime font-medium mb-3">
-                      {education.institution}
-                    </p>
-                    
-                    {/* Expandable description */}
-                    <div className={`
-                      overflow-hidden transition-all duration-300
-                      ${selectedEducation?.id === education.id ? 'max-h-32 opacity-100' : 'max-h-0 opacity-0'}
+        {/* Grid layout más compacto */}
+        <div className="grid gap-4 md:gap-6">
+          {educationData.map((education) => (
+            <div
+              key={education.id}
+              className="cursor-pointer transition-all duration-300 group"
+              onClick={() => setSelectedEducation(selectedEducation?.id === education.id ? null : education)}
+            >
+              <div className={`
+                cyber-glass p-4 md:p-5 rounded-lg border transition-all duration-300
+                ${selectedEducation?.id === education.id 
+                  ? 'border-cyber-lime bg-cyber-lime/10 shadow-lg shadow-cyber-lime/20' 
+                  : 'border-cyber-lime/20 group-hover:border-cyber-lime/40'
+                }
+              `}>
+                {/* Header compacto */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-4">
+                    <span className={`
+                      px-3 py-1 rounded-full text-sm font-bold text-void-black
+                      ${getTypeColor(education.type)}
                     `}>
-                      <div className="pt-3 border-t border-cyber-lime/20">
-                        <p className="text-quantum-silver/80 text-sm leading-relaxed">
-                          {education.description}
-                        </p>
-                        <span className="inline-block mt-2 px-2 py-1 text-xs font-medium bg-cyber-lime/20 text-cyber-lime rounded capitalize">
-                          {education.type}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    {/* Click indicator */}
-                    <div className="mt-3 text-center">
-                      <span className="text-xs text-quantum-silver/60">
-                        {selectedEducation?.id === education.id ? 'Click para contraer' : 'Click para expandir'}
-                      </span>
+                      {education.year}
+                    </span>
+                    <div>
+                      <h3 className="text-lg font-space-grotesk font-bold text-quantum-silver group-hover:text-cyber-lime transition-colors">
+                        {education.title}
+                      </h3>
+                      <p className="text-cyber-lime font-medium text-sm">
+                        {education.institution}
+                      </p>
                     </div>
                   </div>
+                  <span className="text-xs font-medium bg-cyber-lime/20 text-cyber-lime rounded px-2 py-1 capitalize">
+                    {education.type}
+                  </span>
+                </div>
+                
+                {/* Descripción expandible más compacta */}
+                <div className={`
+                  overflow-hidden transition-all duration-300
+                  ${selectedEducation?.id === education.id ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}
+                `}>
+                  <div className="pt-2 border-t border-cyber-lime/20">
+                    <p className="text-quantum-silver/80 text-sm leading-relaxed">
+                      {education.description}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Indicador más sutil */}
+                <div className="mt-2 text-center">
+                  <span className="text-xs text-quantum-silver/40">
+                    {selectedEducation?.id === education.id ? '▲' : '▼'}
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
