@@ -78,7 +78,7 @@ export default function ContactForm() {
             <Input
               id="name"
               {...register('name')}
-              className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime"
+              className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400"
               placeholder="Tu nombre completo"
             />
             {errors.name && (
@@ -94,7 +94,7 @@ export default function ContactForm() {
               id="email"
               type="email"
               {...register('email')}
-              className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime"
+              className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400"
               placeholder="tu@email.com"
             />
             {errors.email && (
@@ -110,7 +110,7 @@ export default function ContactForm() {
           <Textarea
             id="message"
             {...register('message')}
-            className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime min-h-[120px]"
+            className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime min-h-[120px] text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400"
             placeholder="Escribe tu mensaje aquí..."
           />
           {errors.message && (
