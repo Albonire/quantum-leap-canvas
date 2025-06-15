@@ -3,6 +3,7 @@ import CyberCursor from '@/components/CyberCursor';
 import ParticleBackground from '@/components/ParticleBackground';
 import MatrixRain from '@/components/MatrixRain';
 import HeroSection from '@/components/HeroSection';
+import EducationSection from '@/components/EducationSection';
 import TechSection from '@/components/TechSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
@@ -21,6 +22,7 @@ const Index = () => {
       {/* Main content with reduced spacing */}
       <main className="relative z-10 space-y-8">
         <HeroSection />
+        <EducationSection />
         <TechSection />
         <ProjectsSection />
         <ContactSection />
