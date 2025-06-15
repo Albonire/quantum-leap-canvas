@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -12,14 +11,21 @@ const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [terminalHistory, setTerminalHistory] = useState([
-    '$ cat about.txt',
-    'Desarrollador Full Stack especializado en crear experiencias digitales únicas',
-    '$ ls skills/',
-    'React TypeScript Node.js Python PostgreSQL Docker AWS',
-    '$ echo "¿Listo para colaborar?"',
-    '¿Listo para colaborar?'
+    '$ cat welcome.txt',
+    '╔══════════════════════════════════════════════════╗',
+    '║        Bienvenido a Anderson Terminal v2.0       ║',
+    '║              Desarrollador Full Stack            ║',
+    '╚══════════════════════════════════════════════════╝',
+    '$ whoami',
+    'Anderson González - Full Stack Developer',
+    '$ status',
+    '🟢 Online | ⚡ Disponible para proyectos | 🚀 Listo para colaborar',
+    '',
+    '💡 Tip: Escribe "help" para ver todos los comandos disponibles'
   ]);
   const [currentCommand, setCurrentCommand] = useState('');
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -42,9 +48,10 @@ const ContactSection = () => {
       setTerminalHistory(prev => [
         ...prev,
         '$ send_message --to anderson',
-        `✓ Mensaje de ${formData.name} enviado exitosamente`,
-        '$ status',
-        'anderson@terminal: Responderé pronto! 🚀'
+        '📧 Procesando mensaje...',
+        `✅ Mensaje de ${formData.name} enviado exitosamente`,
+        '🤖 Sistema: Responderé pronto! Gracias por contactarme.',
+        ''
       ]);
       
       alert('Mensaje enviado con éxito!');
@@ -53,47 +60,274 @@ const ContactSection = () => {
 
   const executeCommand = (command: string) => {
     const cmd = command.toLowerCase().trim();
+    const args = cmd.split(' ');
+    const baseCmd = args[0];
     let response = '';
     
-    switch (cmd) {
+    // Add command to history
+    setCommandHistory(prev => [...prev, command]);
+    
+    switch (baseCmd) {
       case 'help':
-        response = 'Comandos disponibles: help, skills, projects, contact, clear, whoami, status, about, time';
-        break;
-      case 'skills':
-        response = 'Frontend: React, TypeScript, Tailwind CSS\nBackend: Node.js, Python, PostgreSQL\nTools: Docker, AWS, Git';
-        break;
-      case 'projects':
-        response = 'Portfolio personal, E-commerce platform, Task manager, API REST services';
-        break;
-      case 'contact':
-        response = 'Email: anderson.gonzalez.dev@gmail.com\nEstado: Disponible para nuevos proyectos';
+        response = `Comandos disponibles:
+┌─────────────────┬──────────────────────────────────────┐
+│ Comando         │ Descripción                          │
+├─────────────────┼──────────────────────────────────────┤
+│ help            │ Muestra esta ayuda                   │
+│ about           │ Información personal                 │
+│ skills          │ Tecnologías y habilidades            │
+│ projects        │ Proyectos destacados                 │
+│ experience      │ Experiencia laboral                  │
+│ education       │ Formación académica                  │
+│ contact         │ Información de contacto              │
+│ social          │ Redes sociales                       │
+│ resume          │ Descargar CV                         │
+│ quote           │ Frase motivacional aleatoria         │
+│ joke            │ Chiste de programación               │
+│ weather         │ Clima actual                         │
+│ time            │ Fecha y hora actual                  │
+│ uptime          │ Tiempo de experiencia                │
+│ ping            │ Test de conectividad                 │
+│ whoami          │ Información del usuario              │
+│ pwd             │ Directorio actual                    │
+│ ls              │ Listar contenido                     │
+│ cat [archivo]   │ Mostrar contenido de archivo         │
+│ history         │ Historial de comandos                │
+│ clear           │ Limpiar terminal                     │
+│ exit            │ Mensaje de despedida                 │
+└─────────────────┴──────────────────────────────────────┘`;
         break;
       case 'about':
-        response = 'Desarrollador Full Stack con 5+ años de experiencia\nEspecializado en React, Node.js y soluciones escalables';
+        response = `👨‍💻 Anderson González
+🎯 Full Stack Developer especializado en crear experiencias digitales únicas
+📍 Ubicación: Disponible para trabajo remoto
+💼 Experiencia: 5+ años desarrollando soluciones escalables
+🔥 Pasión: Transformar ideas en productos digitales innovadores`;
         break;
-      case 'whoami':
-        response = 'Anderson González - Full Stack Developer';
+      case 'skills':
+        response = `🚀 Stack Tecnológico:
+
+Frontend:
+├── React.js / Next.js ⚛️
+├── TypeScript 📘
+├── Tailwind CSS 🎨
+├── Vue.js 💚
+└── Angular 🔴
+
+Backend:
+├── Node.js 🟢
+├── Python 🐍
+├── Express.js ⚡
+├── FastAPI 🚀
+└── PostgreSQL 🐘
+
+DevOps & Tools:
+├── Docker 🐳
+├── AWS ☁️
+├── Git/GitHub 📝
+├── MongoDB 🍃
+└── Redis 🔴`;
+        break;
+      case 'projects':
+        response = `📂 Proyectos Destacados:
+
+🛒 E-commerce Platform
+   ├── React + Node.js + PostgreSQL
+   ├── Sistema de pagos integrado
+   └── Dashboard administrativo
+
+📱 Task Manager App
+   ├── Vue.js + Express + MongoDB
+   ├── Real-time collaboration
+   └── Mobile responsive
+
+🎯 Portfolio Personal
+   ├── Next.js + TypeScript
+   ├── Animaciones cyber-punk
+   └── Performance optimizada
+
+🔗 API REST Services
+   ├── Python FastAPI
+   ├── Documentación automática
+   └── Testing completo`;
+        break;
+      case 'experience':
+        response = `💼 Experiencia Profesional:
+
+2022-2024 | Senior Full Stack Developer
+├── Liderazgo de equipo de 5 desarrolladores
+├── Arquitectura de microservicios
+└── Mejora de performance en 40%
+
+2020-2022 | Full Stack Developer
+├── Desarrollo de aplicaciones web complejas
+├── Integración de APIs de terceros
+└── Implementación de metodologías ágiles
+
+2019-2020 | Frontend Developer
+├── Desarrollo en React y Vue.js
+├── Diseño responsive
+└── Optimización SEO`;
+        break;
+      case 'education':
+        response = `🎓 Formación Académica:
+
+2018-2022 | Ingeniería en Sistemas
+├── Universidad Nacional
+├── Especialización en Desarrollo Web
+└── Tesis: Aplicaciones Progressive Web Apps
+
+📚 Certificaciones:
+├── AWS Solutions Architect ☁️
+├── React Advanced Patterns ⚛️
+├── Docker & Kubernetes 🐳
+└── Scrum Master 📋`;
+        break;
+      case 'contact':
+        response = `📞 Información de Contacto:
+
+📧 Email: anderson.gonzalez.dev@gmail.com
+💬 Estado: Disponible
+Respuesta: 24h máximo`;
+        break;
+      case 'social':
+        response = `🌐 Redes Sociales:
+
+├── 📘 LinkedIn: /in/anderson-gonzalez-dev
+├── 🐙 GitHub: /anderson-gonzalez-dev
+├── 🐦 Twitter: @anderson_dev
+├── 📷 Instagram: @anderson.codes
+└── 💼 Portfolio: anderson-dev.com`;
+        break;
+      case 'resume':
+        response = `📄 CV Disponible:
+├── 📥 anderson_gonzalez_cv.pdf
+├── 📊 Formato: PDF profesional
+├── 🔄 Última actualización: Diciembre 2024
+└── 💾 Descarga: [Simular descarga...]
+   ✅ CV descargado exitosamente!`;
+        break;
+      case 'quote':
+        const quotes = [
+          '"El código es poesía en movimiento." - Anderson',
+          '"Debugging es como ser detective en un crimen que tú mismo cometiste." - Anónimo',
+          '"Un buen programador mira ambos lados antes de cruzar una calle de un solo sentido." - Doug Linder',
+          '"El mejor código es el que no necesitas escribir." - Jeff Atwood',
+          '"Primero resuelve el problema, luego escribe el código." - John Johnson'
+        ];
+        response = `💭 ${quotes[Math.floor(Math.random() * quotes.length)]}`;
+        break;
+      case 'joke':
+        const jokes = [
+          '¿Por qué los programadores prefieren el modo oscuro? Porque la luz atrae bugs! 🐛',
+          '¿Cuántos programadores necesitas para cambiar una bombilla? Ninguno, es un problema de hardware. 💡',
+          'Un programador va al supermercado. Su esposa le dice: "Compra pan, y si hay huevos, trae 6". Vuelve con 6 panes. "¿Por qué tanto pan?" "Había huevos" 🥚',
+          '¿Por qué los programadores odian la naturaleza? Tiene demasiados bugs. 🌿',
+          '"Funciona en mi máquina" es el "el perro se comió mi tarea" de los programadores. 🐕'
+        ];
+        response = `😂 ${jokes[Math.floor(Math.random() * jokes.length)]}`;
+        break;
+      case 'weather':
+        response = `🌤️ Clima para Developers:
+├── Temperatura: 23°C (perfecto para codear)
+├── Humedad: 60% (ideal para el teclado)
+├── Viento: 5 km/h (no volará el monitor)
+├── Presión: 1013 hPa (estable como mi código)
+└── Recomendación: ☕ Perfecto para un café y coding`;
         break;
       case 'time':
-        response = new Date().toLocaleString('es-ES');
+        const now = new Date();
+        response = `🕐 Información Temporal:
+├── Fecha: ${now.toLocaleDateString('es-ES', { 
+          weekday: 'long', 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        })}
+├── Hora: ${now.toLocaleTimeString('es-ES')}
+├── Zona: GMT-5
+└── Época Unix: ${Math.floor(now.getTime() / 1000)}`;
         break;
-      case 'status':
-        response = 'Sistema operativo: Desarrollador v2024\nEstado: Listo para colaborar\nUptime: 5+ años';
+      case 'uptime':
+        response = `⏱️ Sistema Anderson v2024:
+├── Tiempo activo: 5+ años de experiencia
+├── Última actualización: Desarrollo continuo
+├── Disponibilidad: 99.9% uptime
+├── Café consumido: ∞ tazas ☕
+└── Líneas de código: 500,000+ 💻`;
+        break;
+      case 'ping':
+        response = `🏓 PING anderson-dev.com:
+├── 64 bytes from anderson: icmp_seq=1 ttl=64 time=0.1ms ✅
+├── 64 bytes from anderson: icmp_seq=2 ttl=64 time=0.1ms ✅
+├── 64 bytes from anderson: icmp_seq=3 ttl=64 time=0.1ms ✅
+└── --- Estadísticas: 3 paquetes, 0% pérdida, tiempo promedio 0.1ms`;
+        break;
+      case 'whoami':
+        response = `👤 anderson
+├── Grupos: developers, fullstack, problem-solvers
+├── Shell: /bin/creativity
+├── Directorio: /home/anderson/projects
+└── Permisos: rwx (read, write, execute dreams)`;
+        break;
+      case 'pwd':
+        response = '/home/anderson/workspace/portfolio/contact-section';
+        break;
+      case 'ls':
+        response = `📁 Contenido del directorio:
+├── 📂 projects/
+├── 📂 skills/
+├── 📂 experience/
+├── 📄 about.txt
+├── 📄 contact.txt
+├── 📄 resume.pdf
+└── 📄 README.md`;
+        break;
+      case 'cat':
+        if (args[1]) {
+          const file = args[1];
+          switch (file) {
+            case 'about.txt':
+              response = 'Desarrollador Full Stack con pasión por crear soluciones innovadoras y escalables.';
+              break;
+            case 'contact.txt':
+              response = 'Email: anderson.gonzalez.dev@gmail.com\nEstado: Disponible\nRespuesta: 24h máximo';
+              break;
+            case 'README.md':
+              response = '# Anderson González\n\nFull Stack Developer especializado en React, Node.js y soluciones cloud.\n\n## Contacto\nSiempre abierto a nuevas oportunidades y colaboraciones.';
+              break;
+            default:
+              response = `cat: ${file}: No existe el archivo`;
+          }
+        } else {
+          response = 'cat: falta especificar archivo. Uso: cat [nombre_archivo]';
+        }
+        break;
+      case 'history':
+        response = commandHistory.length > 0 
+          ? commandHistory.map((cmd, i) => `  ${i + 1}  ${cmd}`).join('\n')
+          : 'Historial vacío';
         break;
       case 'clear':
         setTerminalHistory([]);
         return;
-      case 'ls':
-        response = 'projects/  skills/  contact.txt  about.txt';
+      case 'exit':
+        response = `👋 ¡Hasta luego!
+Thanks for visiting my terminal.
+Hope to collaborate with you soon! 🚀
+
+Connection to anderson-terminal closed.`;
         break;
       default:
-        response = `bash: ${command}: command not found. Escribe 'help' para ver comandos disponibles.`;
+        response = `bash: ${command}: comando no encontrado
+💡 Tip: Escribe 'help' para ver todos los comandos disponibles`;
     }
     
     setTerminalHistory(prev => [
       ...prev,
       `$ ${command}`,
-      response
+      response,
+      ''
     ]);
   };
 
@@ -101,6 +335,24 @@ const ContactSection = () => {
     if (e.key === 'Enter') {
       if (currentCommand.trim()) {
         executeCommand(currentCommand);
+        setCurrentCommand('');
+        setHistoryIndex(-1);
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+        const newIndex = historyIndex + 1;
+        setHistoryIndex(newIndex);
+        setCurrentCommand(commandHistory[commandHistory.length - 1 - newIndex]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        setCurrentCommand(commandHistory[commandHistory.length - 1 - newIndex]);
+      } else if (historyIndex === 0) {
+        setHistoryIndex(-1);
         setCurrentCommand('');
       }
     }
@@ -121,35 +373,57 @@ const ContactSection = () => {
 
         {/* Two column layout with equal heights */}
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-          {/* Interactive Command Console */}
+          {/* Enhanced Interactive Command Console */}
           <div className="cyber-glass rounded-lg p-6 flex flex-col h-[650px]">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" style={{animationDelay: '1s'}}></div>
               <span className="text-quantum-silver text-sm ml-4 font-mono">anderson@terminal:~$</span>
+              <div className="flex-1"></div>
+              <span className="text-xs text-quantum-silver/60 font-mono">Terminal v2.0</span>
             </div>
             
             {/* Terminal output */}
             <div className="flex-1 overflow-y-auto mb-4 font-mono text-sm text-quantum-silver space-y-1 scrollbar-thin scrollbar-thumb-cyber-lime/50">
               {terminalHistory.map((line, index) => (
-                <div key={index} className={line.startsWith('$') ? 'text-cyber-lime' : 'text-quantum-silver'}>
-                  {line}
+                <div 
+                  key={index} 
+                  className={
+                    line.startsWith('$') 
+                      ? 'text-cyber-lime flex items-center gap-2' 
+                      : line.startsWith('├──') || line.startsWith('└──') || line.startsWith('│')
+                        ? 'text-quantum-silver/80 font-mono'
+                        : line.includes('✅') || line.includes('🟢')
+                          ? 'text-green-400'
+                          : line.includes('❌') || line.includes('🔴')
+                            ? 'text-red-400'
+                            : line.includes('⚡') || line.includes('💡')
+                              ? 'text-yellow-400'
+                              : 'text-quantum-silver'
+                  }
+                >
+                  {line.startsWith('$') && <span className="text-cyber-lime mr-1">{'>'}</span>}
+                  <span className="whitespace-pre-wrap">{line.startsWith('$') ? line.substring(2) : line}</span>
                 </div>
               ))}
             </div>
             
-            {/* Command input */}
+            {/* Enhanced command input */}
             <div className="flex items-center gap-2 border-t border-cyber-lime/20 pt-4">
-              <span className="text-cyber-lime font-mono text-sm">$</span>
+              <span className="text-cyber-lime font-mono text-sm animate-pulse">$</span>
               <input
                 type="text"
                 value={currentCommand}
                 onChange={(e) => setCurrentCommand(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="flex-1 bg-transparent text-quantum-silver font-mono text-sm focus:outline-none"
+                onKeyDown={handleKeyPress}
+                className="flex-1 bg-transparent text-quantum-silver font-mono text-sm focus:outline-none placeholder:text-quantum-silver/50"
                 placeholder="Escribe 'help' para ver comandos disponibles..."
+                autoComplete="off"
               />
+              <div className="text-xs text-quantum-silver/40 font-mono">
+                ↑↓ historial | Enter ejecutar
+              </div>
             </div>
           </div>
 
