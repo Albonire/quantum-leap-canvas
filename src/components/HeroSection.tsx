@@ -89,13 +89,30 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Personal Description with glass morphism effect */}
+        {/* Personal Description with enhanced liquid glass effect */}
         <div className={`mb-12 max-w-4xl mx-auto transition-all duration-700 delay-600 ${
           isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <div className="relative backdrop-blur-sm bg-white/10 dark:bg-black/10 rounded-2xl p-8 border border-white/30 dark:border-white/20 shadow-2xl overflow-hidden">
-            {/* Glass effect overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/5 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent rounded-2xl"></div>
+          <div 
+            className="relative rounded-2xl p-8 overflow-hidden"
+            style={{
+              background: 'rgba(255, 255, 255, 0.08)',
+              backdropFilter: 'blur(15px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              boxShadow: `
+                0 12px 40px rgba(31, 38, 135, 0.15), 
+                inset 0 6px 25px rgba(255, 255, 255, 0.15),
+                0 0 60px rgba(107, 142, 107, 0.1)
+              `
+            }}
+          >
+            {/* Enhanced glass effect overlay */}
+            <div 
+              className="absolute inset-0 rounded-2xl"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.08) 100%)'
+              }}
+            />
             
             {/* Content */}
             <div className="relative z-10">
