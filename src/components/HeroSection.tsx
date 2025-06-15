@@ -11,6 +11,17 @@ const HeroSection = () => {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const downloadCV = () => {
+    // Simular descarga del CV
+    const link = document.createElement('a');
+    link.href = '#'; // En producción, aquí iría la URL real del CV
+    link.download = 'Anderson_Gonzalez_CV.pdf';
+    link.click();
+    
+    // Mostrar mensaje de confirmación
+    alert('CV descargado exitosamente!');
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Enhanced geometric floating shapes */}
@@ -74,6 +85,16 @@ const HeroSection = () => {
             className="group transform hover:scale-105 transition-all duration-300"
           >
             <span>Ver mis proyectos</span>
+            <div className="w-2 h-2 bg-sage-accent dark:bg-cyber-lime rounded-full animate-pulse ml-2" />
+          </CyberButton>
+          
+          <CyberButton 
+            variant="secondary" 
+            size="lg"
+            onClick={downloadCV}
+            className="transform hover:scale-105 transition-all duration-300"
+          >
+            <span>Descargar CV</span>
             <div className="w-2 h-2 bg-sage-accent dark:bg-cyber-lime rounded-full animate-pulse ml-2" />
           </CyberButton>
           

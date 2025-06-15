@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -21,11 +22,20 @@ const ContactSection = () => {
     '$ status',
     '🟢 Online | ⚡ Disponible para proyectos | 🚀 Listo para colaborar',
     '',
-    '💡 Tip: Escribe "help" para ver todos los comandos disponibles'
+    '💡 Tip: Escribe "help" para ver todos los comandos disponibles',
+    '💡 Tip: Usa "sudo dnf download" para descargar mi CV'
   ]);
   const [currentCommand, setCurrentCommand] = useState('');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+
+  const downloadCV = () => {
+    // Simular descarga del CV
+    const link = document.createElement('a');
+    link.href = '#'; // En producción, aquí iría la URL real del CV
+    link.download = 'Anderson_Gonzalez_CV.pdf';
+    link.click();
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -67,6 +77,27 @@ const ContactSection = () => {
     // Add command to history
     setCommandHistory(prev => [...prev, command]);
     
+    // Handle sudo dnf download command
+    if (cmd === 'sudo dnf download' || cmd.startsWith('sudo dnf download')) {
+      downloadCV();
+      response = `📥 Descargando CV de Anderson González...
+├── Archivo: Anderson_Gonzalez_CV.pdf
+├── Tamaño: 2.5 MB
+├── Formato: PDF Profesional
+├── Última actualización: Diciembre 2024
+└── ✅ Descarga completada exitosamente!
+
+🎯 CV descargado desde terminal - ¡Gracias por tu interés!`;
+      
+      setTerminalHistory(prev => [
+        ...prev,
+        `$ ${command}`,
+        response,
+        ''
+      ]);
+      return;
+    }
+    
     switch (baseCmd) {
       case 'help':
         response = `Comandos disponibles:
@@ -82,6 +113,7 @@ const ContactSection = () => {
 │ contact         │ Información de contacto              │
 │ social          │ Redes sociales                       │
 │ resume          │ Descargar CV                         │
+│ sudo dnf download│ Descargar CV (método alternativo)   │
 │ quote           │ Frase motivacional aleatoria         │
 │ joke            │ Chiste de programación               │
 │ weather         │ Clima actual                         │
@@ -200,11 +232,12 @@ Respuesta: 24h máximo`;
 └── 💼 Portfolio: anderson-dev.com`;
         break;
       case 'resume':
+        downloadCV();
         response = `📄 CV Disponible:
 ├── 📥 anderson_gonzalez_cv.pdf
 ├── 📊 Formato: PDF profesional
 ├── 🔄 Última actualización: Diciembre 2024
-└── 💾 Descarga: [Simular descarga...]
+└── 💾 Descarga: [Iniciando descarga...]
    ✅ CV descargado exitosamente!`;
         break;
       case 'quote':
@@ -320,7 +353,8 @@ Connection to anderson-terminal closed.`;
         break;
       default:
         response = `bash: ${command}: comando no encontrado
-💡 Tip: Escribe 'help' para ver todos los comandos disponibles`;
+💡 Tip: Escribe 'help' para ver todos los comandos disponibles
+💡 Tip: Usa 'sudo dnf download' para descargar mi CV`;
     }
     
     setTerminalHistory(prev => [
@@ -374,7 +408,7 @@ Connection to anderson-terminal closed.`;
         {/* Two column layout with equal heights */}
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Enhanced Interactive Command Console */}
-          <div className="bg-sage-accent/10 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent/50 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
+          <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500 animate-pulse" style={{animationDelay: '0.5s'}}></div>
@@ -410,7 +444,7 @@ Connection to anderson-terminal closed.`;
             </div>
             
             {/* Enhanced command input */}
-            <div className="flex items-center gap-2 border-t-2 border-sage-accent/50 dark:border-cyber-lime/20 pt-4">
+            <div className="flex items-center gap-2 border-t-2 border-sage-accent dark:border-cyber-lime/20 pt-4">
               <span className="text-sage-accent dark:text-cyber-lime font-mono text-sm animate-pulse font-bold">$</span>
               <input
                 type="text"
@@ -428,7 +462,7 @@ Connection to anderson-terminal closed.`;
           </div>
 
           {/* Contact form with matching height */}
-          <div className="bg-sage-accent/10 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent/50 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
+          <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
             <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
               Envíame un mensaje
             </h3>
@@ -445,7 +479,7 @@ Connection to anderson-terminal closed.`;
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent/70 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
+                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
                     placeholder="Tu nombre completo"
                   />
                 </div>
@@ -460,7 +494,7 @@ Connection to anderson-terminal closed.`;
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent/70 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
+                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
                     placeholder="tu@email.com"
                   />
                 </div>
@@ -474,7 +508,7 @@ Connection to anderson-terminal closed.`;
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="flex-1 min-h-[120px] w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent/70 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 resize-none font-medium"
+                    className="flex-1 min-h-[120px] w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 resize-none font-medium"
                     placeholder="Describe tu proyecto o idea..."
                   />
                 </div>
@@ -497,7 +531,7 @@ Connection to anderson-terminal closed.`;
                 </CyberButton>
 
                 {/* Contact info below the button */}
-                <div className="bg-sage-accent/15 dark:bg-neural-gray/30 border-2 border-sage-accent/50 dark:border-cyber-lime/20 rounded-lg p-4 text-center mb-4 backdrop-blur-sm">
+                <div className="bg-sage-accent/15 dark:bg-neural-gray/30 border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-4 text-center mb-4 backdrop-blur-sm">
                   <p className="text-gray-800 dark:text-quantum-silver text-sm mb-2 font-medium">O contáctame directamente:</p>
                   <p className="text-sage-accent dark:text-cyber-lime text-sm font-mono mb-1 font-semibold">anderson.gonzalez.dev@gmail.com</p>
                   <p className="text-gray-700 dark:text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
