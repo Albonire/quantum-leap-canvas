@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import GlitchText from './GlitchText';
 import CyberButton from './CyberButton';
+import LiquidGlassCard from './LiquidGlassCard';
 
 const HeroSection = () => {
   const scrollToSection = (sectionId: string) => {
@@ -13,8 +14,13 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Enhanced geometric floating shapes */}
+      {/* Liquid glass floating elements */}
       <div className="absolute inset-0 z-0">
+        <div className="absolute top-20 left-20 w-32 h-32 morphing-glass opacity-30" />
+        <div className="absolute top-1/3 right-16 w-24 h-24 liquid-blob opacity-40" />
+        <div className="absolute bottom-1/4 left-1/3 w-40 h-20 liquid-glass opacity-25" />
+        
+        {/* Enhanced geometric floating shapes with liquid glass */}
         <div className="absolute top-20 left-20 w-20 h-20 border border-cyber-lime rotate-45 animate-spin-slow opacity-30" />
         <div className="absolute top-40 right-32 w-16 h-16 bg-cyber-lime/10 rotate-12 animate-pulse" />
         <div className="absolute bottom-32 left-1/4 w-24 h-24 border-2 border-matrix-green rounded-full animate-bounce opacity-20" />
@@ -25,8 +31,8 @@ const HeroSection = () => {
         <div className="absolute top-1/3 right-16 w-12 h-12 border-2 border-cyber-lime rounded-full animate-ping opacity-20" />
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
+      {/* Main content with liquid glass background */}
+      <LiquidGlassCard className="relative z-10 text-center max-w-5xl mx-auto" size="lg">
         {/* Professional greeting */}
         <div className="mb-8">
           <p className="text-lg md:text-xl text-quantum-silver font-inter mb-4 tracking-wide">
@@ -41,12 +47,12 @@ const HeroSection = () => {
             González
           </h2>
           
-          {/* Professional title with enhanced styling */}
-          <div className="inline-block bg-cyber-lime/10 border border-cyber-lime/30 rounded-full px-6 py-3 mb-6">
+          {/* Professional title with liquid glass styling */}
+          <LiquidGlassCard className="inline-block" size="sm">
             <p className="text-cyber-lime font-space-grotesk font-semibold text-lg">
               Desarrollador Full Stack
             </p>
-          </div>
+          </LiquidGlassCard>
         </div>
 
         {/* Enhanced CTA Buttons */}
@@ -76,7 +82,7 @@ const HeroSection = () => {
             <div className="w-1 h-3 bg-cyber-lime rounded-full animate-bounce mt-2" />
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Enhanced holographic overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyber-lime/5 to-transparent pointer-events-none" />
