@@ -11,16 +11,20 @@ interface Skill {
 }
 
 const skills: Skill[] = [
-  { name: 'React', level: 'alto', category: 'frontend', color: '#61dafb' },
+  { name: 'HTML', level: 'alto', category: 'frontend', color: '#e34f26' },
+  { name: 'CSS', level: 'alto', category: 'frontend', color: '#1572b6' },
+  { name: 'JavaScript', level: 'alto', category: 'frontend', color: '#f7df1e' },
   { name: 'TypeScript', level: 'alto', category: 'frontend', color: '#3178c6' },
+  { name: 'React', level: 'alto', category: 'frontend', color: '#61dafb' },
   { name: 'Next.js', level: 'alto', category: 'frontend', color: '#000000' },
-  { name: 'Node.js', level: 'alto', category: 'backend', color: '#339933' },
+  { name: 'Tailwind CSS', level: 'alto', category: 'frontend', color: '#06b6d4' },
+  { name: 'Three.js', level: 'medio', category: 'frontend', color: '#000000' },
   { name: 'Python', level: 'alto', category: 'backend', color: '#3776ab' },
-  { name: 'Java', level: 'medio', category: 'backend', color: '#ed8b00' },
-  { name: 'PostgreSQL', level: 'alto', category: 'database', color: '#336791' },
-  { name: 'MongoDB', level: 'medio', category: 'database', color: '#47a248' },
-  { name: 'Docker', level: 'medio', category: 'tools', color: '#2496ed' },
-  { name: 'AWS', level: 'medio', category: 'tools', color: '#ff9900' },
+  { name: 'Node.js', level: 'medio', category: 'backend', color: '#339933' },
+  { name: 'Express', level: 'medio', category: 'backend', color: '#000000' },
+  { name: 'FastAPI/Flask', level: 'alto', category: 'backend', color: '#009688' },
+  { name: 'GraphQL', level: 'medio', category: 'backend', color: '#e10098' },
+  { name: 'SQL', level: 'medio', category: 'database', color: '#336791' },
 ];
 
 const TechSection = () => {
