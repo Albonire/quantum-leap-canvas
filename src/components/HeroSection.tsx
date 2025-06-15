@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -89,27 +88,27 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Personal Description with ultra-transparent liquid glass effect */}
+        {/* Personal Description with ultra-minimal liquid glass effect */}
         <div className={`mb-12 max-w-4xl mx-auto transition-all duration-700 delay-600 ${
           isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
           <div 
             className="relative rounded-2xl p-8 overflow-hidden"
             style={{
-              background: 'rgba(255, 255, 255, 0.03)',
-              backdropFilter: 'blur(20px) saturate(120%)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
+              background: 'rgba(255, 255, 255, 0.015)',
+              backdropFilter: 'blur(25px) saturate(100%)',
+              border: '1px solid rgba(255, 255, 255, 0.04)',
               boxShadow: `
-                0 8px 32px rgba(31, 38, 135, 0.08), 
-                inset 0 2px 10px rgba(255, 255, 255, 0.05)
+                0 4px 20px rgba(31, 38, 135, 0.04), 
+                inset 0 1px 5px rgba(255, 255, 255, 0.02)
               `
             }}
           >
-            {/* Ultra-subtle glass effect overlay */}
+            {/* Ultra-minimal glass effect overlay */}
             <div 
               className="absolute inset-0 rounded-2xl"
               style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0.02) 100%)'
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 50%, rgba(255, 255, 255, 0.01) 100%)'
               }}
             />
             
