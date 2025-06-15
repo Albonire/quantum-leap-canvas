@@ -200,20 +200,13 @@ const ContactSection = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="flex-1 min-h-[140px] w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300 resize-none"
+                    className="flex-1 min-h-[120px] w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300 resize-none"
                     placeholder="Describe tu proyecto o idea..."
                   />
                 </div>
-
-                {/* Contact info inside the form */}
-                <div className="bg-neural-gray/30 border border-cyber-lime/20 rounded-lg p-4 text-center">
-                  <p className="text-quantum-silver text-sm mb-2">O contáctame directamente:</p>
-                  <p className="text-cyber-lime text-sm font-mono mb-1">anderson.gonzalez.dev@gmail.com</p>
-                  <p className="text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
-                </div>
               </div>
 
-              <div className="mt-6">
+              <div className="mt-6 space-y-4">
                 <CyberButton
                   size="lg"
                   disabled={isSubmitting}
@@ -228,6 +221,13 @@ const ContactSection = () => {
                     'Enviar Mensaje'
                   )}
                 </CyberButton>
+
+                {/* Contact info below the button */}
+                <div className="bg-neural-gray/30 border border-cyber-lime/20 rounded-lg p-4 text-center mb-4">
+                  <p className="text-quantum-silver text-sm mb-2">O contáctame directamente:</p>
+                  <p className="text-cyber-lime text-sm font-mono mb-1">anderson.gonzalez.dev@gmail.com</p>
+                  <p className="text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
+                </div>
               </div>
             </form>
           </div>
