@@ -6,6 +6,16 @@ import GlitchText from './GlitchText';
 import CyberButton from './CyberButton';
 
 const HeroSection = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -36,24 +46,36 @@ const HeroSection = () => {
         <div className="absolute top-1/3 right-16 w-12 h-12 border-2 border-sage-accent dark:border-cyber-lime rounded-full animate-ping opacity-20" />
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
+      {/* Main content with zoom in effect */}
+      <div className={`relative z-10 text-center max-w-5xl mx-auto px-6 transition-all duration-1000 ease-out ${
+        isLoaded 
+          ? 'scale-100 opacity-100' 
+          : 'scale-95 opacity-0'
+      }`}>
         {/* Professional greeting */}
         <div className="mb-8">
-          <p className="text-lg md:text-xl text-gray-700 dark:text-quantum-silver font-inter mb-4 tracking-wide font-medium">
+          <p className={`text-lg md:text-xl text-gray-700 dark:text-quantum-silver font-inter mb-4 tracking-wide font-medium transition-all duration-700 delay-200 ${
+            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+          }`}>
             Hola, soy
           </p>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-space-grotesk font-bold mb-4 text-gray-900 dark:text-quantum-silver">
+          <h1 className={`text-5xl md:text-7xl lg:text-8xl font-space-grotesk font-bold mb-4 text-gray-900 dark:text-quantum-silver transition-all duration-700 delay-300 ${
+            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+          }`}>
             <GlitchText trigger="auto" intensity="medium">
               Anderson
             </GlitchText>
           </h1>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-space-grotesk font-bold text-sage-accent dark:text-cyber-lime mb-6">
+          <h2 className={`text-4xl md:text-5xl lg:text-6xl font-space-grotesk font-bold text-sage-accent dark:text-cyber-lime mb-6 transition-all duration-700 delay-400 ${
+            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+          }`}>
             González
           </h2>
           
           {/* Professional titles with enhanced styling */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+          <div className={`flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 transition-all duration-700 delay-500 ${
+            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          }`}>
             <div className="inline-block bg-sage-accent/20 dark:bg-cyber-lime/10 border border-sage-accent/50 dark:border-cyber-lime/30 rounded-full px-6 py-3">
               <p className="text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold text-lg">
                 Desarrollador Full Stack
@@ -68,7 +90,9 @@ const HeroSection = () => {
         </div>
 
         {/* Personal Description */}
-        <div className="mb-12 max-w-4xl mx-auto">
+        <div className={`mb-12 max-w-4xl mx-auto transition-all duration-700 delay-600 ${
+          isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}>
           <div className="bg-white/60 dark:bg-black/20 backdrop-blur-md rounded-2xl p-8 border border-sage-accent/30 dark:border-emerald-accent/20 shadow-lg">
             <p className="text-lg md:text-xl text-gray-800 dark:text-pearl-white/90 font-inter leading-relaxed mb-4 font-medium">
               Soy un desarrollador apasionado por crear soluciones digitales innovadoras. 
@@ -85,7 +109,9 @@ const HeroSection = () => {
         </div>
 
         {/* Enhanced CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+        <div className={`flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 transition-all duration-700 delay-700 ${
+          isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}>
           <CyberButton 
             size="lg" 
             onClick={() => scrollToSection('projects')}
@@ -116,7 +142,9 @@ const HeroSection = () => {
         </div>
 
         {/* Enhanced scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-700 delay-800 ${
+          isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}>
           <div className="w-6 h-10 border-2 border-sage-accent dark:border-cyber-lime rounded-full flex justify-center animate-pulse">
             <div className="w-1 h-3 bg-sage-accent dark:bg-cyber-lime rounded-full animate-bounce mt-2" />
           </div>
