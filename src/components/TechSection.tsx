@@ -5,22 +5,22 @@ import { useState } from 'react';
 
 interface Skill {
   name: string;
-  level: number;
+  level: 'bajo' | 'medio' | 'alto';
   category: 'frontend' | 'backend' | 'database' | 'tools';
   color: string;
 }
 
 const skills: Skill[] = [
-  { name: 'React', level: 95, category: 'frontend', color: '#61dafb' },
-  { name: 'TypeScript', level: 90, category: 'frontend', color: '#3178c6' },
-  { name: 'Next.js', level: 88, category: 'frontend', color: '#000000' },
-  { name: 'Node.js', level: 85, category: 'backend', color: '#339933' },
-  { name: 'Python', level: 92, category: 'backend', color: '#3776ab' },
-  { name: 'Java', level: 80, category: 'backend', color: '#ed8b00' },
-  { name: 'PostgreSQL', level: 87, category: 'database', color: '#336791' },
-  { name: 'MongoDB', level: 83, category: 'database', color: '#47a248' },
-  { name: 'Docker', level: 85, category: 'tools', color: '#2496ed' },
-  { name: 'AWS', level: 78, category: 'tools', color: '#ff9900' },
+  { name: 'React', level: 'alto', category: 'frontend', color: '#61dafb' },
+  { name: 'TypeScript', level: 'alto', category: 'frontend', color: '#3178c6' },
+  { name: 'Next.js', level: 'alto', category: 'frontend', color: '#000000' },
+  { name: 'Node.js', level: 'alto', category: 'backend', color: '#339933' },
+  { name: 'Python', level: 'alto', category: 'backend', color: '#3776ab' },
+  { name: 'Java', level: 'medio', category: 'backend', color: '#ed8b00' },
+  { name: 'PostgreSQL', level: 'alto', category: 'database', color: '#336791' },
+  { name: 'MongoDB', level: 'medio', category: 'database', color: '#47a248' },
+  { name: 'Docker', level: 'medio', category: 'tools', color: '#2496ed' },
+  { name: 'AWS', level: 'medio', category: 'tools', color: '#ff9900' },
 ];
 
 const TechSection = () => {
@@ -32,6 +32,32 @@ const TechSection = () => {
   const filteredSkills = selectedCategory === 'all' 
     ? skills 
     : skills.filter(skill => skill.category === selectedCategory);
+
+  const getLevelInfo = (level: 'bajo' | 'medio' | 'alto') => {
+    switch (level) {
+      case 'bajo':
+        return { 
+          text: 'Básico', 
+          color: 'bg-yellow-500 dark:bg-yellow-400',
+          width: '33%',
+          textColor: 'text-yellow-600 dark:text-yellow-400'
+        };
+      case 'medio':
+        return { 
+          text: 'Intermedio', 
+          color: 'bg-orange-500 dark:bg-orange-400',
+          width: '66%',
+          textColor: 'text-orange-600 dark:text-orange-400'
+        };
+      case 'alto':
+        return { 
+          text: 'Avanzado', 
+          color: 'bg-green-500 dark:bg-green-400',
+          width: '100%',
+          textColor: 'text-green-600 dark:text-green-400'
+        };
+    }
+  };
 
   return (
     <section id="tech" className="py-20 px-6 relative">
@@ -65,54 +91,60 @@ const TechSection = () => {
 
         {/* Skills grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSkills.map((skill) => (
-            <div
-              key={skill.name}
-              className="relative group bg-white/70 dark:bg-black/20 backdrop-blur-md p-6 rounded-lg border border-sage-accent/30 dark:border-cyber-lime/20 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 shadow-sm"
-              onMouseEnter={() => setHoveredSkill(skill.name)}
-              onMouseLeave={() => setHoveredSkill(null)}
-            >
-              {/* Skill name and percentage */}
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-space-grotesk font-semibold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
-                  {skill.name}
-                </h3>
-                <span className="text-sage-accent dark:text-cyber-lime font-bold">{skill.level}%</span>
-              </div>
+          {filteredSkills.map((skill) => {
+            const levelInfo = getLevelInfo(skill.level);
+            
+            return (
+              <div
+                key={skill.name}
+                className="relative group bg-white/70 dark:bg-black/20 backdrop-blur-md p-6 rounded-lg border border-sage-accent/30 dark:border-cyber-lime/20 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 shadow-sm"
+                onMouseEnter={() => setHoveredSkill(skill.name)}
+                onMouseLeave={() => setHoveredSkill(null)}
+              >
+                {/* Skill name and level */}
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xl font-space-grotesk font-semibold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
+                    {skill.name}
+                  </h3>
+                  <span className={`font-bold ${levelInfo.textColor}`}>
+                    {levelInfo.text}
+                  </span>
+                </div>
 
-              {/* Progress bar */}
-              <div className="relative h-2 bg-gray-300 dark:bg-neural-gray rounded-full overflow-hidden">
-                <div
-                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-sage-accent to-mint-accent dark:from-cyber-lime dark:to-matrix-green transition-all duration-1000 ease-out"
-                  style={{
-                    width: hoveredSkill === skill.name ? `${skill.level}%` : '0%',
-                  }}
-                />
-                {/* Glow effect */}
+                {/* Progress bar */}
+                <div className="relative h-2 bg-gray-300 dark:bg-neural-gray rounded-full overflow-hidden">
+                  <div
+                    className={`absolute top-0 left-0 h-full transition-all duration-1000 ease-out ${levelInfo.color}`}
+                    style={{
+                      width: hoveredSkill === skill.name ? levelInfo.width : '0%',
+                    }}
+                  />
+                  {/* Glow effect */}
+                  {hoveredSkill === skill.name && (
+                    <div className={`absolute top-0 left-0 h-full w-full opacity-30 blur-sm ${levelInfo.color}`} />
+                  )}
+                </div>
+
+                {/* Category badge */}
+                <div className="mt-4">
+                  <span className="inline-block px-3 py-1 text-xs font-inter font-medium bg-sage-accent/20 dark:bg-cyber-lime/20 text-sage-accent dark:text-cyber-lime rounded-full">
+                    {skill.category}
+                  </span>
+                </div>
+
+                {/* Hover effect overlay */}
                 {hoveredSkill === skill.name && (
-                  <div className="absolute top-0 left-0 h-full w-full bg-sage-accent dark:bg-cyber-lime opacity-30 blur-sm" />
+                  <div className="absolute inset-0 bg-sage-accent/5 dark:bg-cyber-lime/5 rounded-lg pointer-events-none" />
                 )}
+
+                {/* Corner accents */}
+                <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-sage-accent dark:border-cyber-lime opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-sage-accent dark:border-cyber-lime opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-sage-accent dark:border-cyber-lime opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-sage-accent dark:border-cyber-lime opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-
-              {/* Category badge */}
-              <div className="mt-4">
-                <span className="inline-block px-3 py-1 text-xs font-inter font-medium bg-sage-accent/20 dark:bg-cyber-lime/20 text-sage-accent dark:text-cyber-lime rounded-full">
-                  {skill.category}
-                </span>
-              </div>
-
-              {/* Hover effect overlay */}
-              {hoveredSkill === skill.name && (
-                <div className="absolute inset-0 bg-sage-accent/5 dark:bg-cyber-lime/5 rounded-lg pointer-events-none" />
-              )}
-
-              {/* Corner accents */}
-              <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-sage-accent dark:border-cyber-lime opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-sage-accent dark:border-cyber-lime opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-sage-accent dark:border-cyber-lime opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-sage-accent dark:border-cyber-lime opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Stats section */}
