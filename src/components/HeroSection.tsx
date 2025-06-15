@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -88,27 +89,28 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Personal Description with matte glass effect */}
+        {/* Personal Description with enhanced liquid glass effect */}
         <div className={`mb-12 max-w-4xl mx-auto transition-all duration-700 delay-600 ${
           isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
           <div 
             className="relative rounded-2xl p-8 overflow-hidden"
             style={{
-              background: 'rgba(255, 255, 255, 0.25)',
-              backdropFilter: 'blur(8px) saturate(120%)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.08)',
+              backdropFilter: 'blur(15px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
               boxShadow: `
-                0 4px 16px rgba(31, 38, 135, 0.08), 
-                inset 0 2px 8px rgba(255, 255, 255, 0.2)
+                0 12px 40px rgba(31, 38, 135, 0.15), 
+                inset 0 6px 25px rgba(255, 255, 255, 0.15),
+                0 0 60px rgba(107, 142, 107, 0.1)
               `
             }}
           >
-            {/* Matte glass effect overlay */}
+            {/* Enhanced glass effect overlay */}
             <div 
               className="absolute inset-0 rounded-2xl"
               style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.15) 100%)'
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.08) 100%)'
               }}
             />
             
