@@ -49,7 +49,7 @@ const StarryBackground = () => {
           baseY: baseY,
           radius: Math.random() * 1.5 + 0.3, // Smaller, more realistic stars
           alpha: Math.random() * 0.8 + 0.2,
-          twinkleSpeed: Math.random() * 0.005 + 0.001, // Slower, more natural twinkling
+          twinkleSpeed: Math.random() * 0.01 + 0.005, // Faster twinkling
           twinklePhase: Math.random() * Math.PI * 2,
           brightness: Math.random() * 0.5 + 0.5, // Different star brightnesses
         });
@@ -64,13 +64,13 @@ const StarryBackground = () => {
       ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      const time = Date.now() * 0.0001;
+      const time = Date.now() * 0.0003; // Faster time multiplier
 
       // Draw and animate stars
       stars.forEach((star, index) => {
-        // Very subtle movement - like distant parallax
-        const parallaxX = Math.sin(time * 0.1 + index * 0.1) * 0.3;
-        const parallaxY = Math.cos(time * 0.15 + index * 0.15) * 0.2;
+        // Faster, more noticeable movement - like distant parallax
+        const parallaxX = Math.sin(time * 0.3 + index * 0.1) * 1.5; // Increased movement
+        const parallaxY = Math.cos(time * 0.4 + index * 0.15) * 1.0; // Increased movement
         
         star.x = star.baseX + parallaxX;
         star.y = star.baseY + parallaxY;
