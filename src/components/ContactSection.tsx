@@ -122,7 +122,7 @@ const ContactSection = () => {
         {/* Two column layout with equal heights */}
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Interactive Command Console */}
-          <div className="cyber-glass rounded-lg p-6 flex flex-col h-[550px]">
+          <div className="cyber-glass rounded-lg p-6 flex flex-col h-[650px]">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -154,7 +154,7 @@ const ContactSection = () => {
           </div>
 
           {/* Contact form with matching height */}
-          <div className="cyber-glass rounded-lg p-6 flex flex-col h-[550px]">
+          <div className="cyber-glass rounded-lg p-6 flex flex-col h-[650px]">
             <h3 className="text-2xl font-space-grotesk font-bold text-quantum-silver mb-6 text-center">
               Envíame un mensaje
             </h3>
@@ -200,9 +200,16 @@ const ContactSection = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="flex-1 min-h-[120px] w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300 resize-none"
+                    className="flex-1 min-h-[140px] w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300 resize-none"
                     placeholder="Describe tu proyecto o idea..."
                   />
+                </div>
+
+                {/* Contact info inside the form */}
+                <div className="bg-neural-gray/30 border border-cyber-lime/20 rounded-lg p-4 text-center">
+                  <p className="text-quantum-silver text-sm mb-2">O contáctame directamente:</p>
+                  <p className="text-cyber-lime text-sm font-mono mb-1">anderson.gonzalez.dev@gmail.com</p>
+                  <p className="text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
                 </div>
               </div>
 
@@ -221,13 +228,6 @@ const ContactSection = () => {
                     'Enviar Mensaje'
                   )}
                 </CyberButton>
-
-                {/* Contact info below button */}
-                <div className="mt-4 pt-4 border-t border-cyber-lime/20 text-center">
-                  <p className="text-quantum-silver text-sm mb-1">O contáctame directamente:</p>
-                  <p className="text-cyber-lime text-sm">anderson.gonzalez.dev@gmail.com</p>
-                  <p className="text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
-                </div>
               </div>
             </form>
           </div>
