@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -89,29 +90,11 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Personal Description with transparent glass effect */}
+        {/* Personal Description with glassmorphism style like CyberButton secondary */}
         <div className={`mb-12 max-w-4xl mx-auto transition-all duration-700 delay-600 ${
           isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <div 
-            className="relative rounded-2xl p-8 overflow-hidden backdrop-blur-md"
-            style={{
-              background: 'rgba(255, 255, 255, 0.08)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-              boxShadow: `
-                0 8px 32px rgba(31, 38, 135, 0.1), 
-                inset 0 2px 10px rgba(255, 255, 255, 0.1)
-              `
-            }}
-          >
-            {/* Glass effect overlay for light theme contrast */}
-            <div 
-              className="absolute inset-0 rounded-2xl dark:opacity-0 opacity-100"
-              style={{
-                background: 'linear-gradient(135deg, rgba(107, 142, 107, 0.05) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(107, 142, 107, 0.03) 100%)'
-              }}
-            />
-            
+          <div className="relative rounded-2xl p-8 overflow-hidden bg-white/20 dark:bg-neural-gray/50 border-2 border-steel-gray/50 dark:border-quantum-silver/50 backdrop-blur-md">
             {/* Content */}
             <div className="relative z-10">
               <p className="text-lg md:text-xl text-gray-900 dark:text-pearl-white/95 font-inter leading-relaxed mb-4 font-medium">
@@ -188,3 +171,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
