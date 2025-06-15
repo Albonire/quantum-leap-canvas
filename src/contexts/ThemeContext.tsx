@@ -36,7 +36,8 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       document.body.style.background = '#0a0a15';
     } else {
       document.documentElement.classList.remove('dark');
-      document.body.style.background = '#f8fafc';
+      // Elegant cream background
+      document.body.style.background = 'linear-gradient(135deg, #faf7f0, #f5f2e8)';
     }
   }, [theme]);
 

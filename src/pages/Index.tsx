@@ -10,7 +10,7 @@ import ContactSection from '@/components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden bg-void-black dark:bg-void-black light:bg-slate-50 transition-colors duration-300">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-cream via-pearl-white to-cream dark:bg-void-black transition-colors duration-300">
       {/* Background effects */}
       <StarryBackground />
       <CyberCursor />
@@ -26,21 +26,21 @@ const Index = () => {
       </main>
       
       {/* Footer */}
-      <footer className="relative z-10 py-8 px-6 border-t border-cyber-lime/20 dark:border-cyber-lime/20 light:border-emerald-accent/30">
+      <footer className="relative z-10 py-8 px-6 border-t border-sage-accent/30 dark:border-cyber-lime/20">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-quantum-silver dark:text-quantum-silver light:text-charcoal font-inter">
+          <p className="text-charcoal dark:text-quantum-silver font-inter">
             © 2024 Anderson González. Desarrollado con{' '}
-            <span className="text-cyber-lime dark:text-cyber-lime light:text-emerald-accent animate-pulse">❤️</span>
+            <span className="text-sage-accent dark:text-cyber-lime animate-pulse">❤️</span>
             {' '}y tecnología del futuro.
           </p>
           <div className="mt-4 flex justify-center gap-6">
-            <a href="#" className="text-quantum-silver dark:text-quantum-silver light:text-charcoal hover:text-cyber-lime dark:hover:text-cyber-lime light:hover:text-emerald-accent transition-colors">
+            <a href="#" className="text-charcoal dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors">
               GitHub
             </a>
-            <a href="#" className="text-quantum-silver dark:text-quantum-silver light:text-charcoal hover:text-cyber-lime dark:hover:text-cyber-lime light:hover:text-emerald-accent transition-colors">
+            <a href="#" className="text-charcoal dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors">
               LinkedIn
             </a>
-            <a href="#" className="text-quantum-silver dark:text-quantum-silver light:text-charcoal hover:text-cyber-lime dark:hover:text-cyber-lime light:hover:text-emerald-accent transition-colors">
+            <a href="#" className="text-charcoal dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors">
               Twitter
             </a>
           </div>
