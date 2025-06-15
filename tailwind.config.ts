@@ -52,28 +52,25 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Elegant matte pastel green palette with improved contrast
-				'deep-forest': '#0f1f0f',
-				'sage-green': '#6b8e6b',
-				'mint-matte': '#7fa67f',
-				'forest-gray': '#2d3a2d',
-				'pearl-white': '#f8f9f8',
-				'moss-green': '#4a6741',
-				'olive-matte': '#5c6b5c',
-				// High contrast colors for better readability
-				'cream-white': '#fdfef8',
-				'soft-gray': '#e8eae8',
-				'charcoal': '#1a1f1a',
-				'warm-white': '#fcfcfa',
-				'light-sage': '#a8bfa8',
-				'dark-sage': '#3a4f3a',
-				// Legacy aliases for compatibility - now with better contrast
-				'cyber-lime': '#7fa67f',
-				'neural-gray': '#2d3a2d',
-				'quantum-silver': '#f8f9f8',
-				'void-black': '#0f1f0f',
-				'matrix-green': '#6b8e6b',
-				'neon-cyan': '#7fa67f',
+				// Balanced elegant palette with high contrast
+				'deep-slate': '#0f1419',
+				'charcoal': '#1a1f2e',
+				'steel-gray': '#2a3441',
+				'slate-blue': '#3d4b5c',
+				'silver-mist': '#8b9bb3',
+				'pearl-white': '#f4f6f8',
+				'cream': '#fafbfc',
+				// Strategic green accents - not overwhelming
+				'emerald-accent': '#10b981',
+				'sage-accent': '#6b8e6b',
+				'mint-accent': '#7dd3c0',
+				// Legacy aliases for compatibility - now with neutral base
+				'cyber-lime': '#10b981',
+				'neural-gray': '#2a3441',
+				'quantum-silver': '#f4f6f8',
+				'void-black': '#0f1419',
+				'matrix-green': '#10b981',
+				'neon-cyan': '#7dd3c0',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -113,10 +110,10 @@ export default {
 				},
 				'glow-pulse': {
 					'0%, 100%': {
-						boxShadow: '0 0 20px #7fa67f, 0 0 40px #7fa67f, 0 0 60px #7fa67f'
+						boxShadow: '0 0 20px #10b981, 0 0 40px #10b981, 0 0 60px #10b981'
 					},
 					'50%': {
-						boxShadow: '0 0 10px #7fa67f, 0 0 20px #7fa67f, 0 0 30px #7fa67f'
+						boxShadow: '0 0 10px #10b981, 0 0 20px #10b981, 0 0 30px #10b981'
 					}
 				},
 				'particle-float': {
@@ -196,9 +193,9 @@ export default {
 				'cyber-scan': 'cyber-scan 2s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'cyber-gradient': 'linear-gradient(135deg, #0f1f0f, #2d3a2d, #4a6741)',
-				'holographic': 'linear-gradient(45deg, #7fa67f, #6b8e6b, #7fa67f, #6b8e6b)',
-				'neural-mesh': 'radial-gradient(circle at 20% 80%, #4a6741 0%, transparent 50%), radial-gradient(circle at 80% 20%, #2d3a2d 0%, transparent 50%), radial-gradient(circle at 40% 40%, #7fa67f 0%, transparent 50%)'
+				'cyber-gradient': 'linear-gradient(135deg, #0f1419, #1a1f2e, #2a3441)',
+				'holographic': 'linear-gradient(45deg, #10b981, #7dd3c0, #10b981, #7dd3c0)',
+				'neural-mesh': 'radial-gradient(circle at 20% 80%, #10b981 0%, transparent 50%), radial-gradient(circle at 80% 20%, #2a3441 0%, transparent 50%), radial-gradient(circle at 40% 40%, #7dd3c0 0%, transparent 50%)'
 			}
 		}
 	},
