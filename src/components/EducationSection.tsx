@@ -2,6 +2,8 @@
 'use client';
 
 import { useState } from 'react';
+import CyberButton from './CyberButton';
+import { ExternalLink } from 'lucide-react';
 
 interface Education {
   id: number;
@@ -10,6 +12,7 @@ interface Education {
   institution: string;
   description: string;
   type: 'degree' | 'certification' | 'course';
+  certificateUrl?: string;
 }
 
 const educationData: Education[] = [
@@ -19,7 +22,8 @@ const educationData: Education[] = [
     title: 'Bachiller en Ciencias',
     institution: 'Instituto Tecnológico Superior',
     description: 'Enfoque en matemáticas y ciencias de la computación',
-    type: 'degree'
+    type: 'degree',
+    certificateUrl: 'https://example.com/certificate1'
   },
   {
     id: 2,
@@ -27,7 +31,8 @@ const educationData: Education[] = [
     title: 'Técnico en Programación',
     institution: 'Centro de Formación Digital',
     description: 'Fundamentos de programación y desarrollo web',
-    type: 'certification'
+    type: 'certification',
+    certificateUrl: 'https://example.com/certificate2'
   },
   {
     id: 3,
@@ -35,7 +40,8 @@ const educationData: Education[] = [
     title: 'Desarrollo Full Stack',
     institution: 'Academia de Programación',
     description: 'JavaScript, React, Node.js y bases de datos',
-    type: 'course'
+    type: 'course',
+    certificateUrl: 'https://example.com/certificate3'
   },
   {
     id: 4,
@@ -43,7 +49,8 @@ const educationData: Education[] = [
     title: 'Ingeniería en Sistemas',
     institution: 'Universidad Tecnológica',
     description: 'Carrera universitaria en desarrollo de software',
-    type: 'degree'
+    type: 'degree',
+    certificateUrl: 'https://example.com/certificate4'
   },
   {
     id: 5,
@@ -51,7 +58,8 @@ const educationData: Education[] = [
     title: 'Especialización en DevOps',
     institution: 'Instituto de Tecnología Avanzada',
     description: 'Docker, AWS, CI/CD y automatización',
-    type: 'certification'
+    type: 'certification',
+    certificateUrl: 'https://example.com/certificate5'
   }
 ];
 
@@ -65,6 +73,10 @@ const EducationSection = () => {
       case 'course': return 'bg-emerald-accent dark:bg-neon-cyan';
       default: return 'bg-sage-accent dark:bg-cyber-lime';
     }
+  };
+
+  const handleViewCertificate = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -97,14 +109,14 @@ const EducationSection = () => {
               `}>
                 {/* Header compacto */}
                 <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 flex-1">
                     <span className={`
                       px-3 py-1 rounded-full text-sm font-bold text-white dark:text-void-black
                       ${getTypeColor(education.type)}
                     `}>
                       {education.year}
                     </span>
-                    <div>
+                    <div className="flex-1">
                       <h3 className="text-lg font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
                         {education.title}
                       </h3>
@@ -113,9 +125,27 @@ const EducationSection = () => {
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-medium bg-sage-accent/20 dark:bg-cyber-lime/20 text-sage-accent dark:text-cyber-lime rounded px-2 py-1 capitalize">
-                    {education.type}
-                  </span>
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-medium bg-sage-accent/20 dark:bg-cyber-lime/20 text-sage-accent dark:text-cyber-lime rounded px-2 py-1 capitalize">
+                      {education.type}
+                    </span>
+                    
+                    {education.certificateUrl && (
+                      <CyberButton
+                        size="sm"
+                        variant="ghost"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleViewCertificate(education.certificateUrl!);
+                        }}
+                        className="min-w-0 px-3"
+                      >
+                        <ExternalLink size={14} />
+                        <span className="hidden sm:inline ml-1">Ver</span>
+                      </CyberButton>
+                    )}
+                  </div>
                 </div>
                 
                 {/* Descripción expandible más compacta */}
