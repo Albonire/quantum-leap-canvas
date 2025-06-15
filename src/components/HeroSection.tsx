@@ -89,18 +89,18 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Personal Description */}
+        {/* Personal Description with enhanced blur and transparency */}
         <div className={`mb-12 max-w-4xl mx-auto transition-all duration-700 delay-600 ${
           isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <div className="bg-white/60 dark:bg-black/20 backdrop-blur-md rounded-2xl p-8 border border-sage-accent/30 dark:border-emerald-accent/20 shadow-lg">
-            <p className="text-lg md:text-xl text-gray-800 dark:text-pearl-white/90 font-inter leading-relaxed mb-4 font-medium">
+          <div className="bg-white/40 dark:bg-black/30 backdrop-blur-lg rounded-2xl p-8 border border-white/30 dark:border-white/10 shadow-2xl shadow-sage-accent/10 dark:shadow-cyber-lime/5">
+            <p className="text-lg md:text-xl text-gray-900 dark:text-pearl-white/95 font-inter leading-relaxed mb-4 font-medium">
               Soy un desarrollador apasionado por crear soluciones digitales innovadoras. 
               Con experiencia en tecnologías modernas como <span className="text-sage-accent dark:text-cyber-lime font-semibold">React</span>, 
               <span className="text-sage-accent dark:text-cyber-lime font-semibold"> Node.js</span> y <span className="text-sage-accent dark:text-cyber-lime font-semibold">Python</span>, 
               me especializo en construir aplicaciones web escalables y experiencias de usuario excepcionales.
             </p>
-            <p className="text-base md:text-lg text-gray-600 dark:text-silver-mist font-inter leading-relaxed font-medium">
+            <p className="text-base md:text-lg text-gray-700 dark:text-silver-mist/90 font-inter leading-relaxed font-medium">
               Mi enfoque se centra en la calidad del código, las mejores prácticas de desarrollo 
               y la colaboración efectiva en equipos multidisciplinarios. Siempre busco aprender 
               nuevas tecnologías y enfrentar desafíos que me permitan crecer profesionalmente.
