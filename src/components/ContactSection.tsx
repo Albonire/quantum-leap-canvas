@@ -1,16 +1,9 @@
-
 'use client';
 
 import { useState } from 'react';
-import CyberButton from './CyberButton';
+import ContactForm from './ContactForm';
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [terminalHistory, setTerminalHistory] = useState([
     '$ cat welcome.txt',
     '╔══════════════════════════════════════════════════╗',
@@ -35,37 +28,6 @@ const ContactSection = () => {
     link.href = '#'; // En producción, aquí iría la URL real del CV
     link.download = 'Anderson_Gonzalez_CV.pdf';
     link.click();
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Add success message to terminal
-      setTerminalHistory(prev => [
-        ...prev,
-        '$ send_message --to anderson',
-        '📧 Procesando mensaje...',
-        `✅ Mensaje de ${formData.name} enviado exitosamente`,
-        '🤖 Sistema: Responderé pronto! Gracias por contactarme.',
-        ''
-      ]);
-      
-      alert('Mensaje enviado con éxito!');
-    }, 2000);
   };
 
   const executeCommand = (command: string) => {
@@ -462,83 +424,7 @@ Connection to anderson-terminal closed.`;
           </div>
 
           {/* Contact form with matching height */}
-          <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
-            <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
-              Envíame un mensaje
-            </h3>
-            
-            <form onSubmit={handleSubmit} className="flex-1 flex flex-col">
-              <div className="flex-1 space-y-4">
-                <div>
-                  <label className="block text-gray-900 dark:text-quantum-silver font-space-grotesk font-semibold mb-2">
-                    Nombre
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
-                    placeholder="Tu nombre completo"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-900 dark:text-quantum-silver font-space-grotesk font-semibold mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
-                    placeholder="tu@email.com"
-                  />
-                </div>
-
-                <div className="flex-1 flex flex-col">
-                  <label className="block text-gray-900 dark:text-quantum-silver font-space-grotesk font-semibold mb-2">
-                    Mensaje
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    className="flex-1 min-h-[120px] w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 resize-none font-medium"
-                    placeholder="Describe tu proyecto o idea..."
-                  />
-                </div>
-              </div>
-
-              <div className="mt-6 space-y-4">
-                <CyberButton
-                  size="lg"
-                  disabled={isSubmitting}
-                  className="w-full"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <span className="animate-pulse">Enviando...</span>
-                      <div className="w-4 h-4 border-2 border-void-black border-t-transparent rounded-full animate-spin ml-2" />
-                    </>
-                  ) : (
-                    'Enviar Mensaje'
-                  )}
-                </CyberButton>
-
-                {/* Contact info below the button */}
-                <div className="bg-sage-accent/15 dark:bg-neural-gray/30 border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-4 text-center mb-4 backdrop-blur-sm">
-                  <p className="text-gray-800 dark:text-quantum-silver text-sm mb-2 font-medium">O contáctame directamente:</p>
-                  <p className="text-sage-accent dark:text-cyber-lime text-sm font-mono mb-1 font-semibold">anderson.gonzalez.dev@gmail.com</p>
-                  <p className="text-gray-700 dark:text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
-                </div>
-              </div>
-            </form>
-          </div>
+          <ContactForm />
         </div>
       </div>
     </section>
