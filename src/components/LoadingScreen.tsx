@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -13,7 +12,6 @@ const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => void })
     'Cargando arsenal tecnológico...',
     'Preparando proyectos...',
     'Configurando interfaz...',
-    'Activando modo cyberpunk...',
     'Sistemas listos!'
   ];
 
