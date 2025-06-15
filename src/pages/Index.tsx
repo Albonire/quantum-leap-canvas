@@ -1,7 +1,6 @@
 
 import CyberCursor from '@/components/CyberCursor';
 import StarryBackground from '@/components/StarryBackground';
-import MatrixRain from '@/components/MatrixRain';
 import HeroSection from '@/components/HeroSection';
 import EducationSection from '@/components/EducationSection';
 import TechSection from '@/components/TechSection';
@@ -13,7 +12,6 @@ const Index = () => {
     <div className="min-h-screen relative overflow-hidden">
       {/* Background effects */}
       <StarryBackground />
-      <MatrixRain />
       <CyberCursor />
       
       {/* Main content with reduced spacing */}
