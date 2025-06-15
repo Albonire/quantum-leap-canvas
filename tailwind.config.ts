@@ -52,19 +52,26 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Elegant matte pastel green palette
-				'deep-forest': '#1a2f1a',
+				// Elegant matte pastel green palette with improved contrast
+				'deep-forest': '#0f1f0f',
 				'sage-green': '#6b8e6b',
 				'mint-matte': '#7fa67f',
 				'forest-gray': '#2d3a2d',
 				'pearl-white': '#f8f9f8',
 				'moss-green': '#4a6741',
 				'olive-matte': '#5c6b5c',
-				// Legacy aliases for compatibility
+				// High contrast colors for better readability
+				'cream-white': '#fdfef8',
+				'soft-gray': '#e8eae8',
+				'charcoal': '#1a1f1a',
+				'warm-white': '#fcfcfa',
+				'light-sage': '#a8bfa8',
+				'dark-sage': '#3a4f3a',
+				// Legacy aliases for compatibility - now with better contrast
 				'cyber-lime': '#7fa67f',
 				'neural-gray': '#2d3a2d',
 				'quantum-silver': '#f8f9f8',
-				'void-black': '#1a2f1a',
+				'void-black': '#0f1f0f',
 				'matrix-green': '#6b8e6b',
 				'neon-cyan': '#7fa67f',
 				sidebar: {
@@ -189,7 +196,7 @@ export default {
 				'cyber-scan': 'cyber-scan 2s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'cyber-gradient': 'linear-gradient(135deg, #1a2f1a, #2d3a2d, #4a6741)',
+				'cyber-gradient': 'linear-gradient(135deg, #0f1f0f, #2d3a2d, #4a6741)',
 				'holographic': 'linear-gradient(45deg, #7fa67f, #6b8e6b, #7fa67f, #6b8e6b)',
 				'neural-mesh': 'radial-gradient(circle at 20% 80%, #4a6741 0%, transparent 50%), radial-gradient(circle at 80% 20%, #2d3a2d 0%, transparent 50%), radial-gradient(circle at 40% 40%, #7fa67f 0%, transparent 50%)'
 			}
