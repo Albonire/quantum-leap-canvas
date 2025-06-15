@@ -52,11 +52,18 @@ const HeroSection = () => {
             González
           </h2>
           
-          {/* Professional title with enhanced styling */}
-          <div className="inline-block bg-sage-accent/20 dark:bg-cyber-lime/10 border border-sage-accent/50 dark:border-cyber-lime/30 rounded-full px-6 py-3 mb-8">
-            <p className="text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold text-lg">
-              Desarrollador Full Stack
-            </p>
+          {/* Professional titles with enhanced styling */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+            <div className="inline-block bg-sage-accent/20 dark:bg-cyber-lime/10 border border-sage-accent/50 dark:border-cyber-lime/30 rounded-full px-6 py-3">
+              <p className="text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold text-lg">
+                Desarrollador Full Stack
+              </p>
+            </div>
+            <div className="inline-block bg-sage-accent/20 dark:bg-cyber-lime/10 border border-sage-accent/50 dark:border-cyber-lime/30 rounded-full px-6 py-3">
+              <p className="text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold text-lg">
+                Ingeniero en Sistemas
+              </p>
+            </div>
           </div>
         </div>
 
