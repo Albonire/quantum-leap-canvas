@@ -37,6 +37,53 @@ const GitHubProfile = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    console.log('GitHubProfile: Setting up intersection observer');
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        console.log('GitHubProfile: Observer triggered', {
+          isIntersecting: entry.isIntersecting,
+          intersectionRatio: entry.intersectionRatio
+        });
+        
+        if (entry.isIntersecting) {
+          console.log('GitHubProfile: Setting isVisible to true');
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    // Use a timeout to ensure the DOM is ready
+    const setupObserver = () => {
+      const section = document.getElementById('github-section');
+      console.log('GitHubProfile: Found section element:', section);
+      
+      if (section) {
+        observer.observe(section);
+      } else {
+        console.warn('GitHubProfile: github-section element not found');
+      }
+    };
+
+    // Delay the observer setup slightly to ensure DOM is ready
+    const timeout = setTimeout(setupObserver, 100);
+
+    return () => {
+      clearTimeout(timeout);
+      const section = document.getElementById('github-section');
+      if (section) {
+        observer.unobserve(section);
+      }
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('GitHubProfile: isVisible state changed to:', isVisible);
+  }, [isVisible]);
+
+  useEffect(() => {
     const fetchGitHubData = async () => {
       try {
         // Fetch user data
@@ -59,28 +106,6 @@ const GitHubProfile = () => {
     };
 
     fetchGitHubData();
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById('github-section');
-    if (section) {
-      observer.observe(section);
-    }
-
-    return () => {
-      if (section) {
-        observer.unobserve(section);
-      }
-    };
   }, []);
 
   const formatDate = (dateString: string) => {
@@ -119,7 +144,7 @@ const GitHubProfile = () => {
     <section id="github-section" className="py-16 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header with zoom-out effect */}
-        <div className={`text-center mb-12 transition-all duration-1000 ease-out ${
+        <div className={`text-center mb-12 transition-all duration-1000 ease-out transform ${
           isVisible 
             ? 'scale-100 opacity-100' 
             : 'scale-110 opacity-0'
@@ -133,7 +158,7 @@ const GitHubProfile = () => {
         </div>
 
         {/* GitHub Profile Card with zoom-out effect */}
-        <div className={`bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg relative transition-all duration-1000 ease-out delay-200 ${
+        <div className={`bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg relative transition-all duration-1000 ease-out delay-200 transform ${
           isVisible 
             ? 'scale-100 opacity-100' 
             : 'scale-110 opacity-0'
@@ -209,7 +234,7 @@ const GitHubProfile = () => {
         </div>
 
         {/* Recent Repositories with staggered zoom-out effects */}
-        <div className={`mb-8 transition-all duration-1000 ease-out delay-400 ${
+        <div className={`mb-8 transition-all duration-1000 ease-out delay-400 transform ${
           isVisible 
             ? 'scale-100 opacity-100' 
             : 'scale-110 opacity-0'
@@ -221,7 +246,7 @@ const GitHubProfile = () => {
             {repos.map((repo, index) => (
               <div
                 key={repo.id}
-                className={`bg-white/60 dark:bg-neural-gray/40 backdrop-blur-md border-2 border-sage-accent/30 dark:border-cyber-lime/20 rounded-lg p-6 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 group hover:scale-105 shadow-lg ${
+                className={`bg-white/60 dark:bg-neural-gray/40 backdrop-blur-md border-2 border-sage-accent/30 dark:border-cyber-lime/20 rounded-lg p-6 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 group hover:scale-105 shadow-lg transform ${
                   isVisible 
                     ? 'scale-100 opacity-100' 
                     : 'scale-110 opacity-0'
