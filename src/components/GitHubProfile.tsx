@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Github, Star, GitFork, ExternalLink, Calendar, MapPin, Users, Book } from 'lucide-react';
 import CyberButton from './CyberButton';
 
@@ -35,53 +36,29 @@ const GitHubProfile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    console.log('GitHubProfile: Setting up intersection observer');
-    
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log('GitHubProfile: Observer triggered', {
-          isIntersecting: entry.isIntersecting,
-          intersectionRatio: entry.intersectionRatio
-        });
-        
         if (entry.isIntersecting) {
-          console.log('GitHubProfile: Setting isVisible to true');
           setIsVisible(true);
         }
       },
       { threshold: 0.1 }
     );
 
-    // Use a timeout to ensure the DOM is ready
-    const setupObserver = () => {
-      const section = document.getElementById('github-section');
-      console.log('GitHubProfile: Found section element:', section);
-      
-      if (section) {
-        observer.observe(section);
-      } else {
-        console.warn('GitHubProfile: github-section element not found');
-      }
-    };
-
-    // Delay the observer setup slightly to ensure DOM is ready
-    const timeout = setTimeout(setupObserver, 100);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
     return () => {
-      clearTimeout(timeout);
-      const section = document.getElementById('github-section');
-      if (section) {
-        observer.unobserve(section);
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
       }
       observer.disconnect();
     };
   }, []);
-
-  useEffect(() => {
-    console.log('GitHubProfile: isVisible state changed to:', isVisible);
-  }, [isVisible]);
 
   useEffect(() => {
     const fetchGitHubData = async () => {
@@ -117,31 +94,39 @@ const GitHubProfile = () => {
 
   if (loading) {
     return (
-      <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8">
-        <div className="flex items-center justify-center">
-          <div className="w-8 h-8 border-4 border-sage-accent dark:border-cyber-lime border-t-transparent rounded-full animate-spin"></div>
-          <span className="ml-3 text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold">
-            Cargando perfil de GitHub...
-          </span>
+      <section ref={sectionRef} className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8">
+            <div className="flex items-center justify-center">
+              <div className="w-8 h-8 border-4 border-sage-accent dark:border-cyber-lime border-t-transparent rounded-full animate-spin"></div>
+              <span className="ml-3 text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold">
+                Cargando perfil de GitHub...
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-red-100 dark:bg-red-900/20 border-2 border-red-500 rounded-lg p-8">
-        <p className="text-red-600 dark:text-red-400 text-center font-space-grotesk font-semibold">
-          Error al cargar el perfil: {error}
-        </p>
-      </div>
+      <section ref={sectionRef} className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-red-100 dark:bg-red-900/20 border-2 border-red-500 rounded-lg p-8">
+            <p className="text-red-600 dark:text-red-400 text-center font-space-grotesk font-semibold">
+              Error al cargar el perfil: {error}
+            </p>
+          </div>
+        </div>
+      </section>
     );
   }
 
   if (!user) return null;
 
   return (
-    <section id="github-section" className="py-16 px-6">
+    <section ref={sectionRef} className="py-16 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header with zoom-out effect */}
         <div className={`text-center mb-12 transition-all duration-1000 ease-out transform ${
