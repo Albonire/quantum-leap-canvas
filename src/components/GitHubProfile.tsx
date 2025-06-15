@@ -107,7 +107,7 @@ const GitHubProfile = () => {
         </div>
 
         {/* GitHub Profile Card */}
-        <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg">
+        <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg relative">
           <div className="flex flex-col md:flex-row gap-8 items-start">
             {/* Avatar and basic info */}
             <div className="flex flex-col items-center md:items-start">
@@ -132,8 +132,7 @@ const GitHubProfile = () => {
             </div>
 
             {/* Stats and info */}
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Stats */}
+            <div className="flex-1">
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Book className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
@@ -162,20 +161,20 @@ const GitHubProfile = () => {
                   </span>
                 </div>
               </div>
-
-              {/* Action button */}
-              <div className="flex items-center justify-center md:justify-end">
-                <CyberButton
-                  size="lg"
-                  onClick={() => window.open(user.html_url, '_blank')}
-                  className="group"
-                >
-                  <Github className="w-5 h-5 mr-2" />
-                  Ver perfil completo
-                  <ExternalLink className="w-4 h-4 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
-                </CyberButton>
-              </div>
             </div>
+          </div>
+
+          {/* Ver perfil completo button - moved to bottom right and made smaller */}
+          <div className="absolute bottom-6 right-6">
+            <CyberButton
+              size="sm"
+              onClick={() => window.open(user.html_url, '_blank')}
+              className="group text-sm"
+            >
+              <Github className="w-4 h-4 mr-2" />
+              Ver perfil completo
+              <ExternalLink className="w-3 h-3 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
+            </CyberButton>
           </div>
         </div>
 
