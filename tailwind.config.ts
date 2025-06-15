@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -53,14 +52,21 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Cyber theme colors
-				'deep-emerald': '#0a5f38',
-				'cyber-lime': '#a4ff00',
-				'neural-gray': '#1a1f2d',
-				'quantum-silver': '#e0e5ec',
-				'void-black': '#0d1117',
-				'matrix-green': '#00ff41',
-				'neon-cyan': '#00ffff',
+				// Elegant matte pastel green palette
+				'deep-forest': '#1a2f1a',
+				'sage-green': '#6b8e6b',
+				'mint-matte': '#7fa67f',
+				'forest-gray': '#2d3a2d',
+				'pearl-white': '#f8f9f8',
+				'moss-green': '#4a6741',
+				'olive-matte': '#5c6b5c',
+				// Legacy aliases for compatibility
+				'cyber-lime': '#7fa67f',
+				'neural-gray': '#2d3a2d',
+				'quantum-silver': '#f8f9f8',
+				'void-black': '#1a2f1a',
+				'matrix-green': '#6b8e6b',
+				'neon-cyan': '#7fa67f',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -100,10 +106,10 @@ export default {
 				},
 				'glow-pulse': {
 					'0%, 100%': {
-						boxShadow: '0 0 20px #a4ff00, 0 0 40px #a4ff00, 0 0 60px #a4ff00'
+						boxShadow: '0 0 20px #7fa67f, 0 0 40px #7fa67f, 0 0 60px #7fa67f'
 					},
 					'50%': {
-						boxShadow: '0 0 10px #a4ff00, 0 0 20px #a4ff00, 0 0 30px #a4ff00'
+						boxShadow: '0 0 10px #7fa67f, 0 0 20px #7fa67f, 0 0 30px #7fa67f'
 					}
 				},
 				'particle-float': {
@@ -183,9 +189,9 @@ export default {
 				'cyber-scan': 'cyber-scan 2s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'cyber-gradient': 'linear-gradient(135deg, #0d1117, #1a1f2d, #0a5f38)',
-				'holographic': 'linear-gradient(45deg, #a4ff00, #00ffff, #a4ff00, #00ffff)',
-				'neural-mesh': 'radial-gradient(circle at 20% 80%, #0a5f38 0%, transparent 50%), radial-gradient(circle at 80% 20%, #1a1f2d 0%, transparent 50%), radial-gradient(circle at 40% 40%, #a4ff00 0%, transparent 50%)'
+				'cyber-gradient': 'linear-gradient(135deg, #1a2f1a, #2d3a2d, #4a6741)',
+				'holographic': 'linear-gradient(45deg, #7fa67f, #6b8e6b, #7fa67f, #6b8e6b)',
+				'neural-mesh': 'radial-gradient(circle at 20% 80%, #4a6741 0%, transparent 50%), radial-gradient(circle at 80% 20%, #2d3a2d 0%, transparent 50%), radial-gradient(circle at 40% 40%, #7fa67f 0%, transparent 50%)'
 			}
 		}
 	},
