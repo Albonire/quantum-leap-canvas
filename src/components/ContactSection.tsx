@@ -366,7 +366,7 @@ Connection to anderson-terminal closed.`;
           <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold mb-6 text-sage-accent dark:text-cyber-lime">
             Conectemos
           </h2>
-          <p className="text-xl max-w-2xl mx-auto font-medium text-gray-900 dark:text-quantum-silver">
+          <p className="text-xl max-w-2xl mx-auto font-medium text-black dark:text-quantum-silver">
             ¿Tienes un proyecto en mente? Hablemos sobre cómo puedo ayudarte a llevarlo al siguiente nivel
           </p>
         </div>
@@ -374,7 +374,7 @@ Connection to anderson-terminal closed.`;
         {/* Two column layout with equal heights */}
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Enhanced Interactive Command Console */}
-          <div className="bg-white/90 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-gray-400 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
+          <div className="bg-sage-accent/10 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent/50 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500 animate-pulse" style={{animationDelay: '0.5s'}}></div>
@@ -410,7 +410,7 @@ Connection to anderson-terminal closed.`;
             </div>
             
             {/* Enhanced command input */}
-            <div className="flex items-center gap-2 border-t-2 border-gray-400 dark:border-cyber-lime/20 pt-4">
+            <div className="flex items-center gap-2 border-t-2 border-sage-accent/50 dark:border-cyber-lime/20 pt-4">
               <span className="text-sage-accent dark:text-cyber-lime font-mono text-sm animate-pulse font-bold">$</span>
               <input
                 type="text"
@@ -428,7 +428,7 @@ Connection to anderson-terminal closed.`;
           </div>
 
           {/* Contact form with matching height */}
-          <div className="bg-white/90 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-gray-400 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
+          <div className="bg-sage-accent/10 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent/50 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
             <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
               Envíame un mensaje
             </h3>
@@ -445,7 +445,7 @@ Connection to anderson-terminal closed.`;
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-gray-500 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
+                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent/70 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
                     placeholder="Tu nombre completo"
                   />
                 </div>
@@ -460,7 +460,7 @@ Connection to anderson-terminal closed.`;
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-gray-500 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
+                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent/70 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
                     placeholder="tu@email.com"
                   />
                 </div>
@@ -474,7 +474,7 @@ Connection to anderson-terminal closed.`;
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="flex-1 min-h-[120px] w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-gray-500 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 resize-none font-medium"
+                    className="flex-1 min-h-[120px] w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-sage-accent/70 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 resize-none font-medium"
                     placeholder="Describe tu proyecto o idea..."
                   />
                 </div>
@@ -497,7 +497,7 @@ Connection to anderson-terminal closed.`;
                 </CyberButton>
 
                 {/* Contact info below the button */}
-                <div className="bg-white/70 dark:bg-neural-gray/30 border-2 border-gray-500 dark:border-cyber-lime/20 rounded-lg p-4 text-center mb-4">
+                <div className="bg-sage-accent/15 dark:bg-neural-gray/30 border-2 border-sage-accent/50 dark:border-cyber-lime/20 rounded-lg p-4 text-center mb-4 backdrop-blur-sm">
                   <p className="text-gray-800 dark:text-quantum-silver text-sm mb-2 font-medium">O contáctame directamente:</p>
                   <p className="text-sage-accent dark:text-cyber-lime text-sm font-mono mb-1 font-semibold">anderson.gonzalez.dev@gmail.com</p>
                   <p className="text-gray-700 dark:text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
