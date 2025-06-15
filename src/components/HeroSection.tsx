@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -88,11 +89,11 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Personal Description with ultra-transparent glassmorphism */}
+        {/* Personal Description with ultra-transparent glassmorphism and visible border */}
         <div className={`mb-12 max-w-4xl mx-auto transition-all duration-700 delay-600 ${
           isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <div className="relative rounded-2xl p-8 overflow-hidden bg-white/5 dark:bg-black/10 border border-white/10 dark:border-white/5 backdrop-blur-sm">
+          <div className="relative rounded-2xl p-8 overflow-hidden bg-white/5 dark:bg-black/10 border-2 border-sage-accent/30 dark:border-cyber-lime/30 backdrop-blur-sm">
             {/* Content */}
             <div className="relative z-10">
               <p className="text-lg md:text-xl text-gray-900 dark:text-pearl-white/95 font-inter leading-relaxed mb-4 font-medium">
