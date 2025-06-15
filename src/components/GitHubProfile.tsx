@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -35,6 +34,7 @@ const GitHubProfile = () => {
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchGitHubData = async () => {
@@ -59,6 +59,28 @@ const GitHubProfile = () => {
     };
 
     fetchGitHubData();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const section = document.getElementById('github-section');
+    if (section) {
+      observer.observe(section);
+    }
+
+    return () => {
+      if (section) {
+        observer.unobserve(section);
+      }
+    };
   }, []);
 
   const formatDate = (dateString: string) => {
@@ -94,10 +116,14 @@ const GitHubProfile = () => {
   if (!user) return null;
 
   return (
-    <section className="py-16 px-6">
+    <section id="github-section" className="py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
+        {/* Header with zoom-out effect */}
+        <div className={`text-center mb-12 transition-all duration-1000 ease-out ${
+          isVisible 
+            ? 'scale-100 opacity-100' 
+            : 'scale-110 opacity-0'
+        }`}>
           <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold mb-6 text-sage-accent dark:text-cyber-lime">
             Mi GitHub
           </h2>
@@ -106,8 +132,12 @@ const GitHubProfile = () => {
           </p>
         </div>
 
-        {/* GitHub Profile Card */}
-        <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg relative">
+        {/* GitHub Profile Card with zoom-out effect */}
+        <div className={`bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg relative transition-all duration-1000 ease-out delay-200 ${
+          isVisible 
+            ? 'scale-100 opacity-100' 
+            : 'scale-110 opacity-0'
+        }`}>
           <div className="flex flex-col md:flex-row gap-8 items-start">
             {/* Avatar and basic info */}
             <div className="flex flex-col items-center md:items-start">
@@ -178,16 +208,28 @@ const GitHubProfile = () => {
           </div>
         </div>
 
-        {/* Recent Repositories */}
-        <div className="mb-8">
+        {/* Recent Repositories with staggered zoom-out effects */}
+        <div className={`mb-8 transition-all duration-1000 ease-out delay-400 ${
+          isVisible 
+            ? 'scale-100 opacity-100' 
+            : 'scale-110 opacity-0'
+        }`}>
           <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
             Repositorios Recientes
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {repos.map((repo) => (
+            {repos.map((repo, index) => (
               <div
                 key={repo.id}
-                className="bg-white/60 dark:bg-neural-gray/40 backdrop-blur-md border-2 border-sage-accent/30 dark:border-cyber-lime/20 rounded-lg p-6 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 group hover:scale-105 shadow-lg"
+                className={`bg-white/60 dark:bg-neural-gray/40 backdrop-blur-md border-2 border-sage-accent/30 dark:border-cyber-lime/20 rounded-lg p-6 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 group hover:scale-105 shadow-lg ${
+                  isVisible 
+                    ? 'scale-100 opacity-100' 
+                    : 'scale-110 opacity-0'
+                }`}
+                style={{
+                  transitionDelay: isVisible ? `${600 + index * 100}ms` : '0ms',
+                  transitionDuration: '1000ms'
+                }}
               >
                 <div className="flex items-start justify-between mb-3">
                   <h4 className="text-lg font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
