@@ -1,6 +1,6 @@
 
 import CyberCursor from '@/components/CyberCursor';
-import StarryBackground from '@/components/StarryBackground';
+import ParticleBackground from '@/components/ParticleBackground';
 import MatrixRain from '@/components/MatrixRain';
 import HeroSection from '@/components/HeroSection';
 import EducationSection from '@/components/EducationSection';
@@ -10,16 +10,14 @@ import ContactSection from '@/components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Starry space background */}
-      <StarryBackground />
-      
-      {/* Reduced matrix rain opacity for space theme */}
-      <div className="opacity-30">
-        <MatrixRain />
-      </div>
-      
+    <div className="min-h-screen bg-cyber-gradient relative overflow-hidden">
+      {/* Background effects */}
+      <MatrixRain />
+      <ParticleBackground />
       <CyberCursor />
+      
+      {/* Matrix dots pattern */}
+      <div className="fixed inset-0 matrix-dots pointer-events-none z-0" />
       
       {/* Main content with reduced spacing */}
       <main className="relative z-10 space-y-8">
