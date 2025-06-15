@@ -30,9 +30,16 @@ interface GitHubRepo {
   updated_at: string;
 }
 
+interface ContributionDay {
+  date: string;
+  count: number;
+  level: number;
+}
+
 const GitHubProfile = () => {
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [contributions, setContributions] = useState<ContributionDay[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,6 +58,10 @@ const GitHubProfile = () => {
         const reposData = await reposResponse.json();
         setRepos(reposData);
 
+        // Generate mock contribution data (since GitHub API doesn't provide this without authentication)
+        const mockContributions = generateMockContributions();
+        setContributions(mockContributions);
+
         setLoading(false);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
@@ -61,11 +72,75 @@ const GitHubProfile = () => {
     fetchGitHubData();
   }, []);
 
+  const generateMockContributions = (): ContributionDay[] => {
+    const contributions: ContributionDay[] = [];
+    const today = new Date();
+    const oneYearAgo = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+    
+    for (let d = new Date(oneYearAgo); d <= today; d.setDate(d.getDate() + 1)) {
+      const date = new Date(d);
+      const count = Math.floor(Math.random() * 15); // Random commits between 0-14
+      const level = count === 0 ? 0 : count <= 3 ? 1 : count <= 6 ? 2 : count <= 9 ? 3 : 4;
+      
+      contributions.push({
+        date: date.toISOString().split('T')[0],
+        count,
+        level
+      });
+    }
+    
+    return contributions;
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('es-ES', {
       year: 'numeric',
       month: 'long'
     });
+  };
+
+  const getContributionColor = (level: number): string => {
+    const colors = {
+      0: 'bg-gray-100 dark:bg-gray-800',
+      1: 'bg-sage-accent/20 dark:bg-cyber-lime/20',
+      2: 'bg-sage-accent/40 dark:bg-cyber-lime/40',
+      3: 'bg-sage-accent/60 dark:bg-cyber-lime/60',
+      4: 'bg-sage-accent dark:bg-cyber-lime'
+    };
+    return colors[level as keyof typeof colors] || colors[0];
+  };
+
+  const renderContributionCalendar = () => {
+    const weeks: ContributionDay[][] = [];
+    let currentWeek: ContributionDay[] = [];
+    
+    contributions.forEach((day, index) => {
+      const dayOfWeek = new Date(day.date).getDay();
+      
+      if (index === 0) {
+        // Fill empty days at the beginning of the first week
+        for (let i = 0; i < dayOfWeek; i++) {
+          currentWeek.push({ date: '', count: 0, level: 0 });
+        }
+      }
+      
+      currentWeek.push(day);
+      
+      if (currentWeek.length === 7) {
+        weeks.push(currentWeek);
+        currentWeek = [];
+      }
+    });
+    
+    // Add remaining days to the last week
+    if (currentWeek.length > 0) {
+      while (currentWeek.length < 7) {
+        currentWeek.push({ date: '', count: 0, level: 0 });
+      }
+      weeks.push(currentWeek);
+    }
+
+    return weeks;
   };
 
   if (loading) {
@@ -174,6 +249,67 @@ const GitHubProfile = () => {
                   Ver perfil completo
                   <ExternalLink className="w-4 h-4 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
                 </CyberButton>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contribution Calendar */}
+        <div className="bg-white/60 dark:bg-neural-gray/40 backdrop-blur-md border-2 border-sage-accent/30 dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg">
+          <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
+            Calendario de Contribuciones
+          </h3>
+          
+          <div className="overflow-x-auto">
+            <div className="flex flex-col items-center min-w-max">
+              {/* Days of week labels */}
+              <div className="flex mb-2">
+                <div className="w-6"></div>
+                {['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'].map((day) => (
+                  <div key={day} className="w-3 h-3 text-xs text-gray-600 dark:text-quantum-silver/60 flex items-center justify-center mx-[1px]">
+                    {day[0]}
+                  </div>
+                ))}
+              </div>
+              
+              {/* Contribution grid */}
+              <div className="flex">
+                <div className="flex flex-col justify-between text-xs text-gray-600 dark:text-quantum-silver/60 mr-2 h-[91px]">
+                  <span>Ene</span>
+                  <span>Mar</span>
+                  <span>May</span>
+                  <span>Jul</span>
+                  <span>Sep</span>
+                  <span>Nov</span>
+                </div>
+                
+                <div className="flex gap-[1px]">
+                  {renderContributionCalendar().map((week, weekIndex) => (
+                    <div key={weekIndex} className="flex flex-col gap-[1px]">
+                      {week.map((day, dayIndex) => (
+                        <div
+                          key={`${weekIndex}-${dayIndex}`}
+                          className={`w-3 h-3 rounded-sm ${getContributionColor(day.level)} ${
+                            day.date ? 'cursor-pointer hover:scale-110 transition-transform' : ''
+                          }`}
+                          title={day.date ? `${day.count} contribuciones el ${day.date}` : ''}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Legend */}
+              <div className="flex items-center gap-2 mt-4 text-sm text-gray-600 dark:text-quantum-silver/60">
+                <span>Menos</span>
+                {[0, 1, 2, 3, 4].map((level) => (
+                  <div
+                    key={level}
+                    className={`w-3 h-3 rounded-sm ${getContributionColor(level)}`}
+                  />
+                ))}
+                <span>Más</span>
               </div>
             </div>
           </div>
