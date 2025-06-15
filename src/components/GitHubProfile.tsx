@@ -231,38 +231,6 @@ const GitHubProfile = () => {
             ))}
           </div>
         </div>
-
-        {/* Call to action */}
-        <div className="text-center">
-          <div className="bg-sage-accent/15 dark:bg-neural-gray/30 border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 backdrop-blur-sm">
-            <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-4">
-              ¿Listo para colaborar?
-            </h3>
-            <p className="text-gray-800 dark:text-quantum-silver/90 mb-6 max-w-2xl mx-auto font-medium">
-              Si tienes algún proyecto interesante o quieres contribuir a alguno de mis repositorios, 
-              no dudes en contactarme. ¡Siempre estoy abierto a nuevas colaboraciones!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <CyberButton
-                size="lg"
-                onClick={() => window.open('https://github.com/Albonire', '_blank')}
-              >
-                <Github className="w-5 h-5 mr-2" />
-                Explorar GitHub
-              </CyberButton>
-              <CyberButton
-                variant="secondary"
-                size="lg"
-                onClick={() => {
-                  const element = document.getElementById('contact');
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Iniciar Proyecto
-              </CyberButton>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
