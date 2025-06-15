@@ -57,7 +57,7 @@ const ContactSection = () => {
     
     switch (cmd) {
       case 'help':
-        response = 'Comandos disponibles: help, skills, projects, contact, clear, whoami, status';
+        response = 'Comandos disponibles: help, skills, projects, contact, clear, whoami, status, about, time';
         break;
       case 'skills':
         response = 'Frontend: React, TypeScript, Tailwind CSS\nBackend: Node.js, Python, PostgreSQL\nTools: Docker, AWS, Git';
@@ -68,8 +68,14 @@ const ContactSection = () => {
       case 'contact':
         response = 'Email: anderson.gonzalez.dev@gmail.com\nEstado: Disponible para nuevos proyectos';
         break;
+      case 'about':
+        response = 'Desarrollador Full Stack con 5+ años de experiencia\nEspecializado en React, Node.js y soluciones escalables';
+        break;
       case 'whoami':
         response = 'Anderson González - Full Stack Developer';
+        break;
+      case 'time':
+        response = new Date().toLocaleString('es-ES');
         break;
       case 'status':
         response = 'Sistema operativo: Desarrollador v2024\nEstado: Listo para colaborar\nUptime: 5+ años';
@@ -77,6 +83,9 @@ const ContactSection = () => {
       case 'clear':
         setTerminalHistory([]);
         return;
+      case 'ls':
+        response = 'projects/  skills/  contact.txt  about.txt';
+        break;
       default:
         response = `bash: ${command}: command not found. Escribe 'help' para ver comandos disponibles.`;
     }
@@ -98,10 +107,10 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 px-6 relative">
+    <section id="contact" className="py-16 px-6 relative">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold cyber-text mb-6">
             Conectemos
           </h2>
@@ -110,10 +119,10 @@ const ContactSection = () => {
           </p>
         </div>
 
-        {/* Two column layout */}
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        {/* Two column layout with equal heights */}
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Interactive Command Console */}
-          <div className="cyber-glass rounded-lg p-6 h-[600px] flex flex-col">
+          <div className="cyber-glass rounded-lg p-6 flex flex-col h-[550px]">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -144,82 +153,83 @@ const ContactSection = () => {
             </div>
           </div>
 
-          {/* Contact form */}
-          <div className="cyber-glass rounded-lg p-8">
+          {/* Contact form with matching height */}
+          <div className="cyber-glass rounded-lg p-6 flex flex-col h-[550px]">
             <h3 className="text-2xl font-space-grotesk font-bold text-quantum-silver mb-6 text-center">
               Envíame un mensaje
             </h3>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-quantum-silver font-space-grotesk font-medium mb-2">
-                  Nombre
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300"
-                  placeholder="Tu nombre completo"
-                />
+            <form onSubmit={handleSubmit} className="flex-1 flex flex-col">
+              <div className="flex-1 space-y-4">
+                <div>
+                  <label className="block text-quantum-silver font-space-grotesk font-medium mb-2">
+                    Nombre
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300"
+                    placeholder="Tu nombre completo"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-quantum-silver font-space-grotesk font-medium mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300"
+                    placeholder="tu@email.com"
+                  />
+                </div>
+
+                <div className="flex-1 flex flex-col">
+                  <label className="block text-quantum-silver font-space-grotesk font-medium mb-2">
+                    Mensaje
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    className="flex-1 min-h-[120px] w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300 resize-none"
+                    placeholder="Describe tu proyecto o idea..."
+                  />
+                </div>
               </div>
 
-              <div>
-                <label className="block text-quantum-silver font-space-grotesk font-medium mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300"
-                  placeholder="tu@email.com"
-                />
-              </div>
+              <div className="mt-6">
+                <CyberButton
+                  size="lg"
+                  disabled={isSubmitting}
+                  className="w-full"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <span className="animate-pulse">Enviando...</span>
+                      <div className="w-4 h-4 border-2 border-void-black border-t-transparent rounded-full animate-spin ml-2" />
+                    </>
+                  ) : (
+                    'Enviar Mensaje'
+                  )}
+                </CyberButton>
 
-              <div>
-                <label className="block text-quantum-silver font-space-grotesk font-medium mb-2">
-                  Mensaje
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={5}
-                  className="w-full bg-neural-gray/50 border border-cyber-lime/30 rounded-lg px-4 py-3 text-quantum-silver focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-cyber-lime/20 transition-all duration-300 resize-none"
-                  placeholder="Describe tu proyecto o idea..."
-                />
+                {/* Contact info below button */}
+                <div className="mt-4 pt-4 border-t border-cyber-lime/20 text-center">
+                  <p className="text-quantum-silver text-sm mb-1">O contáctame directamente:</p>
+                  <p className="text-cyber-lime text-sm">anderson.gonzalez.dev@gmail.com</p>
+                  <p className="text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
+                </div>
               </div>
-
-              <CyberButton
-                size="lg"
-                disabled={isSubmitting}
-                className="w-full"
-              >
-                {isSubmitting ? (
-                  <>
-                    <span className="animate-pulse">Enviando...</span>
-                    <div className="w-4 h-4 border-2 border-void-black border-t-transparent rounded-full animate-spin ml-2" />
-                  </>
-                ) : (
-                  'Enviar Mensaje'
-                )}
-              </CyberButton>
             </form>
-
-            {/* Contact info below form */}
-            <div className="mt-8 pt-6 border-t border-cyber-lime/20 text-center">
-              <p className="text-quantum-silver mb-2">O contáctame directamente:</p>
-              <div className="space-y-1">
-                <p className="text-cyber-lime">anderson.gonzalez.dev@gmail.com</p>
-                <p className="text-quantum-silver text-sm">Respondo usualmente en 24 horas</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

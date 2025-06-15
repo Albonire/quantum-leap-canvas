@@ -50,7 +50,7 @@ const HeroSection = () => {
         </div>
 
         {/* Enhanced CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
           <CyberButton 
             size="lg" 
             onClick={() => scrollToSection('projects')}
@@ -71,11 +71,10 @@ const HeroSection = () => {
         </div>
 
         {/* Enhanced scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
           <div className="w-6 h-10 border-2 border-cyber-lime rounded-full flex justify-center animate-pulse">
             <div className="w-1 h-3 bg-cyber-lime rounded-full animate-bounce mt-2" />
           </div>
-          <p className="text-sm text-quantum-silver mt-2 font-inter">Explora mi trabajo</p>
         </div>
       </div>
 
