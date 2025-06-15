@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -364,10 +363,10 @@ Connection to anderson-terminal closed.`;
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold cyber-text mb-6">
+          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold mb-6 text-sage-accent dark:text-cyber-lime">
             Conectemos
           </h2>
-          <p className="text-xl text-gray-800 dark:text-quantum-silver max-w-2xl mx-auto font-medium">
+          <p className="text-xl max-w-2xl mx-auto font-medium text-gray-900 dark:text-quantum-silver">
             ¿Tienes un proyecto en mente? Hablemos sobre cómo puedo ayudarte a llevarlo al siguiente nivel
           </p>
         </div>
@@ -375,14 +374,14 @@ Connection to anderson-terminal closed.`;
         {/* Two column layout with equal heights */}
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Enhanced Interactive Command Console */}
-          <div className="bg-gray-100/80 dark:bg-neural-gray/30 backdrop-blur-md border border-gray-300 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
+          <div className="bg-white/90 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-gray-400 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500 animate-pulse" style={{animationDelay: '0.5s'}}></div>
               <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" style={{animationDelay: '1s'}}></div>
-              <span className="text-gray-700 dark:text-quantum-silver text-sm ml-4 font-mono font-medium">anderson@terminal:~$</span>
+              <span className="text-gray-800 dark:text-quantum-silver text-sm ml-4 font-mono font-medium">anderson@terminal:~$</span>
               <div className="flex-1"></div>
-              <span className="text-xs text-gray-600 dark:text-quantum-silver/60 font-mono">Terminal v2.0</span>
+              <span className="text-xs text-gray-700 dark:text-quantum-silver/60 font-mono">Terminal v2.0</span>
             </div>
             
             {/* Terminal output */}
@@ -394,14 +393,14 @@ Connection to anderson-terminal closed.`;
                     line.startsWith('$') 
                       ? 'text-sage-accent dark:text-cyber-lime flex items-center gap-2 font-semibold' 
                       : line.startsWith('├──') || line.startsWith('└──') || line.startsWith('│')
-                        ? 'text-gray-700 dark:text-quantum-silver/80 font-mono'
+                        ? 'text-gray-800 dark:text-quantum-silver/80 font-mono'
                         : line.includes('✅') || line.includes('🟢')
                           ? 'text-green-600 dark:text-green-400 font-medium'
                           : line.includes('❌') || line.includes('🔴')
                             ? 'text-red-600 dark:text-red-400 font-medium'
                             : line.includes('⚡') || line.includes('💡')
                               ? 'text-amber-600 dark:text-yellow-400 font-medium'
-                              : 'text-gray-800 dark:text-quantum-silver'
+                              : 'text-gray-900 dark:text-quantum-silver'
                   }
                 >
                   {line.startsWith('$') && <span className="text-sage-accent dark:text-cyber-lime mr-1">{'>'}</span>}
@@ -411,33 +410,33 @@ Connection to anderson-terminal closed.`;
             </div>
             
             {/* Enhanced command input */}
-            <div className="flex items-center gap-2 border-t border-gray-300 dark:border-cyber-lime/20 pt-4">
+            <div className="flex items-center gap-2 border-t-2 border-gray-400 dark:border-cyber-lime/20 pt-4">
               <span className="text-sage-accent dark:text-cyber-lime font-mono text-sm animate-pulse font-bold">$</span>
               <input
                 type="text"
                 value={currentCommand}
                 onChange={(e) => setCurrentCommand(e.target.value)}
                 onKeyDown={handleKeyPress}
-                className="flex-1 bg-transparent text-gray-800 dark:text-quantum-silver font-mono text-sm focus:outline-none placeholder:text-gray-500 dark:placeholder:text-quantum-silver/50 font-medium"
+                className="flex-1 bg-transparent text-gray-900 dark:text-quantum-silver font-mono text-sm focus:outline-none placeholder:text-gray-600 dark:placeholder:text-quantum-silver/50 font-medium"
                 placeholder="Escribe 'help' para ver comandos disponibles..."
                 autoComplete="off"
               />
-              <div className="text-xs text-gray-600 dark:text-quantum-silver/40 font-mono">
+              <div className="text-xs text-gray-700 dark:text-quantum-silver/40 font-mono">
                 ↑↓ historial | Enter ejecutar
               </div>
             </div>
           </div>
 
           {/* Contact form with matching height */}
-          <div className="bg-gray-100/80 dark:bg-neural-gray/30 backdrop-blur-md border border-gray-300 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
-            <h3 className="text-2xl font-space-grotesk font-bold text-gray-800 dark:text-quantum-silver mb-6 text-center">
+          <div className="bg-white/90 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-gray-400 dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
+            <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
               Envíame un mensaje
             </h3>
             
             <form onSubmit={handleSubmit} className="flex-1 flex flex-col">
               <div className="flex-1 space-y-4">
                 <div>
-                  <label className="block text-gray-800 dark:text-quantum-silver font-space-grotesk font-semibold mb-2">
+                  <label className="block text-gray-900 dark:text-quantum-silver font-space-grotesk font-semibold mb-2">
                     Nombre
                   </label>
                   <input
@@ -446,13 +445,13 @@ Connection to anderson-terminal closed.`;
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/70 dark:bg-neural-gray/50 border border-gray-400 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-800 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
+                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-gray-500 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
                     placeholder="Tu nombre completo"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-800 dark:text-quantum-silver font-space-grotesk font-semibold mb-2">
+                  <label className="block text-gray-900 dark:text-quantum-silver font-space-grotesk font-semibold mb-2">
                     Email
                   </label>
                   <input
@@ -461,13 +460,13 @@ Connection to anderson-terminal closed.`;
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/70 dark:bg-neural-gray/50 border border-gray-400 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-800 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
+                    className="w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-gray-500 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 font-medium"
                     placeholder="tu@email.com"
                   />
                 </div>
 
                 <div className="flex-1 flex flex-col">
-                  <label className="block text-gray-800 dark:text-quantum-silver font-space-grotesk font-semibold mb-2">
+                  <label className="block text-gray-900 dark:text-quantum-silver font-space-grotesk font-semibold mb-2">
                     Mensaje
                   </label>
                   <textarea
@@ -475,7 +474,7 @@ Connection to anderson-terminal closed.`;
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="flex-1 min-h-[120px] w-full bg-white/70 dark:bg-neural-gray/50 border border-gray-400 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-800 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 resize-none font-medium"
+                    className="flex-1 min-h-[120px] w-full bg-white/80 dark:bg-neural-gray/50 border-2 border-gray-500 dark:border-cyber-lime/30 rounded-lg px-4 py-3 text-gray-900 dark:text-quantum-silver focus:border-sage-accent dark:focus:border-cyber-lime focus:outline-none focus:ring-2 focus:ring-sage-accent/20 dark:focus:ring-cyber-lime/20 transition-all duration-300 resize-none font-medium"
                     placeholder="Describe tu proyecto o idea..."
                   />
                 </div>
@@ -498,10 +497,10 @@ Connection to anderson-terminal closed.`;
                 </CyberButton>
 
                 {/* Contact info below the button */}
-                <div className="bg-white/50 dark:bg-neural-gray/30 border border-gray-400 dark:border-cyber-lime/20 rounded-lg p-4 text-center mb-4">
-                  <p className="text-gray-700 dark:text-quantum-silver text-sm mb-2 font-medium">O contáctame directamente:</p>
+                <div className="bg-white/70 dark:bg-neural-gray/30 border-2 border-gray-500 dark:border-cyber-lime/20 rounded-lg p-4 text-center mb-4">
+                  <p className="text-gray-800 dark:text-quantum-silver text-sm mb-2 font-medium">O contáctame directamente:</p>
                   <p className="text-sage-accent dark:text-cyber-lime text-sm font-mono mb-1 font-semibold">anderson.gonzalez.dev@gmail.com</p>
-                  <p className="text-gray-600 dark:text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
+                  <p className="text-gray-700 dark:text-quantum-silver text-xs">Respondo usualmente en 24 horas</p>
                 </div>
               </div>
             </form>

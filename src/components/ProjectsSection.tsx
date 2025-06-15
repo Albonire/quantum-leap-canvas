@@ -71,10 +71,10 @@ const ProjectsSection = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold cyber-text mb-6">
+          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold mb-6 text-sage-accent dark:text-cyber-lime">
             Galaxia de Proyectos
           </h2>
-          <p className="text-xl text-quantum-silver max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto text-gray-900 dark:text-quantum-silver font-medium">
             Explorando el cosmos digital a través de soluciones innovadoras que transforman ideas en realidades tecnológicas
           </p>
         </div>
@@ -87,8 +87,8 @@ const ProjectsSection = () => {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-3 rounded-full font-space-grotesk font-medium transition-all duration-300 ${
                 selectedCategory === category
-                  ? 'bg-cyber-lime text-void-black shadow-[0_0_20px_#a4ff00]'
-                  : 'bg-neural-gray/50 text-quantum-silver hover:bg-cyber-lime/20 hover:text-cyber-lime border border-transparent hover:border-cyber-lime/50'
+                  ? 'bg-sage-accent dark:bg-cyber-lime text-white dark:text-void-black shadow-[0_0_20px_#6b8e6b] dark:shadow-[0_0_20px_#a4ff00]'
+                  : 'bg-gray-200/80 dark:bg-neural-gray/50 text-gray-800 dark:text-quantum-silver hover:bg-sage-accent/20 dark:hover:bg-cyber-lime/20 hover:text-sage-accent dark:hover:text-cyber-lime border border-transparent hover:border-sage-accent/50 dark:hover:border-cyber-lime/50'
               }`}
             >
               {category === 'all' ? 'Todos' : category.toUpperCase()}
@@ -101,7 +101,7 @@ const ProjectsSection = () => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="group relative cyber-glass rounded-xl overflow-hidden hover:border-cyber-lime transition-all duration-500"
+              className="group relative bg-white/90 dark:bg-neural-gray/30 backdrop-blur-md border border-gray-300 dark:border-cyber-lime/20 rounded-xl overflow-hidden hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-500 shadow-lg"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
@@ -118,11 +118,11 @@ const ProjectsSection = () => {
                 {/* Hover effects */}
                 {hoveredProject === project.id && (
                   <>
-                    <div className="absolute inset-0 bg-cyber-lime/10" />
-                    <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-cyber-lime animate-pulse" />
-                    <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-cyber-lime animate-pulse" />
-                    <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-cyber-lime animate-pulse" />
-                    <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-cyber-lime animate-pulse" />
+                    <div className="absolute inset-0 bg-sage-accent/10 dark:bg-cyber-lime/10" />
+                    <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-sage-accent dark:border-cyber-lime animate-pulse" />
+                    <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-sage-accent dark:border-cyber-lime animate-pulse" />
+                    <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-sage-accent dark:border-cyber-lime animate-pulse" />
+                    <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-sage-accent dark:border-cyber-lime animate-pulse" />
                   </>
                 )}
               </div>
@@ -130,15 +130,15 @@ const ProjectsSection = () => {
               {/* Project content */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-2xl font-space-grotesk font-bold text-quantum-silver group-hover:text-cyber-lime transition-colors">
+                  <h3 className="text-2xl font-space-grotesk font-bold text-gray-800 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
                     {project.title}
                   </h3>
-                  <span className="px-3 py-1 text-xs font-inter font-medium bg-cyber-lime/20 text-cyber-lime rounded-full">
+                  <span className="px-3 py-1 text-xs font-inter font-medium bg-sage-accent/20 dark:bg-cyber-lime/20 text-sage-accent dark:text-cyber-lime rounded-full">
                     {project.category.toUpperCase()}
                   </span>
                 </div>
 
-                <p className="text-quantum-silver/80 font-inter mb-6 leading-relaxed">
+                <p className="text-gray-700 dark:text-quantum-silver/80 font-inter mb-6 leading-relaxed">
                   {project.description}
                 </p>
 
@@ -147,7 +147,7 @@ const ProjectsSection = () => {
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-neural-gray/50 text-quantum-silver text-sm rounded-full font-inter border border-transparent group-hover:border-cyber-lime/30 transition-all duration-300"
+                      className="px-3 py-1 bg-gray-200/80 dark:bg-neural-gray/50 text-gray-800 dark:text-quantum-silver text-sm rounded-full font-inter border border-transparent group-hover:border-sage-accent/30 dark:group-hover:border-cyber-lime/30 transition-all duration-300"
                     >
                       {tech}
                     </span>
@@ -175,7 +175,7 @@ const ProjectsSection = () => {
 
               {/* Scanning line effect */}
               {hoveredProject === project.id && (
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyber-lime to-transparent animate-cyber-scan" />
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sage-accent dark:via-cyber-lime to-transparent animate-cyber-scan" />
               )}
             </div>
           ))}
@@ -183,7 +183,7 @@ const ProjectsSection = () => {
 
         {/* Call to action */}
         <div className="text-center mt-16">
-          <p className="text-xl text-quantum-silver mb-8 font-inter">
+          <p className="text-xl mb-8 font-inter font-medium text-gray-900 dark:text-quantum-silver">
             ¿Listo para crear algo extraordinario juntos?
           </p>
           <CyberButton 
