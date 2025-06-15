@@ -42,9 +42,26 @@ const HeroSection = () => {
           </h2>
           
           {/* Professional title with enhanced styling */}
-          <div className="inline-block bg-cyber-lime/10 border border-cyber-lime/30 rounded-full px-6 py-3 mb-6">
+          <div className="inline-block bg-cyber-lime/10 border border-cyber-lime/30 rounded-full px-6 py-3 mb-8">
             <p className="text-cyber-lime font-space-grotesk font-semibold text-lg">
               Desarrollador Full Stack
+            </p>
+          </div>
+        </div>
+
+        {/* Personal Description */}
+        <div className="mb-12 max-w-4xl mx-auto">
+          <div className="cyber-glass rounded-2xl p-8 backdrop-blur-md border border-emerald-accent/20">
+            <p className="text-lg md:text-xl text-pearl-white/90 font-inter leading-relaxed mb-4">
+              Soy un desarrollador apasionado por crear soluciones digitales innovadoras. 
+              Con experiencia en tecnologías modernas como <span className="text-cyber-lime">React</span>, 
+              <span className="text-cyber-lime"> Node.js</span> y <span className="text-cyber-lime">Python</span>, 
+              me especializo en construir aplicaciones web escalables y experiencias de usuario excepcionales.
+            </p>
+            <p className="text-base md:text-lg text-silver-mist font-inter leading-relaxed">
+              Mi enfoque se centra en la calidad del código, las mejores prácticas de desarrollo 
+              y la colaboración efectiva en equipos multidisciplinarios. Siempre busco aprender 
+              nuevas tecnologías y enfrentar desafíos que me permitan crecer profesionalmente.
             </p>
           </div>
         </div>
