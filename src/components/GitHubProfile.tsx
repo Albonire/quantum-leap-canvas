@@ -35,6 +35,7 @@ const GitHubProfile = () => {
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchGitHubData = async () => {
@@ -59,6 +60,27 @@ const GitHubProfile = () => {
     };
 
     fetchGitHubData();
+
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const section = document.getElementById('github-section');
+    if (section) {
+      observer.observe(section);
+    }
+
+    return () => {
+      if (section) {
+        observer.unobserve(section);
+      }
+    };
   }, []);
 
   const formatDate = (dateString: string) => {
@@ -94,10 +116,14 @@ const GitHubProfile = () => {
   if (!user) return null;
 
   return (
-    <section className="py-16 px-6">
+    <section id="github-section" className="py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
+        {/* Header with slide-in animation */}
+        <div className={`text-center mb-12 transition-all duration-1000 ${
+          isVisible 
+            ? 'translate-y-0 opacity-100' 
+            : 'translate-y-8 opacity-0'
+        }`}>
           <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold mb-6 text-sage-accent dark:text-cyber-lime">
             Mi GitHub
           </h2>
@@ -106,15 +132,19 @@ const GitHubProfile = () => {
           </p>
         </div>
 
-        {/* GitHub Profile Card */}
-        <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg relative">
+        {/* GitHub Profile Card with slide-in from left */}
+        <div className={`bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg relative transition-all duration-1000 delay-300 ${
+          isVisible 
+            ? 'translate-x-0 opacity-100' 
+            : '-translate-x-12 opacity-0'
+        }`}>
           <div className="flex flex-col md:flex-row gap-8 items-start">
             {/* Avatar and basic info */}
             <div className="flex flex-col items-center md:items-start">
               <img
                 src={user.avatar_url}
                 alt={user.name}
-                className="w-32 h-32 rounded-full border-4 border-sage-accent dark:border-cyber-lime shadow-lg mb-4"
+                className="w-32 h-32 rounded-full border-4 border-sage-accent dark:border-cyber-lime shadow-lg mb-4 transition-transform duration-300 hover:scale-110 hover:rotate-3"
               />
               <div className="text-center md:text-left">
                 <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-2">
@@ -131,30 +161,38 @@ const GitHubProfile = () => {
               </div>
             </div>
 
-            {/* Stats and info */}
+            {/* Stats and info with staggered animations */}
             <div className="flex-1">
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
+                <div className={`flex items-center gap-3 transition-all duration-700 delay-500 ${
+                  isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
+                }`}>
                   <Book className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
                   <span className="text-gray-900 dark:text-quantum-silver font-medium">
                     {user.public_repos} repositorios públicos
                   </span>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className={`flex items-center gap-3 transition-all duration-700 delay-600 ${
+                  isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
+                }`}>
                   <Users className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
                   <span className="text-gray-900 dark:text-quantum-silver font-medium">
                     {user.followers} seguidores • {user.following} siguiendo
                   </span>
                 </div>
                 {user.location && (
-                  <div className="flex items-center gap-3">
+                  <div className={`flex items-center gap-3 transition-all duration-700 delay-700 ${
+                    isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
+                  }`}>
                     <MapPin className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
                     <span className="text-gray-900 dark:text-quantum-silver font-medium">
                       {user.location}
                     </span>
                   </div>
                 )}
-                <div className="flex items-center gap-3">
+                <div className={`flex items-center gap-3 transition-all duration-700 delay-800 ${
+                  isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
+                }`}>
                   <Calendar className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
                   <span className="text-gray-900 dark:text-quantum-silver font-medium">
                     Desde {formatDate(user.created_at)}
@@ -164,12 +202,14 @@ const GitHubProfile = () => {
             </div>
           </div>
 
-          {/* Ver perfil completo button - moved to bottom right and made smaller */}
-          <div className="absolute bottom-6 right-6">
+          {/* Ver perfil completo button with slide-in from bottom */}
+          <div className={`absolute bottom-6 right-6 transition-all duration-700 delay-900 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+          }`}>
             <CyberButton
               size="sm"
               onClick={() => window.open(user.html_url, '_blank')}
-              className="group text-sm"
+              className="group text-sm hover:scale-105 transition-transform duration-300"
             >
               <Github className="w-4 h-4 mr-2" />
               Ver perfil completo
@@ -178,23 +218,34 @@ const GitHubProfile = () => {
           </div>
         </div>
 
-        {/* Recent Repositories */}
-        <div className="mb-8">
+        {/* Recent Repositories with slide-in from right */}
+        <div className={`mb-8 transition-all duration-1000 delay-500 ${
+          isVisible 
+            ? 'translate-x-0 opacity-100' 
+            : 'translate-x-12 opacity-0'
+        }`}>
           <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
             Repositorios Recientes
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {repos.map((repo) => (
+            {repos.map((repo, index) => (
               <div
                 key={repo.id}
-                className="bg-white/60 dark:bg-neural-gray/40 backdrop-blur-md border-2 border-sage-accent/30 dark:border-cyber-lime/20 rounded-lg p-6 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-300 group hover:scale-105 shadow-lg"
+                className={`bg-white/60 dark:bg-neural-gray/40 backdrop-blur-md border-2 border-sage-accent/30 dark:border-cyber-lime/20 rounded-lg p-6 hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-500 group hover:scale-105 shadow-lg hover:-translate-y-2 ${
+                  isVisible 
+                    ? 'translate-y-0 opacity-100' 
+                    : 'translate-y-8 opacity-0'
+                }`}
+                style={{
+                  transitionDelay: `${700 + index * 100}ms`
+                }}
               >
                 <div className="flex items-start justify-between mb-3">
                   <h4 className="text-lg font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors">
                     {repo.name}
                   </h4>
                   <ExternalLink 
-                    className="w-4 h-4 text-gray-600 dark:text-quantum-silver/60 group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors cursor-pointer"
+                    className="w-4 h-4 text-gray-600 dark:text-quantum-silver/60 group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-all duration-300 cursor-pointer hover:scale-110"
                     onClick={() => window.open(repo.html_url, '_blank')}
                   />
                 </div>
@@ -226,6 +277,9 @@ const GitHubProfile = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Scanning line effect on hover */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sage-accent dark:via-cyber-lime to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-cyber-scan" />
               </div>
             ))}
           </div>
