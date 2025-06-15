@@ -59,72 +59,83 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <Label htmlFor="name" className="text-gray-900 dark:text-quantum-silver font-medium">
-            Nombre
-          </Label>
-          <Input
-            id="name"
-            {...register('name')}
-            className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime"
-            placeholder="Tu nombre completo"
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm">{errors.name.message}</p>
-          )}
+    <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
+      <div className="mb-6">
+        <h3 className="text-2xl font-space-grotesk font-bold text-sage-accent dark:text-cyber-lime mb-2">
+          Envíame un mensaje
+        </h3>
+        <p className="text-gray-800 dark:text-quantum-silver font-medium">
+          ¿Tienes algún proyecto en mente? Me encantaría escuchar tus ideas
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="name" className="text-gray-900 dark:text-quantum-silver font-medium">
+              Nombre
+            </Label>
+            <Input
+              id="name"
+              {...register('name')}
+              className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime"
+              placeholder="Tu nombre completo"
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm">{errors.name.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-gray-900 dark:text-quantum-silver font-medium">
+              Email
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              {...register('email')}
+              className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime"
+              placeholder="tu@email.com"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+          </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-gray-900 dark:text-quantum-silver font-medium">
-            Email
+          <Label htmlFor="message" className="text-gray-900 dark:text-quantum-silver font-medium">
+            Mensaje
           </Label>
-          <Input
-            id="email"
-            type="email"
-            {...register('email')}
-            className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime"
-            placeholder="tu@email.com"
+          <Textarea
+            id="message"
+            {...register('message')}
+            className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime min-h-[120px]"
+            placeholder="Escribe tu mensaje aquí..."
           />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          {errors.message && (
+            <p className="text-red-500 text-sm">{errors.message.message}</p>
           )}
         </div>
-      </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="message" className="text-gray-900 dark:text-quantum-silver font-medium">
-          Mensaje
-        </Label>
-        <Textarea
-          id="message"
-          {...register('message')}
-          className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime min-h-[120px]"
-          placeholder="Escribe tu mensaje aquí..."
-        />
-        {errors.message && (
-          <p className="text-red-500 text-sm">{errors.message.message}</p>
-        )}
-      </div>
-
-      <Button
-        size="lg"
-        disabled={isSubmitting}
-        className="w-full bg-sage-accent hover:bg-sage-accent/90 dark:bg-cyber-lime dark:hover:bg-cyber-lime/90 text-white dark:text-void-black font-space-grotesk font-semibold py-3 transition-all duration-300 hover:shadow-lg hover:shadow-sage-accent/25 dark:hover:shadow-cyber-lime/25"
-      >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Enviando...
-          </>
-        ) : (
-          <>
-            <Send className="mr-2 h-4 w-4" />
-            Enviar mensaje
-          </>
-        )}
-      </Button>
-    </form>
+        <Button
+          size="lg"
+          disabled={isSubmitting}
+          className="w-full bg-sage-accent hover:bg-sage-accent/90 dark:bg-cyber-lime dark:hover:bg-cyber-lime/90 text-white dark:text-void-black font-space-grotesk font-semibold py-3 transition-all duration-300 hover:shadow-lg hover:shadow-sage-accent/25 dark:hover:shadow-cyber-lime/25"
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Enviando...
+            </>
+          ) : (
+            <>
+              <Send className="mr-2 h-4 w-4" />
+              Enviar mensaje
+            </>
+          )}
+        </Button>
+      </form>
+    </div>
   );
 }
