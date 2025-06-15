@@ -24,29 +24,34 @@ const StarryBackground = () => {
     const stars: Array<{
       x: number;
       y: number;
-      z: number;
+      baseX: number;
+      baseY: number;
       radius: number;
       alpha: number;
       twinkleSpeed: number;
-      twinkleDirection: number;
-      speed: number;
+      twinklePhase: number;
+      brightness: number;
     }> = [];
 
-    // Create stars
+    // Create stars with more natural distribution
     const createStars = () => {
-      const numStars = Math.floor((canvas.width * canvas.height) / 6000);
+      const numStars = Math.floor((canvas.width * canvas.height) / 4000);
       stars.length = 0;
       
       for (let i = 0; i < numStars; i++) {
+        const baseX = Math.random() * canvas.width;
+        const baseY = Math.random() * canvas.height;
+        
         stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          z: Math.random() * 1000,
-          radius: Math.random() * 2 + 0.5,
+          x: baseX,
+          y: baseY,
+          baseX: baseX,
+          baseY: baseY,
+          radius: Math.random() * 1.5 + 0.3, // Smaller, more realistic stars
           alpha: Math.random() * 0.8 + 0.2,
-          twinkleSpeed: Math.random() * 0.02 + 0.005,
-          twinkleDirection: Math.random() > 0.5 ? 1 : -1,
-          speed: Math.random() * 0.5 + 0.1,
+          twinkleSpeed: Math.random() * 0.005 + 0.001, // Slower, more natural twinkling
+          twinklePhase: Math.random() * Math.PI * 2,
+          brightness: Math.random() * 0.5 + 0.5, // Different star brightnesses
         });
       }
     };
@@ -55,82 +60,56 @@ const StarryBackground = () => {
 
     // Animation loop
     const animate = () => {
-      // Clear canvas with deep space background
-      ctx.fillStyle = '#0a0a15';
+      // Pure black space background
+      ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Add moving nebula effect
       const time = Date.now() * 0.0001;
-      const gradient = ctx.createRadialGradient(
-        canvas.width * (0.3 + Math.sin(time) * 0.1),
-        canvas.height * (0.3 + Math.cos(time * 0.7) * 0.1),
-        0,
-        canvas.width * (0.3 + Math.sin(time) * 0.1),
-        canvas.height * (0.3 + Math.cos(time * 0.7) * 0.1),
-        canvas.width * 0.8
-      );
-      gradient.addColorStop(0, 'rgba(75, 0, 130, 0.1)');
-      gradient.addColorStop(0.5, 'rgba(25, 25, 112, 0.05)');
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw and animate stars
-      stars.forEach((star) => {
-        // Move stars towards viewer (3D effect)
-        star.z -= star.speed;
+      stars.forEach((star, index) => {
+        // Very subtle movement - like distant parallax
+        const parallaxX = Math.sin(time * 0.1 + index * 0.1) * 0.3;
+        const parallaxY = Math.cos(time * 0.15 + index * 0.15) * 0.2;
         
-        // Reset star position when it gets too close
-        if (star.z <= 0) {
-          star.z = 1000;
-          star.x = Math.random() * canvas.width;
-          star.y = Math.random() * canvas.height;
-        }
+        star.x = star.baseX + parallaxX;
+        star.y = star.baseY + parallaxY;
 
-        // Calculate 3D position
-        const x = (star.x - canvas.width / 2) * (1000 / star.z) + canvas.width / 2;
-        const y = (star.y - canvas.height / 2) * (1000 / star.z) + canvas.height / 2;
-        const radius = star.radius * (1000 / star.z);
+        // Natural twinkling using sine wave
+        star.twinklePhase += star.twinkleSpeed;
+        const twinkle = (Math.sin(star.twinklePhase) + 1) * 0.5; // 0 to 1
+        const currentAlpha = star.alpha * star.brightness * (0.3 + twinkle * 0.7);
 
-        // Update twinkle
-        star.alpha += star.twinkleSpeed * star.twinkleDirection;
-        
-        if (star.alpha <= 0.2 || star.alpha >= 1) {
-          star.twinkleDirection *= -1;
-        }
+        // Draw star core
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha})`;
+        ctx.fill();
 
-        star.alpha = Math.max(0.2, Math.min(1, star.alpha));
-
-        // Only draw stars that are visible
-        if (x >= -radius && x <= canvas.width + radius && 
-            y >= -radius && y <= canvas.height + radius) {
-          
-          // Draw star
+        // Add subtle glow for brighter stars
+        if (star.brightness > 0.7 && currentAlpha > 0.5) {
           ctx.beginPath();
-          ctx.arc(x, y, Math.max(0.1, radius), 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha * (1000 / star.z)})`;
+          ctx.arc(star.x, star.y, star.radius * 2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha * 0.1})`;
           ctx.fill();
+        }
 
-          // Add glow effect for larger/closer stars
-          if (radius > 1) {
-            ctx.beginPath();
-            ctx.arc(x, y, radius * 2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(173, 216, 230, ${star.alpha * 0.3 * (1000 / star.z)})`;
-            ctx.fill();
-          }
-
-          // Add motion trails for fast-moving stars
-          if (star.speed > 0.3) {
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            const trailX = x - (x - canvas.width / 2) * 0.1;
-            const trailY = y - (y - canvas.height / 2) * 0.1;
-            ctx.lineTo(trailX, trailY);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${star.alpha * 0.2})`;
-            ctx.lineWidth = Math.max(0.1, radius * 0.5);
-            ctx.stroke();
-          }
+        // Very bright stars get a soft cross pattern
+        if (star.brightness > 0.9 && currentAlpha > 0.8) {
+          ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.3})`;
+          ctx.lineWidth = 0.5;
+          
+          // Vertical line
+          ctx.beginPath();
+          ctx.moveTo(star.x, star.y - star.radius * 3);
+          ctx.lineTo(star.x, star.y + star.radius * 3);
+          ctx.stroke();
+          
+          // Horizontal line
+          ctx.beginPath();
+          ctx.moveTo(star.x - star.radius * 3, star.y);
+          ctx.lineTo(star.x + star.radius * 3, star.y);
+          ctx.stroke();
         }
       });
 
@@ -149,7 +128,7 @@ const StarryBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none z-0"
-      style={{ background: 'linear-gradient(135deg, #0a0a15 0%, #1a1a2e 50%, #16213e 100%)' }}
+      style={{ background: '#000000' }}
     />
   );
 };
