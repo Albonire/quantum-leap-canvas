@@ -19,9 +19,9 @@ const educationData: Education[] = [
   {
     id: 1,
     year: '2019',
-    title: 'Bachiller en Ciencias',
-    institution: 'Instituto Tecnológico Superior',
-    description: 'Enfoque en matemáticas y ciencias de la computación',
+    title: 'Bachiller Técnico',
+    institution: 'Instituto Tecnico Industrial Francisco de Paula Santander',
+    description: 'Enfoque en electrónica y mecánica industrial',
     type: 'degree',
     certificateUrl: 'https://example.com/certificate1'
   },

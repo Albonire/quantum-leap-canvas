@@ -26,7 +26,7 @@ const ContactSection = () => {
     // Simular descarga del CV
     const link = document.createElement('a');
     link.href = '#'; // En producción, aquí iría la URL real del CV
-    link.download = 'Anderson_Gonzalez_CV.pdf';
+    link.download = 'https://icedrive.net/s/gghN1jxzVwV9t8BVBkPQgxD8a4i3';
     link.click();
   };
 
