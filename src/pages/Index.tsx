@@ -1,6 +1,4 @@
 
-import { useState, useEffect } from 'react';
-import Scene from '@/components/Scene';
 import CyberCursor from '@/components/CyberCursor';
 import StarryBackground from '@/components/StarryBackground';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -10,21 +8,9 @@ import TechSection from '@/components/TechSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import GitHubProfile from '@/components/GitHubProfile';
 import ContactSection from '@/components/ContactSection';
+import LoadingScreen from '@/components/LoadingScreen';
 
 const Index = () => {
-  const [opacity, setOpacity] = useState(1);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const newOpacity = Math.max(0, 1 - scrollY / 500);
-      setOpacity(newOpacity);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-cream via-pearl-white to-cream dark:bg-void-black transition-colors duration-300">
       <Scene opacity={opacity} />

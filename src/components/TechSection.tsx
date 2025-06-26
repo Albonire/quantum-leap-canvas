@@ -25,6 +25,10 @@ const skills: Skill[] = [
   { name: 'FastAPI/Flask', level: 'alto', category: 'backend', color: '#009688' },
   { name: 'GraphQL', level: 'medio', category: 'backend', color: '#e10098' },
   { name: 'SQL', level: 'medio', category: 'database', color: '#336791' },
+  { name: 'PostgreSQL', level: 'medio', category: 'database', color: '#336791' },
+  { name: 'SQLite', level: 'medio', category: 'database', color: '#003b57' },
+  { name: 'Git', level: 'alto', category: 'tools', color: '#f05032' },
+  { name: 'GitHub', level: 'alto', category: 'tools', color: '#181717' },
 ];
 
 const TechSection = () => {
