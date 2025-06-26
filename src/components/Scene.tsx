@@ -2,8 +2,8 @@
 import { Canvas, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Suspense } from 'react';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
 import { TextureLoader } from 'three';
 
 const Model = ({ mtlUrl, objUrl, position, scale = [0.1, 0.1, 0.1] }: { mtlUrl: string, objUrl: string, position: [number, number, number], scale?: [number, number, number] }) => {
