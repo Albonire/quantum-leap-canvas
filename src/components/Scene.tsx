@@ -40,7 +40,7 @@ const Scene = ({ opacity }: { opacity: number }) => {
       <ambientLight intensity={0.8} />
       <directionalLight position={[10, 10, 5]} intensity={1.2} castShadow />
       <pointLight position={[-10, -10, -10]} intensity={0.8} />
-      <hemisphereLight skyColor={0xffffff} groundColor={0x444444} intensity={0.6} />
+      <hemisphereLight args={[0xffffff, 0x444444, 0.6]} />
       
       <Suspense fallback={
         <mesh position={[0, 0, 0]}>
