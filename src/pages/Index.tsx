@@ -26,7 +26,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-cream via-pearl-white to-cream dark:bg-void-black transition-colors duration-300">
+    <div className="min-h-screen relative transition-colors duration-300">
       <Scene opacity={opacity} />
       {/* Background effects */}
       <StarryBackground />
