@@ -45,7 +45,7 @@ const CyberCursor = () => {
       gsap.to(follower, {
         scale: 1.5,
         duration: 0.3,
-        borderColor: 'var(--emerald-accent)',
+        borderColor: 'var(--cursor-hover-color)',
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
       });
     };
@@ -54,7 +54,7 @@ const CyberCursor = () => {
       gsap.to(follower, {
         scale: 1,
         duration: 0.3,
-        borderColor: 'var(--sage-accent)',
+        borderColor: 'var(--cursor-color)',
         backgroundColor: 'transparent',
       });
     };
@@ -94,12 +94,18 @@ const CyberCursor = () => {
     <>
       <div
         ref={cursorRef}
-        className="fixed w-2 h-2 bg-sage-accent rounded-full pointer-events-none z-[9999] opacity-0"
-        style={{ transform: 'translate(-50%, -50%)' }}
+        className="fixed w-2 h-2 rounded-full pointer-events-none z-[9999] opacity-0"
+        style={{
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: 'var(--cursor-color)',
+        }}
       />
       <div
         ref={followerRef}
-        className="fixed w-6 h-6 border-2 border-sage-accent rounded-full pointer-events-none z-[9999] opacity-0"
+        className="fixed w-6 h-6 border-2 rounded-full pointer-events-none z-[9999] opacity-0"
+        style={{
+          borderColor: 'var(--cursor-color)',
+        }}
       />
     </>
   );
