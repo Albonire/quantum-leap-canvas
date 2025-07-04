@@ -144,14 +144,6 @@ const HeroSection = () => {
           </CyberButton>
         </div>
 
-        {/* Enhanced scroll indicator */}
-        <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-700 delay-800 ${
-          isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-        }`}>
-          <div className="w-6 h-10 border-2 border-sage-accent dark:border-cyber-lime rounded-full flex justify-center animate-pulse">
-            <div className="w-1 h-3 bg-sage-accent dark:bg-cyber-lime rounded-full animate-bounce mt-2" />
-          </div>
-        </div>
       </div>
 
       {/* Enhanced holographic overlay */}
