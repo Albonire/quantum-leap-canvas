@@ -63,33 +63,32 @@ const ContactSection = () => {
     switch (baseCmd) {
       case 'help':
         response = `Comandos disponibles:
-┌─────────────────┬──────────────────────────────────────┐
-│ Comando         │ Descripción                          │
-├─────────────────┼──────────────────────────────────────┤
-│ help            │ Muestra esta ayuda                   │
-│ about           │ Información personal                 │
-│ skills          │ Tecnologías y habilidades            │
-│ projects        │ Proyectos destacados                 │
-│ experience      │ Experiencia laboral                  │
-│ education       │ Formación académica                  │
-│ contact         │ Información de contacto              │
-│ social          │ Redes sociales                       │
-│ resume          │ Descargar CV                         │
-│ sudo dnf download│ Descargar CV (método alternativo)   │
-│ quote           │ Frase motivacional aleatoria         │
-│ joke            │ Chiste de programación               │
-│ weather         │ Clima actual                         │
-│ time            │ Fecha y hora actual                  │
-│ uptime          │ Tiempo de experiencia                │
-│ ping            │ Test de conectividad                 │
-│ whoami          │ Información del usuario              │
-│ pwd             │ Directorio actual                    │
-│ ls              │ Listar contenido                     │
-│ cat [archivo]   │ Mostrar contenido de archivo         │
-│ history         │ Historial de comandos                │
-│ clear           │ Limpiar terminal                     │
-│ exit            │ Mensaje de despedida                 │
-└─────────────────┴──────────────────────────────────────┘`;
+┌──────────────────┬──────────────────────────────────────┐
+│ Comando          │ Descripción                          │
+├──────────────────┼──────────────────────────────────────┤
+│ help             │ Muestra esta ayuda                   │
+│ about            │ Información personal                 │
+│ skills           │ Tecnologías y habilidades            │
+│ projects         │ Proyectos destacados                 │
+│ experience       │ Experiencia laboral                  │
+│ education        │ Formación académica                  │
+│ contact          │ Información de contacto              │
+│ social           │ Redes sociales                       │
+│ sudo dnf download│ Descargar CV                         │
+│ quote            │ Frase motivacional aleatoria         │
+│ joke             │ Chiste de programación               │
+│ weather          │ Clima actual                         │
+│ time             │ Fecha y hora actual                  │
+│ uptime           │ Tiempo de experiencia                │
+│ ping             │ Test de conectividad                 │
+│ whoami           │ Información del usuario              │
+│ pwd              │ Directorio actual                    │
+│ ls               │ Listar contenido                     │
+│ cat [archivo]    │ Mostrar contenido de archivo         │
+│ history          │ Historial de comandos                │
+│ clear            │ Limpiar terminal                     │
+│ exit             │ Mensaje de despedida                 │
+└──────────────────┴──────────────────────────────────────┘`;
         break;
       case 'about':
         response = `👨‍💻 Anderson González
@@ -193,25 +192,7 @@ Respuesta: 24h máximo`;
 ├── 📷 Instagram: @anderson.codes
 └── 💼 Portfolio: anderson-dev.com`;
         break;
-      case 'resume':
-        downloadCV();
-        response = `📄 CV Disponible:
-├── 📥 anderson_gonzalez_cv.pdf
-├── 📊 Formato: PDF profesional
-├── 🔄 Última actualización: Diciembre 2024
-└── 💾 Descarga: [Iniciando descarga...]
-   ✅ CV descargado exitosamente!`;
-        break;
-      case 'quote':
-        const quotes = [
-          '"El código es poesía en movimiento." - Anderson',
-          '"Debugging es como ser detective en un crimen que tú mismo cometiste." - Anónimo',
-          '"Un buen programador mira ambos lados antes de cruzar una calle de un solo sentido." - Doug Linder',
-          '"El mejor código es el que no necesitas escribir." - Jeff Atwood',
-          '"Primero resuelve el problema, luego escribe el código." - John Johnson'
-        ];
-        response = `💭 ${quotes[Math.floor(Math.random() * quotes.length)]}`;
-        break;
+      
       case 'joke':
         const jokes = [
           '¿Por qué los programadores prefieren el modo oscuro? Porque la luz atrae bugs! 🐛',

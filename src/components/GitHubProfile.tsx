@@ -61,11 +61,18 @@ const GitHubProfile = () => {
   }, []);
 
   useEffect(() => {
+    // IMPORTANT: Replace with your own GitHub Personal Access Token
+    const GITHUB_TOKEN = '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';
+
     const fetchWithRetry = async (url: string, retries = 3, delay = 1000): Promise<any> => {
       let lastError: Error | null = null;
       for (let i = 0; i < retries; i++) {
         try {
-          const response = await fetch(url);
+          const response = await fetch(url, {
+            headers: {
+              Authorization: `token ${GITHUB_TOKEN}`,
+            },
+          });
           if (response.ok) {
             return response.json();
           }
