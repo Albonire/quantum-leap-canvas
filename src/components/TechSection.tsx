@@ -11,24 +11,19 @@ interface Skill {
 }
 
 const skills: Skill[] = [
-  { name: 'HTML', level: 'alto', category: 'frontend', color: '#e34f26' },
-  { name: 'CSS', level: 'alto', category: 'frontend', color: '#1572b6' },
-  { name: 'JavaScript', level: 'alto', category: 'frontend', color: '#f7df1e' },
+  { name: 'HTML, CSS & JavaScript', level: 'alto', category: 'frontend', color: '#e34f26' },
   { name: 'TypeScript', level: 'alto', category: 'frontend', color: '#3178c6' },
-  { name: 'React', level: 'alto', category: 'frontend', color: '#61dafb' },
-  { name: 'Next.js', level: 'alto', category: 'frontend', color: '#000000' },
+  { name: 'React & Next.js', level: 'alto', category: 'frontend', color: '#61dafb' }, // Opcional: Juntarlos si siempre los usas en conjunto
   { name: 'Tailwind CSS', level: 'alto', category: 'frontend', color: '#06b6d4' },
-  { name: 'Three.js', level: 'medio', category: 'frontend', color: '#000000' },
-  { name: 'Python', level: 'alto', category: 'backend', color: '#3776ab' },
-  { name: 'Node.js', level: 'medio', category: 'backend', color: '#339933' },
-  { name: 'Express', level: 'medio', category: 'backend', color: '#000000' },
-  { name: 'FastAPI/Flask', level: 'alto', category: 'backend', color: '#009688' },
-  { name: 'GraphQL', level: 'medio', category: 'backend', color: '#e10098' },
-  { name: 'SQL', level: 'medio', category: 'database', color: '#336791' },
-  { name: 'PostgreSQL', level: 'medio', category: 'database', color: '#336791' },
-  { name: 'SQLite', level: 'medio', category: 'database', color: '#003b57' },
-  { name: 'Git', level: 'alto', category: 'tools', color: '#f05032' },
-  { name: 'GitHub', level: 'alto', category: 'tools', color: '#181717' },
+  { name: 'Three.js / R3F', level: 'medio', category: 'frontend', color: '#000000' }, // Más específico si usas React Three Fiber
+
+  { name: 'Python (Django & FastAPI)', level: 'alto', category: 'backend', color: '#3776ab' },
+  { name: 'Node.js (Express)', level: 'medio', category: 'backend', color: '#339933' }, // Más específico si usas Express.js
+
+  { name: 'SQL databases (PostgreSQL & SQLite)', level: 'medio', category: 'database', color: '#336791' },
+  
+  { name: 'Git & GitHub', level: 'alto', category: 'tools', color: '#f05032' },
+  { name: 'Vercel', level: 'alto', category: 'tools', color: '#f05032' }
 ];
 
 const TechSection = () => {

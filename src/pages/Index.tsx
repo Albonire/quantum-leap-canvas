@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Scene from '@/components/Scene';
 import CyberCursor from '@/components/CyberCursor';
 import StarryBackground from '@/components/StarryBackground';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -27,7 +26,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative transition-colors duration-300">
-      <Scene opacity={opacity} />
       {/* Background effects */}
       <StarryBackground />
       <CyberCursor />

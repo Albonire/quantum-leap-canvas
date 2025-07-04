@@ -308,8 +308,10 @@ Respuesta: 24h máximo`;
         return;
       case 'exit':
         response = `👋 ¡Hasta luego!
+¡Esperamos verte pronto!
+
 Thanks for visiting my terminal.
-Hope to collaborate with you soon! 🚀
+We hope to see you soon! 🚀
 
 Connection to anderson-terminal closed.`;
         break;
