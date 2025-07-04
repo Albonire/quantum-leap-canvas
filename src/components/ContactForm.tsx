@@ -68,7 +68,7 @@ export default function ContactForm() {
               id="name"
               type="text"
               name="name"
-              className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400"
+              className="bg-white/50 dark:bg-neural-gray/40 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400"
               placeholder="Tu nombre completo"
             />
             <ValidationError 
@@ -87,7 +87,7 @@ export default function ContactForm() {
               id="email"
               type="email"
               name="email"
-              className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400"
+              className="bg-white/50 dark:bg-neural-gray/40 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400"
               placeholder="tu@email.com"
             />
             <ValidationError 
@@ -106,7 +106,7 @@ export default function ContactForm() {
           <Textarea
             id="message"
             name="message"
-            className="bg-white/20 dark:bg-neural-gray/20 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime min-h-[120px] text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400"
+            className="bg-white/50 dark:bg-neural-gray/40 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime min-h-[120px] text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400"
             placeholder="Escribe tu mensaje aquí..."
           />
           <ValidationError 
@@ -135,6 +135,15 @@ export default function ContactForm() {
             </>
           )}
         </Button>
+        <p className="text-center text-sm text-gray-700 dark:text-quantum-silver/80 font-medium pt-4">
+          O si prefieres, contáctame directamente a mi email:{" "}
+          <a
+            href="mailto:fabianagcris@gmail.com"
+            className="text-sage-accent dark:text-cyber-lime hover:underline font-semibold"
+          >
+            fabianagcris@gmail.com
+          </a>
+        </p>
       </form>
     </div>
   );
