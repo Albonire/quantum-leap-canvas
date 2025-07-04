@@ -61,23 +61,40 @@ const GitHubProfile = () => {
   }, []);
 
   useEffect(() => {
+    const fetchWithRetry = async (url: string, retries = 3, delay = 1000): Promise<any> => {
+      let lastError: Error | null = null;
+      for (let i = 0; i < retries; i++) {
+        try {
+          const response = await fetch(url);
+          if (response.ok) {
+            return response.json();
+          }
+          lastError = new Error(`Request failed with status ${response.status}`);
+        } catch (error) {
+          lastError = error instanceof Error ? error : new Error('Unknown fetch error');
+        }
+        if (i < retries - 1) {
+          await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
+        }
+      }
+      throw lastError || new Error('Failed to fetch data after multiple retries');
+    };
+
     const fetchGitHubData = async () => {
       try {
         // Fetch user data
-        const userResponse = await fetch('https://api.github.com/users/Albonire');
-        if (!userResponse.ok) throw new Error('Failed to fetch user data');
-        const userData = await userResponse.json();
+        const userData = await fetchWithRetry('https://api.github.com/users/Albonire');
         setUser(userData);
 
         // Fetch repositories
-        const reposResponse = await fetch('https://api.github.com/users/Albonire/repos?sort=updated&per_page=6');
-        if (!reposResponse.ok) throw new Error('Failed to fetch repositories');
-        const reposData = await reposResponse.json();
+        const reposData = await fetchWithRetry('https://api.github.com/users/Albonire/repos?sort=updated&per_page=6');
         setRepos(reposData);
 
         setLoading(false);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        const errorId = Math.random().toString(36).substring(7);
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+        setError(`${errorMessage} (Ref: ${errorId})`);
         setLoading(false);
       }
     };

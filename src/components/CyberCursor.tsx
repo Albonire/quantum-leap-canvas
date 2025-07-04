@@ -1,55 +1,106 @@
 
 'use client';
-
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 const CyberCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const followerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    const cursor = cursorRef.current;
+    const follower = followerRef.current;
+
+    if (!cursor || !follower) return;
+
+    let posX = 0;
+    let posY = 0;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    gsap.to({}, 0.016, {
+      repeat: -1,
+      onRepeat: () => {
+        posX += (mouseX - posX) / 9;
+        posY += (mouseY - posY) / 9;
+
+        gsap.set(follower, {
+          left: posX - 12,
+          top: posY - 12,
+        });
+
+        gsap.set(cursor, {
+          left: mouseX,
+          top: mouseY,
+        });
+      },
+    });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'BUTTON' || target.tagName === 'A' || target.classList.contains('clickable')) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
+    const handleMouseEnter = () => {
+      gsap.to(follower, {
+        scale: 1.5,
+        duration: 0.3,
+        borderColor: 'var(--emerald-accent)',
+        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+      });
     };
 
-    window.addEventListener('mousemove', updateMousePosition);
-    window.addEventListener('mouseover', handleMouseOver);
+    const handleMouseLeave = () => {
+      gsap.to(follower, {
+        scale: 1,
+        duration: 0.3,
+        borderColor: 'var(--sage-accent)',
+        backgroundColor: 'transparent',
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    document.body.addEventListener('mouseenter', () => {
+      gsap.to([cursor, follower], { autoAlpha: 1, duration: 0.3 });
+    });
+    document.body.addEventListener('mouseleave', () => {
+      gsap.to([cursor, follower], { autoAlpha: 0, duration: 0.3 });
+    });
+
+    const interactiveElements = document.querySelectorAll(
+      'a, button, .clickable'
+    );
+    interactiveElements.forEach((el) => {
+      el.addEventListener('mouseenter', handleMouseEnter);
+      el.addEventListener('mouseleave', handleMouseLeave);
+    });
 
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.body.removeEventListener('mouseenter', () => {
+        gsap.to([cursor, follower], { autoAlpha: 1, duration: 0.3 });
+      });
+      document.body.removeEventListener('mouseleave', () => {
+        gsap.to([cursor, follower], { autoAlpha: 0, duration: 0.3 });
+      });
+      interactiveElements.forEach((el) => {
+        el.removeEventListener('mouseenter', handleMouseEnter);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+      });
     };
   }, []);
 
   return (
     <>
       <div
-        className={`cyber-cursor ${isHovering ? 'scale-150' : 'scale-100'}`}
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-          transform: `translate(-50%, -50%) scale(${isHovering ? 1.5 : 1})`,
-        }}
+        ref={cursorRef}
+        className="fixed w-2 h-2 bg-sage-accent rounded-full pointer-events-none z-[9999] opacity-0"
+        style={{ transform: 'translate(-50%, -50%)' }}
       />
       <div
-        className="fixed pointer-events-none z-[9998]"
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        <div className="w-8 h-8 border border-cyber-lime rounded-full opacity-30 animate-ping" />
-      </div>
+        ref={followerRef}
+        className="fixed w-6 h-6 border-2 border-sage-accent rounded-full pointer-events-none z-[9999] opacity-0"
+      />
     </>
   );
 };
