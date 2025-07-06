@@ -1,4 +1,4 @@
-# Quantum Leap Canvas - Personal Portfolio
+# Quantum Leap Canvas - My Personal Portfolio
 
 This is a personal portfolio website built to showcase my skills, projects, and experience. The design incorporates modern aesthetics with interactive elements.
 
