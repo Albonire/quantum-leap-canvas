@@ -27,7 +27,7 @@ const CyberButton = ({
   const baseClasses = "relative overflow-hidden font-space-grotesk font-semibold transition-all duration-300 transform clickable group";
   
   const variantClasses = {
-    primary: "bg-transparent border-2 border-sage-accent dark:border-cyber-lime text-sage-accent dark:text-cyber-lime hover:bg-sage-accent dark:hover:bg-cyber-lime hover:text-charcoal dark:hover:text-void-black hover:shadow-[0_0_30px_rgba(107,142,107,0.5)] dark:hover:shadow-[0_0_30px_#a4ff00]",
+    primary: "bg-transparent border-2 border-sage-accent dark:border-cyber-lime text-sage-accent dark:text-cyber-lime hover:bg-sage-accent dark:hover:bg-cyber-lime hover:text-white dark:hover:text-white hover:shadow-[0_0_30px_rgba(107,142,107,0.5)] dark:hover:shadow-[0_0_30px_#a4ff00]",
     secondary: "bg-white/20 dark:bg-neural-gray/50 border-2 border-steel-gray/50 dark:border-quantum-silver/50 text-charcoal dark:text-quantum-silver hover:border-sage-accent dark:hover:border-cyber-lime hover:text-sage-accent dark:hover:text-cyber-lime hover:bg-sage-accent/10 dark:hover:bg-cyber-lime/10",
     ghost: "bg-transparent text-sage-accent dark:text-cyber-lime hover:bg-sage-accent/10 dark:hover:bg-cyber-lime/10 border-2 border-transparent hover:border-sage-accent/30 dark:hover:border-cyber-lime/30"
   };
