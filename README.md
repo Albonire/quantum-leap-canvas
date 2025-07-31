@@ -17,7 +17,7 @@ This project is built with:
 The portfolio is organized into several key sections:
 
 - **Hero Section:** Introduction and initial greeting.
-<img href="\public\HS.png">
+![Hero Screenshot](./public/HS.png) 
 - **Education Section:** Details about educational background.
 - **Tech Section:** Overview of technologies and skills.
 - **Projects Section:** Showcase of personal and professional projects.
