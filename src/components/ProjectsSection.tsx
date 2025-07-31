@@ -18,7 +18,7 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Neural",
+    title: "Task Manager",
     description: "Plataforma de comercio electrónico con IA para recomendaciones personalizadas y análisis predictivo de ventas.",
     technologies: ["React", "Node.js", "Python", "TensorFlow", "PostgreSQL"],
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop",
