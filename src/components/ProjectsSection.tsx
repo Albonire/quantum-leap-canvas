@@ -38,7 +38,7 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "AI Code Assistant",
+    title: "AI Humanizer",
     description: "Asistente de código inteligente que utiliza machine learning para sugerir optimizaciones y detectar errores.",
     technologies: ["Python", "OpenAI", "FastAPI", "React", "Docker"],
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop",
