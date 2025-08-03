@@ -1,12 +1,12 @@
 
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface CyberButtonProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -38,11 +38,11 @@ const CyberButton = ({
     lg: "px-8 py-4 text-lg rounded-lg"
   };
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!disabled && onClick) {
       setIsClicked(true);
       setTimeout(() => setIsClicked(false), 200);
-      onClick();
+      onClick(event);
     }
   };
 
