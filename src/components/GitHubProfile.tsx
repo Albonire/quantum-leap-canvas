@@ -167,28 +167,28 @@ const GitHubProfile = () => {
         </div>
 
         {/* GitHub Profile Card with zoom-out effect */}
-        <div className={`bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-8 mb-8 shadow-lg relative transition-all duration-1000 ease-out delay-200 transform ${
+        <div className={`bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-6 sm:p-8 mb-8 shadow-lg relative transition-all duration-1000 ease-out delay-200 transform ${
           isVisible 
             ? 'scale-100 opacity-100' 
             : 'scale-110 opacity-0'
         }`}>
-          <div className="flex flex-col md:flex-row gap-8 items-start">
+          <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-start">
             {/* Avatar and basic info */}
             <div className="flex flex-col items-center md:items-start">
               <img
                 src={user.avatar_url}
                 alt={user.name}
-                className="w-32 h-32 rounded-full border-4 border-sage-accent dark:border-cyber-lime shadow-lg mb-4"
+                className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-sage-accent dark:border-cyber-lime shadow-lg mb-4"
               />
               <div className="text-center md:text-left">
-                <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-2">
+                <h3 className="text-xl sm:text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-2">
                   {user.name}
                 </h3>
-                <p className="text-sage-accent dark:text-cyber-lime font-mono font-semibold mb-2">
+                <p className="text-sage-accent dark:text-cyber-lime font-mono font-semibold mb-2 text-sm sm:text-base">
                   @{user.login}
                 </p>
                 {user.bio && (
-                  <p className="text-gray-800 dark:text-quantum-silver/90 max-w-md mb-4 font-medium">
+                  <p className="text-gray-800 dark:text-quantum-silver/90 max-w-md mb-4 font-medium text-sm sm:text-base">
                     {user.bio}
                   </p>
                 )}
@@ -197,30 +197,30 @@ const GitHubProfile = () => {
 
             {/* Stats and info */}
             <div className="flex-1">
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-3">
-                  <Book className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
-                  <span className="text-gray-900 dark:text-quantum-silver font-medium">
+                  <Book className="w-4 h-4 sm:w-5 sm:h-5 text-sage-accent dark:text-cyber-lime" />
+                  <span className="text-gray-900 dark:text-quantum-silver font-medium text-sm sm:text-base">
                     {user.public_repos} repositorios públicos
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Users className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
-                  <span className="text-gray-900 dark:text-quantum-silver font-medium">
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 text-sage-accent dark:text-cyber-lime" />
+                  <span className="text-gray-900 dark:text-quantum-silver font-medium text-sm sm:text-base">
                     {user.followers} seguidores • {user.following} siguiendo
                   </span>
                 </div>
                 {user.location && (
                   <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
-                    <span className="text-gray-900 dark:text-quantum-silver font-medium">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-sage-accent dark:text-cyber-lime" />
+                    <span className="text-gray-900 dark:text-quantum-silver font-medium text-sm sm:text-base">
                       {user.location}
                     </span>
                   </div>
                 )}
                 <div className="flex items-center gap-3">
-                  <Calendar className="w-5 h-5 text-sage-accent dark:text-cyber-lime" />
-                  <span className="text-gray-900 dark:text-quantum-silver font-medium">
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-sage-accent dark:text-cyber-lime" />
+                  <span className="text-gray-900 dark:text-quantum-silver font-medium text-sm sm:text-base">
                     Desde {formatDate(user.created_at)}
                   </span>
                 </div>
@@ -228,16 +228,17 @@ const GitHubProfile = () => {
             </div>
           </div>
 
-          {/* Ver perfil completo button - moved to bottom right and made smaller */}
-          <div className="absolute bottom-6 right-6">
+          {/* Ver perfil completo button - responsive positioning */}
+          <div className="mt-6 sm:mt-0 sm:absolute sm:bottom-6 sm:right-6 flex justify-center sm:justify-end">
             <CyberButton
               size="sm"
               onClick={() => window.open(user.html_url, '_blank')}
-              className="group text-sm"
+              className="group text-xs sm:text-sm w-full sm:w-auto"
             >
-              <Github className="w-4 h-4 mr-2" />
-              Ver perfil completo
-              <ExternalLink className="w-3 h-3 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
+              <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+              <span className="hidden sm:inline">Ver perfil completo</span>
+              <span className="sm:hidden">Ver perfil</span>
+              <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
             </CyberButton>
           </div>
         </div>
