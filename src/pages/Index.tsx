@@ -17,7 +17,7 @@ const Index = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1200); // Match loading screen duration
+    }, 1200); 
 
     return () => clearTimeout(timer);
   }, []);
