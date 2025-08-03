@@ -37,16 +37,12 @@ export const useContactForm = () => {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Simulo una respuesta exitosa
-      if (true) { // En producción: if (response.ok)
-        toast.success("¡Mensaje enviado exitosamente!", {
-          description: `Gracias ${data.name}, responderé pronto a tu mensaje.`,
-        });
-        
-        form.reset();
-        return { success: true, data };
-      } else {
-        throw new Error("Error en el servidor");
-      }
+      toast.success("¡Mensaje enviado exitosamente!", {
+        description: `Gracias ${data.name}, responderé pronto a tu mensaje.`,
+      });
+      
+      form.reset();
+      return { success: true, data };
       
     } catch (error) {
       console.error("Error enviando formulario:", error);
