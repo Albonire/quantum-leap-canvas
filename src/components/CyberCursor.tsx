@@ -1,13 +1,33 @@
 
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
 const CyberCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Detectar si es un dispositivo móvil
+    const checkMobile = () => {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth < 768;
+      setIsMobile(isTouchDevice || isSmallScreen);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Si es móvil, no inicializar el cursor
+    if (isMobile) return;
+
     const cursor = cursorRef.current;
     const follower = followerRef.current;
 
@@ -82,18 +102,23 @@ const CyberCursor = () => {
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
-  }, []);
+  }, [isMobile]);
+
+  // No renderizar nada si es móvil
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <>
       <div
         ref={cursorRef}
-        className="fixed w-2 h-2 bg-sage-accent dark:bg-emerald-accent rounded-full pointer-events-none z-[9999] opacity-0"
+        className="fixed w-2 h-2 bg-sage-accent dark:bg-emerald-accent rounded-full pointer-events-none z-[9999] opacity-0 hidden md:block"
         style={{ transform: 'translate(-50%, -50%)' }}
       />
       <div
         ref={followerRef}
-        className="fixed w-6 h-6 border-2 border-sage-accent dark:border-emerald-accent rounded-full pointer-events-none z-[9999] opacity-0 transition-transform duration-300"
+        className="fixed w-6 h-6 border-2 border-sage-accent dark:border-emerald-accent rounded-full pointer-events-none z-[9999] opacity-0 transition-transform duration-300 hidden md:block"
       />
     </>
   );
