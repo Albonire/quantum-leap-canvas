@@ -68,10 +68,10 @@ const TechSection = () => {
         {/* Section header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold text-gray-900 dark:text-cyber-lime mb-6">
-            Arsenal Tecnológico
+            Technology Stack
           </h2>
           <p className="text-xl text-gray-600 dark:text-quantum-silver max-w-2xl mx-auto font-medium">
-            Dominando las tecnologías que impulsan el futuro digital
+            The technologies that drive the future of digital 
           </p>
         </div>
 
