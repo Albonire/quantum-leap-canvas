@@ -5,25 +5,25 @@ import { useState } from 'react';
 
 interface Skill {
   name: string;
-  level: 'bajo' | 'medio' | 'alto';
+  level: 'low' | 'medium' | 'high';
   category: 'frontend' | 'backend' | 'database' | 'tools';
   color: string;
 }
 
 const skills: Skill[] = [
-  { name: 'HTML, CSS & JavaScript', level: 'alto', category: 'frontend', color: '#e34f26' },
-  { name: 'TypeScript', level: 'alto', category: 'frontend', color: '#3178c6' },
-  { name: 'React & Next.js', level: 'alto', category: 'frontend', color: '#61dafb' }, // Opcional: Juntarlos si siempre los usas en conjunto
-  { name: 'Tailwind CSS', level: 'alto', category: 'frontend', color: '#06b6d4' },
-  { name: 'Three.js / R3F', level: 'medio', category: 'frontend', color: '#000000' }, // Más específico si usas React Three Fiber
+  { name: 'HTML, CSS & JavaScript', level: 'high', category: 'frontend', color: '#e34f26' },
+  { name: 'TypeScript', level: 'high', category: 'frontend', color: '#3178c6' },
+  { name: 'React & Next.js', level: 'high', category: 'frontend', color: '#61dafb' }, // Opcional: Juntarlos si siempre los usas en conjunto
+  { name: 'Tailwind CSS', level: 'high', category: 'frontend', color: '#06b6d4' },
+  { name: 'Three.js / R3F', level: 'medium', category: 'frontend', color: '#000000' }, // Más específico si usas React Three Fiber
 
-  { name: 'Python (Django & FastAPI)', level: 'alto', category: 'backend', color: '#3776ab' },
-  { name: 'Node.js (Express)', level: 'medio', category: 'backend', color: '#339933' }, // Más específico si usas Express.js
+  { name: 'Python (Django & FastAPI)', level: 'high', category: 'backend', color: '#3776ab' },
+  { name: 'Node.js (Express)', level: 'medium', category: 'backend', color: '#339933' }, // Más específico si usas Express.js
 
-  { name: 'SQL databases (PostgreSQL & SQLite)', level: 'medio', category: 'database', color: '#336791' },
+  { name: 'SQL databases (PostgreSQL & SQLite)', level: 'medium', category: 'database', color: '#336791' },
   
-  { name: 'Git & GitHub', level: 'alto', category: 'tools', color: '#f05032' },
-  { name: 'Vercel', level: 'alto', category: 'tools', color: '#f05032' }
+  { name: 'Git & GitHub', level: 'high', category: 'tools', color: '#f05032' },
+  { name: 'Vercel', level: 'high', category: 'tools', color: '#f05032' }
 ];
 
 const TechSection = () => {
@@ -36,23 +36,23 @@ const TechSection = () => {
     ? skills 
     : skills.filter(skill => skill.category === selectedCategory);
 
-  const getLevelInfo = (level: 'bajo' | 'medio' | 'alto') => {
+  const getLevelInfo = (level: 'low' | 'medium' | 'high') => {
     switch (level) {
-      case 'bajo':
+      case 'low':
         return { 
           text: 'Básico', 
           color: 'bg-yellow-500 dark:bg-yellow-400',
           width: '33%',
           textColor: 'text-yellow-600 dark:text-yellow-400'
         };
-      case 'medio':
+      case 'medium':
         return { 
-          text: 'Intermedio', 
+          text: 'Intermedium', 
           color: 'bg-orange-500 dark:bg-orange-400',
           width: '66%',
           textColor: 'text-orange-600 dark:text-orange-400'
         };
-      case 'alto':
+      case 'high':
         return { 
           text: 'Avanzado', 
           color: 'bg-green-500 dark:bg-green-400',
