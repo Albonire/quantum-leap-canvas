@@ -48,13 +48,14 @@ const GitHubProfile = () => {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
       observer.disconnect();
     };
@@ -64,7 +65,7 @@ const GitHubProfile = () => {
     // IMPORTANT: Replace with your own GitHub Personal Access Token
     const GITHUB_TOKEN = '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';
 
-    const fetchWithRetry = async (url: string, retries = 3, delay = 1000): Promise<any> => {
+    const fetchWithRetry = async <T,>(url: string, retries = 3, delay = 1000): Promise<T> => {
       let lastError: Error | null = null;
       for (let i = 0; i < retries; i++) {
         try {
@@ -90,11 +91,11 @@ const GitHubProfile = () => {
     const fetchGitHubData = async () => {
       try {
         // Fetch user data
-        const userData = await fetchWithRetry('https://api.github.com/users/Albonire');
+        const userData = await fetchWithRetry<GitHubUser>('https://api.github.com/users/Albonire');
         setUser(userData);
 
         // Fetch repositories
-        const reposData = await fetchWithRetry('https://api.github.com/users/Albonire/repos?sort=updated&per_page=6');
+        const reposData = await fetchWithRetry<GitHubRepo[]>('https://api.github.com/users/Albonire/repos?sort=updated&per_page=6');
         setRepos(reposData);
 
         setLoading(false);
