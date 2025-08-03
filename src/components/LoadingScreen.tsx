@@ -1,68 +1,108 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import GlitchText from './GlitchText';
 
-const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => void }) => {
+const loadingSteps = [
+  'Inicializando sistemas...',
+  'Compilando shaders cuánticos...',
+  'Renderizando pixeles de neón...',
+  'Desplegando interfaz holográfica...',
+  '¡Conexión establecida!'
+];
+
+const LoadingScreen = () => {
   const [progress, setProgress] = useState(0);
-  const [loadingText, setLoadingText] = useState('Inicializando...');
+  const [currentStep, setCurrentStep] = useState(0);
+  const [typedText, setTypedText] = useState('');
+  const [isVisible, setIsVisible] = useState(true);
 
-  const loadingSteps = [
-    'Inicializando sistemas...',
-    'Cargando arsenal tecnológico...',
-    'Preparando proyectos...',
-    'Configurando interfaz...',
-    'Sistemas listos!'
-  ];
+  const DURATION = 1200; // 1.2 segundos
+  const stepDuration = DURATION / loadingSteps.length;
 
+  // Efecto de máquina de escribir
   useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress(prev => {
-        const newProgress = prev + 2;
-        
-        // Update loading text based on progress
-        const stepIndex = Math.floor((newProgress / 100) * loadingSteps.length);
-        if (stepIndex < loadingSteps.length) {
-          setLoadingText(loadingSteps[stepIndex]);
+    if (currentStep < loadingSteps.length) {
+      const targetText = loadingSteps[currentStep];
+      let i = 0;
+      setTypedText(''); // Limpiar texto anterior
+      const typingInterval = setInterval(() => {
+        if (i < targetText.length) {
+          setTypedText(prev => prev + targetText[i]);
+          i++;
+        } else {
+          clearInterval(typingInterval);
         }
+      }, 30); // Velocidad de escritura
+      return () => clearInterval(typingInterval);
+    }
+  }, [currentStep]);
 
-        if (newProgress >= 100) {
-          clearInterval(timer);
-          setTimeout(() => {
-            onLoadingComplete();
-          }, 500);
-          return 100;
-        }
-        
-        return newProgress;
-      });
+  // Lógica principal de la animación
+  useEffect(() => {
+    // Progreso de la barra
+    const progressTimer = setInterval(() => {
+      setProgress(prev => Math.min(prev + (100 / (DURATION / 50)), 100));
     }, 50);
 
-    return () => clearInterval(timer);
-  }, [onLoadingComplete]);
+    // Actualización de los pasos de texto
+    const stepTimer = setInterval(() => {
+      setCurrentStep(prev => Math.min(prev + 1, loadingSteps.length -1));
+    }, stepDuration);
+    
+    // Finalizar animación
+    const mainTimer = setTimeout(() => {
+      setIsVisible(false);
+    }, DURATION);
+
+    return () => {
+      clearInterval(progressTimer);
+      clearInterval(stepTimer);
+      clearTimeout(mainTimer);
+    };
+  }, [stepDuration]);
+
+  // Generador de partículas de fondo
+  const particles = useMemo(() => 
+    Array.from({ length: 50 }).map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      size: `${Math.random() * 2 + 1}px`,
+      delay: `${Math.random() * 5}s`,
+      duration: `${Math.random() * 5 + 5}s`,
+    })), []);
 
   return (
-    <div className="fixed inset-0 z-50 bg-void-black flex items-center justify-center overflow-hidden">
-      {/* Animated background particles */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-cyber-lime rounded-full animate-ping opacity-60" />
-        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-sage-accent rounded-full animate-pulse opacity-40" />
-        <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-cyber-lime/30 rounded-full animate-bounce" />
-        <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-sage-accent/50 rounded-full animate-ping" />
-        
-        {/* Grid overlay */}
+    <div className={`fixed inset-0 z-50 bg-void-black flex items-center justify-center transition-opacity duration-500 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      {/* Fondo animado con más partículas */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {particles.map(p => (
+          <div
+            key={p.id}
+            className="absolute bg-cyber-lime rounded-full animate-pulse"
+            style={{
+              left: p.left,
+              top: p.top,
+              width: p.size,
+              height: p.size,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
+              opacity: Math.random()
+            }}
+          />
+        ))}
         <div className="absolute inset-0 opacity-10 pointer-events-none" 
              style={{
                backgroundImage: `linear-gradient(rgba(164, 255, 0, 0.1) 1px, transparent 1px),
                                 linear-gradient(90deg, rgba(164, 255, 0, 0.1) 1px, transparent 1px)`,
-               backgroundSize: '40px 40px'
+               backgroundSize: '30px 30px'
              }} 
         />
       </div>
 
-      {/* Main loading content */}
+      {/* Contenido principal */}
       <div className="relative z-10 text-center max-w-md mx-auto px-6">
-        {/* Logo/Brand */}
         <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-space-grotesk font-bold text-quantum-silver mb-2">
             <GlitchText trigger="auto" intensity="low">
@@ -74,47 +114,33 @@ const LoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => void })
           </p>
         </div>
 
-        {/* Progress bar */}
         <div className="mb-6">
           <div className="w-full bg-charcoal/50 rounded-full h-2 overflow-hidden border border-cyber-lime/30">
             <div 
-              className="h-full bg-gradient-to-r from-sage-accent to-cyber-lime transition-all duration-300 ease-out relative"
+              className="h-full bg-gradient-to-r from-sage-accent to-cyber-lime transition-all duration-100 ease-linear relative"
               style={{ width: `${progress}%` }}
             >
-              {/* Animated glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-sage-accent to-cyber-lime animate-pulse opacity-50" />
             </div>
           </div>
-          <div className="flex justify-between mt-2 text-sm text-quantum-silver/70">
-            <span>0%</span>
-            <span className="text-cyber-lime font-semibold">{Math.round(progress)}%</span>
-            <span>100%</span>
-          </div>
         </div>
 
-        {/* Loading text */}
-        <div className="mb-8">
-          <p className="text-quantum-silver font-inter text-lg animate-pulse">
-            {loadingText}
+        {/* Texto con efecto de máquina de escribir */}
+        <div className="mb-8 h-6">
+          <p className="text-quantum-silver font-mono text-lg">
+            {typedText}
+            <span className="animate-ping">_</span>
           </p>
         </div>
 
-        {/* Animated dots */}
-        <div className="flex justify-center space-x-2">
-          <div className="w-2 h-2 bg-cyber-lime rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-          <div className="w-2 h-2 bg-sage-accent rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-          <div className="w-2 h-2 bg-cyber-lime rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-        </div>
-
-        {/* Scanning line effect */}
-        <div className="absolute -bottom-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyber-lime to-transparent animate-pulse" />
+        <div className="absolute -bottom-20 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyber-lime to-transparent animate-cyber-scan" />
       </div>
 
-      {/* Corner accents */}
-      <div className="absolute top-8 left-8 w-8 h-8 border-l-2 border-t-2 border-cyber-lime opacity-30" />
-      <div className="absolute top-8 right-8 w-8 h-8 border-r-2 border-t-2 border-cyber-lime opacity-30" />
-      <div className="absolute bottom-8 left-8 w-8 h-8 border-l-2 border-b-2 border-cyber-lime opacity-30" />
-      <div className="absolute bottom-8 right-8 w-8 h-8 border-r-2 border-b-2 border-cyber-lime opacity-30" />
+      {/* Acentos de esquina */}
+      <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-cyber-lime/50 animate-pulse" />
+      <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-cyber-lime/50 animate-pulse" />
+      <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-cyber-lime/50 animate-pulse" />
+      <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-cyber-lime/50 animate-pulse" />
     </div>
   );
 };
