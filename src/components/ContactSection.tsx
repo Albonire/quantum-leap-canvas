@@ -179,7 +179,7 @@ DevOps & Tools:
       case 'contact':
         response = `📞 Información de Contacto:
 
-📧 Email: anderson.gonzalez.dev@gmail.com
+📧 Email: fabianagcris@gmail.com
 💬 Estado: Disponible
 Respuesta: 24h máximo`;
         break;
@@ -190,10 +190,10 @@ Respuesta: 24h máximo`;
 ├── 🐙 GitHub: /anderson-gonzalez-dev
 ├── 🐦 Twitter: @anderson_dev
 ├── 📷 Instagram: @anderson.codes
-└── 💼 Portfolio: anderson-dev.com`;
+└── 💼 Portfolio: anderdev-one.vercel.app`;
         break;
       
-      case 'joke':
+      case 'joke': {
         const jokes = [
           '¿Por qué los programadores prefieren el modo oscuro? Porque la luz atrae bugs! 🐛',
           '¿Cuántos programadores necesitas para cambiar una bombilla? Ninguno, es un problema de hardware. 💡',
@@ -203,6 +203,7 @@ Respuesta: 24h máximo`;
         ];
         response = `😂 ${jokes[Math.floor(Math.random() * jokes.length)]}`;
         break;
+      }
       case 'weather':
         response = `🌤️ Clima para Developers:
 ├── Temperatura: 23°C (perfecto para codear)
@@ -211,7 +212,7 @@ Respuesta: 24h máximo`;
 ├── Presión: 1013 hPa (estable como mi código)
 └── Recomendación: ☕ Perfecto para un café y coding`;
         break;
-      case 'time':
+      case 'time': {
         const now = new Date();
         response = `🕐 Información Temporal:
 ├── Fecha: ${now.toLocaleDateString('es-ES', { 
@@ -224,6 +225,7 @@ Respuesta: 24h máximo`;
 ├── Zona: GMT-5
 └── Época Unix: ${Math.floor(now.getTime() / 1000)}`;
         break;
+      }
       case 'uptime':
         response = `⏱️ Sistema Anderson v2024:
 ├── Tiempo activo: 5+ años de experiencia
@@ -259,7 +261,7 @@ Respuesta: 24h máximo`;
 ├── 📄 resume.pdf
 └── 📄 README.md`;
         break;
-      case 'cat':
+      case 'cat': {
         if (args[1]) {
           const file = args[1];
           switch (file) {
@@ -279,6 +281,7 @@ Respuesta: 24h máximo`;
           response = 'cat: falta especificar archivo. Uso: cat [nombre_archivo]';
         }
         break;
+      }
       case 'history':
         response = commandHistory.length > 0 
           ? commandHistory.map((cmd, i) => `  ${i + 1}  ${cmd}`).join('\n')
