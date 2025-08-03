@@ -62,8 +62,7 @@ const GitHubProfile = () => {
   }, []);
 
   useEffect(() => {
-    // IMPORTANT: Replace with your own GitHub Personal Access Token
-    const GITHUB_TOKEN = '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';
+    const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
     const fetchWithRetry = async <T,>(url: string, retries = 3, delay = 1000): Promise<T> => {
       let lastError: Error | null = null;
