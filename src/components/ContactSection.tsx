@@ -355,7 +355,7 @@ Connection to anderson-terminal closed.`;
         {/* Responsive layout - Stack on mobile, side by side on desktop */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-stretch">
           {/* Enhanced Interactive Command Console */}
-          <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-3 sm:p-4 md:p-6 flex flex-col h-[300px] sm:h-[350px] md:h-[400px] lg:h-[650px] shadow-lg">
+          <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-3 sm:p-4 md:p-6 flex flex-col h-[350px] sm:h-[350px] md:h-[400px] lg:h-[650px] shadow-lg">
             <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 rounded-full bg-red-500 animate-pulse"></div>
               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 rounded-full bg-yellow-500 animate-pulse" style={{animationDelay: '0.5s'}}></div>
