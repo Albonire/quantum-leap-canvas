@@ -63,13 +63,13 @@ const Index = () => {
               {' '}y tecnología del futuro.
             </p>
             <div className="mt-3 sm:mt-4 flex justify-center gap-4 sm:gap-6 flex-wrap">
-              <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium text-sm sm:text-base">
+              <a href="https://github.com/Albonire" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium text-sm sm:text-base">
                 GitHub
               </a>
-              <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium text-sm sm:text-base">
+              <a href="https://www.linkedin.com/in/anderson-gonzaleza21/" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium text-sm sm:text-base">
                 LinkedIn
               </a>
-              <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium text-sm sm:text-base">
+              <a href="https://x.com/anderso37646360" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium text-sm sm:text-base">
                 Twitter
               </a>
             </div>
