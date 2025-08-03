@@ -165,10 +165,9 @@ DevOps & Tools:
       case 'education':
         response = `🎓 Formación Académica:
 
-2018-2022 | Ingeniería en Sistemas
-├── Universidad Nacional
-├── Especialización en Desarrollo Web
-└── Tesis: Aplicaciones Progressive Web Apps
+2021-2026 | Ingeniería en Sistemas
+├── Universidad de Pamplona
+
 
 📚 Certificaciones:
 ├── AWS Solutions Architect ☁️
@@ -184,12 +183,12 @@ DevOps & Tools:
 Respuesta: 24h máximo`;
         break;
       case 'social':
-        response = `🌐 Redes Sociales:
+        response = `🌐 Socials:
 
 ├── 📘 LinkedIn: /in/anderson-gonzalez-dev
-├── 🐙 GitHub: /anderson-gonzalez-dev
-├── 🐦 Twitter: @anderson_dev
-├── 📷 Instagram: @anderson.codes
+├── 🐙 GitHub: https://github.com/Albonire
+├── 🐦 Twitter: https://x.com/anderso37646360
+├── 📷 Instagram: https://www.instagram.com/fabian_gonale/
 └── 💼 Portfolio: anderdev-one.vercel.app`;
         break;
       
