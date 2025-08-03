@@ -251,34 +251,36 @@
   }
 }
 
-/* Enhanced cursor effects with better contrast */
-body {
-  cursor: none;
-}
+/* Enhanced cursor effects with better contrast - only on desktop */
+@media (min-width: 768px) {
+  body {
+    cursor: none;
+  }
 
-.cyber-cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(circle, #10b981 30%, rgba(16, 185, 129, 0.2) 70%, transparent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.1s ease-out;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-}
+  .cyber-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #10b981 30%, rgba(16, 185, 129, 0.2) 70%, transparent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease-out;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
 
-.cyber-cursor::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #10b981;
-  border-radius: 50%;
-  opacity: 0.2;
-  animation: cursor-pulse 2s ease-in-out infinite;
+  .cyber-cursor::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #10b981;
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: cursor-pulse 2s ease-in-out infinite;
+  }
 }
 
 /* Enhanced animations */
