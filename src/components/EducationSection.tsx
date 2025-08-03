@@ -11,7 +11,7 @@ interface Education {
   title: string;
   institution: string;
   description: string;
-  type: 'degree' | 'certification' | 'course';
+  type: 'degree' | 'certification' | 'course'| 'ongoing degree';
   certificateUrl?: string;
 }
 
@@ -20,8 +20,8 @@ const educationData: Education[] = [
     id: 1,
     year: '2019',
     title: 'Bachiller Técnico',
-    institution: 'Instituto Tecnico Industrial Francisco de Paula Santander',
-    description: 'Enfoque en electrónica y mecánica industrial',
+    institution: 'Francisco de Paula Santander Industrial Technical Institute',
+    description: 'Focus on electronics and industrial mechanics',
     type: 'degree',
     certificateUrl: 'https://example.com/certificate1'
   },
@@ -47,16 +47,16 @@ const educationData: Education[] = [
     id: 4,
     year: '2022',
     title: 'Ingeniería en Sistemas',
-    institution: 'Universidad Tecnológica',
+    institution: 'Pamplona University',
     description: 'Carrera universitaria en desarrollo de software',
-    type: 'degree',
+    type: 'ongoing degree',
     certificateUrl: 'https://example.com/certificate4'
   },
   {
     id: 5,
     year: '2024',
     title: 'Programming Bootcamp',
-    institution: 'Instituto de Tecnología Avanzada',
+    institution: 'Sergio Arboleda University',
     description: 'TypeScript, React, Node.js, Next.js, Tailwind CSS, and more',
     type: 'certification',
     certificateUrl: 'https://certificadotech.tiiny.site'
