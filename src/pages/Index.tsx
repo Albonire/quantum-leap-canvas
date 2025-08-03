@@ -42,21 +42,21 @@ const Index = () => {
       </main>
       
       {/* Footer */}
-      <footer className="relative z-10 py-8 px-6 border-t border-sage-accent/30 dark:border-cyber-lime/20">
+      <footer className="relative z-10 py-6 sm:py-8 px-4 sm:px-6 border-t border-sage-accent/30 dark:border-cyber-lime/20">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gray-800 dark:text-quantum-silver font-inter font-medium">
+          <p className="text-gray-800 dark:text-quantum-silver font-inter font-medium text-sm sm:text-base">
             © 2024 Anderson González. Desarrollado con{' '}
             <span className="text-sage-accent dark:text-cyber-lime animate-pulse">❤️</span>
             {' '}y tecnología del futuro.
           </p>
-          <div className="mt-4 flex justify-center gap-6">
-            <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium">
+          <div className="mt-3 sm:mt-4 flex justify-center gap-4 sm:gap-6 flex-wrap">
+            <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium text-sm sm:text-base">
               GitHub
             </a>
-            <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium">
+            <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium text-sm sm:text-base">
               LinkedIn
             </a>
-            <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium">
+            <a href="#" className="text-gray-700 dark:text-quantum-silver hover:text-sage-accent dark:hover:text-cyber-lime transition-colors font-medium text-sm sm:text-base">
               Twitter
             </a>
           </div>
