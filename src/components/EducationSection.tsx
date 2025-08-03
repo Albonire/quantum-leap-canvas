@@ -124,20 +124,20 @@ const EducationSection = () => {
   }, []);
 
   return (
-    <section id="education" className="py-12 px-6 relative">
+    <section id="education" className="py-8 sm:py-12 px-3 sm:px-4 md:px-6 relative">
       <div className="max-w-4xl mx-auto">
         {/* Section header */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-space-grotesk font-bold text-gray-900 dark:text-cyber-lime mb-3">
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-space-grotesk font-bold text-gray-900 dark:text-cyber-lime mb-2 sm:mb-3">
             Mi Formación
           </h2>
-          <p className="text-base text-gray-600 dark:text-quantum-silver/80 max-w-2xl mx-auto font-medium">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-quantum-silver/80 max-w-2xl mx-auto font-medium px-2">
             El camino del aprendizaje continuo en tecnología
           </p>
         </div>
 
-        {/* Optimized grid layout with smoother animations */}
-        <div className="grid gap-4 md:gap-6">
+        {/* Original layout with responsive fixes */}
+        <div className="grid gap-3 sm:gap-4 md:gap-6">
           {educationData.map((education, index) => {
             const isVisible = visibleItems.includes(education.id);
             
@@ -159,32 +159,32 @@ const EducationSection = () => {
                 onClick={() => setSelectedEducation(selectedEducation?.id === education.id ? null : education)}
               >
                 <div className={`
-                  bg-white/70 dark:bg-black/20 backdrop-blur-md p-4 md:p-5 rounded-lg border transition-all duration-300 shadow-sm transform-gpu
+                  bg-white/70 dark:bg-black/20 backdrop-blur-md p-3 sm:p-4 md:p-5 rounded-lg border transition-all duration-300 shadow-sm transform-gpu
                   ${selectedEducation?.id === education.id 
                     ? 'border-sage-accent dark:border-cyber-lime bg-sage-accent/10 dark:bg-cyber-lime/10 shadow-lg shadow-sage-accent/20 dark:shadow-cyber-lime/20 scale-[1.02]' 
                     : 'border-sage-accent/30 dark:border-cyber-lime/20 group-hover:border-sage-accent/60 dark:group-hover:border-cyber-lime/40 hover:scale-[1.01]'
                   }
                 `}>
-                  {/* Header compacto */}
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-4 flex-1">
+                  {/* Header - original layout with responsive improvements */}
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div className="flex items-start sm:items-center gap-2 sm:gap-4 flex-1 min-w-0">
                       <span className={`
-                        px-3 py-1 rounded-full text-sm font-bold text-white dark:text-void-black transition-all duration-300
+                        px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold text-white dark:text-void-black transition-all duration-300 flex-shrink-0
                         ${getTypeColor(education.type)}
                       `}>
                         {education.year}
                       </span>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors duration-300">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-sm sm:text-lg font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver group-hover:text-sage-accent dark:group-hover:text-cyber-lime transition-colors duration-300 leading-tight">
                           {education.title}
                         </h3>
-                        <p className="text-sage-accent dark:text-cyber-lime font-medium text-sm transition-colors duration-300">
+                        <p className="text-sage-accent dark:text-cyber-lime font-medium text-xs sm:text-sm transition-colors duration-300 leading-tight mt-0.5 sm:mt-1 break-words">
                           {education.institution}
                         </p>
                       </div>
                     </div>
                     
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3 justify-end flex-shrink-0">
                       <span className="text-xs font-medium bg-sage-accent/20 dark:bg-cyber-lime/20 text-sage-accent dark:text-cyber-lime rounded px-2 py-1 capitalize transition-all duration-300">
                         {education.type}
                       </span>
@@ -193,32 +193,33 @@ const EducationSection = () => {
                         <CyberButton
                           size="sm"
                           variant="ghost"
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation();
                             handleViewCertificate(education.certificateUrl!);
                           }}
-                          className="min-w-0 px-3"
+                          className="min-w-0 px-2 sm:px-3 h-7 sm:h-8"
                         >
-                          <ExternalLink size={14} />
-                          <span className="hidden sm:inline ml-1">Ver</span>
+                          <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
+                          <span className="hidden sm:inline ml-1 text-xs">Ver</span>
                         </CyberButton>
                       )}
                     </div>
                   </div>
                   
-                  {/* Descripción expandible optimizada */}
+                  {/* Description - expandable */}
                   <div className={`
                     overflow-hidden transition-all duration-400 ease-in-out
-                    ${selectedEducation?.id === education.id ? 'max-h-24 opacity-100' : 'max-h-0 opacity-0'}
+                    ${selectedEducation?.id === education.id ? 'max-h-20 sm:max-h-24 opacity-100' : 'max-h-0 opacity-0'}
                   `}>
                     <div className="pt-2 border-t border-sage-accent/30 dark:border-cyber-lime/20 transition-colors duration-300">
-                      <p className="text-gray-600 dark:text-quantum-silver/80 text-sm leading-relaxed font-medium">
+                      <p className="text-gray-600 dark:text-quantum-silver/80 text-xs sm:text-sm leading-relaxed font-medium">
                         {education.description}
                       </p>
                     </div>
                   </div>
                   
-                  {/* Indicador mejorado */}
-                  <div className="mt-2 text-center">
+                  {/* Expand indicator */}
+                  <div className="mt-1 sm:mt-2 text-center">
                     <span className={`text-xs transition-all duration-300 transform ${
                       selectedEducation?.id === education.id 
                         ? 'text-sage-accent dark:text-cyber-lime rotate-180' 
