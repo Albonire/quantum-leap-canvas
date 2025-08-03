@@ -55,11 +55,11 @@ const educationData: Education[] = [
   {
     id: 5,
     year: '2024',
-    title: 'Especialización en DevOps',
+    title: 'Programming Bootcamp',
     institution: 'Instituto de Tecnología Avanzada',
-    description: 'Docker, AWS, CI/CD y automatización',
+    description: 'TypeScript, React, Node.js, Next.js, Tailwind CSS, and more',
     type: 'certification',
-    certificateUrl: 'https://example.com/certificate5'
+    certificateUrl: 'https://certificadotech.tiiny.site'
   }
 ];
 
