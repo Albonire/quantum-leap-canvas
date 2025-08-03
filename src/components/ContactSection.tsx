@@ -66,7 +66,7 @@ const ContactSection = () => {
 ┌──────────────────┬──────────────────────────────────────┐
 │ Comando          │ Descripción                          │
 ├──────────────────┼──────────────────────────────────────┤
-│ help             │ Muestra esta ayuda                   │
+│ help             │ Show help                            │
 │ about            │ Información personal                 │
 │ skills           │ Tecnologías y habilidades            │
 │ projects         │ Proyectos destacados                 │
