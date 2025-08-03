@@ -338,39 +338,39 @@ Connection to anderson-terminal closed.`;
   };
 
   return (
-    <section id="contact" className="py-16 px-6 relative">
+    <section id="contact" className="py-8 sm:py-12 md:py-16 px-3 sm:px-4 md:px-6 relative">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold mb-6 text-sage-accent dark:text-cyber-lime">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-space-grotesk font-bold mb-3 sm:mb-4 md:mb-6 text-sage-accent dark:text-cyber-lime">
             Conectemos
           </h2>
-          <p className="text-xl max-w-2xl mx-auto font-medium text-black dark:text-quantum-silver">
+          <p className="text-sm sm:text-lg md:text-xl max-w-2xl mx-auto font-medium text-black dark:text-quantum-silver px-2 sm:px-4 leading-relaxed">
             ¿Tienes un proyecto en mente? Hablemos sobre cómo puedo ayudarte a llevarlo al siguiente nivel
           </p>
         </div>
 
-        {/* Two column layout with equal heights */}
-        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+        {/* Responsive layout - Stack on mobile, side by side on desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-stretch">
           {/* Enhanced Interactive Command Console */}
-          <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-6 flex flex-col h-[650px] shadow-lg">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500 animate-pulse" style={{animationDelay: '0.5s'}}></div>
-              <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" style={{animationDelay: '1s'}}></div>
-              <span className="text-gray-800 dark:text-quantum-silver text-sm ml-4 font-mono font-medium">anderson@terminal:~$</span>
+          <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-3 sm:p-4 md:p-6 flex flex-col h-[300px] sm:h-[350px] md:h-[400px] lg:h-[650px] shadow-lg">
+            <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
+              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 rounded-full bg-red-500 animate-pulse"></div>
+              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 rounded-full bg-yellow-500 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 rounded-full bg-green-500 animate-pulse" style={{animationDelay: '1s'}}></div>
+              <span className="text-gray-800 dark:text-quantum-silver text-xs sm:text-sm md:text-base ml-1 sm:ml-2 md:ml-4 font-mono font-medium">anderson@terminal:~$</span>
               <div className="flex-1"></div>
-              <span className="text-xs text-gray-700 dark:text-quantum-silver/60 font-mono">Terminal v2.0</span>
+              <span className="text-xs text-gray-700 dark:text-quantum-silver/60 font-mono hidden sm:block">Terminal v2.0</span>
             </div>
             
             {/* Terminal output */}
-            <div className="flex-1 overflow-y-auto mb-4 font-mono text-sm space-y-1 scrollbar-thin scrollbar-thumb-sage-accent/50 dark:scrollbar-thumb-cyber-lime/50">
+            <div className="flex-1 overflow-y-auto mb-2 sm:mb-3 md:mb-4 font-mono text-xs sm:text-sm md:text-base space-y-0.5 sm:space-y-1 scrollbar-thin scrollbar-thumb-sage-accent/50 dark:scrollbar-thumb-cyber-lime/50">
               {terminalHistory.map((line, index) => (
                 <div 
                   key={index} 
                   className={
                     line.startsWith('$') 
-                      ? 'text-sage-accent dark:text-cyber-lime flex items-center gap-2 font-semibold' 
+                      ? 'text-sage-accent dark:text-cyber-lime flex items-center gap-1 sm:gap-2 font-semibold' 
                       : line.startsWith('├──') || line.startsWith('└──') || line.startsWith('│')
                         ? 'text-gray-800 dark:text-quantum-silver/80 font-mono'
                         : line.includes('✅') || line.includes('🟢')
@@ -383,24 +383,24 @@ Connection to anderson-terminal closed.`;
                   }
                 >
                   {line.startsWith('$') && <span className="text-sage-accent dark:text-cyber-lime mr-1">{'>'}</span>}
-                  <span className="whitespace-pre-wrap">{line.startsWith('$') ? line.substring(2) : line}</span>
+                  <span className="whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base">{line.startsWith('$') ? line.substring(2) : line}</span>
                 </div>
               ))}
             </div>
             
             {/* Enhanced command input */}
-            <div className="flex items-center gap-2 border-t-2 border-sage-accent dark:border-cyber-lime/20 pt-4">
-              <span className="text-sage-accent dark:text-cyber-lime font-mono text-sm animate-pulse font-bold">$</span>
+            <div className="flex items-center gap-1 sm:gap-2 border-t-2 border-sage-accent dark:border-cyber-lime/20 pt-2 sm:pt-3 md:pt-4">
+              <span className="text-sage-accent dark:text-cyber-lime font-mono text-xs sm:text-sm md:text-base animate-pulse font-bold">$</span>
               <input
                 type="text"
                 value={currentCommand}
                 onChange={(e) => setCurrentCommand(e.target.value)}
                 onKeyDown={handleKeyPress}
-                className="flex-1 bg-transparent text-gray-900 dark:text-quantum-silver font-mono text-sm focus:outline-none placeholder:text-gray-600 dark:placeholder:text-quantum-silver/50 font-medium"
-                placeholder="Escribe 'help' para ver comandos disponibles..."
+                className="flex-1 bg-transparent text-gray-900 dark:text-quantum-silver font-mono text-xs sm:text-sm md:text-base focus:outline-none placeholder:text-gray-600 dark:placeholder:text-quantum-silver/50 font-medium"
+                placeholder="Escribe 'help' para ver comandos..."
                 autoComplete="off"
               />
-              <div className="text-xs text-gray-700 dark:text-quantum-silver/40 font-mono">
+              <div className="text-xs text-gray-700 dark:text-quantum-silver/40 font-mono hidden sm:block">
                 ↑↓ historial | Enter ejecutar
               </div>
             </div>
