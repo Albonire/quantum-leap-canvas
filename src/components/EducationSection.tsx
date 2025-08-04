@@ -27,10 +27,10 @@ const educationData: Education[] = [
   },
   {
     id: 2,
-    year: '2020',
+    year: '2017',
     title: 'Técnico en Programación',
     institution: 'Centro de Formación Digital',
-    description: 'Fundamentos de programación y desarrollo web',
+    description: 'Hardaware % Networking',
     type: 'certification',
     certificateUrl: 'https://example.com/certificate2'
   },
