@@ -6,29 +6,37 @@ import { gsap } from 'gsap';
 const CyberCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  // Start with the cursor hidden, and only show it if a mouse is used.
+  const [isCursorVisible, setIsCursorVisible] = useState(false);
 
   useEffect(() => {
-    // Detectar si es un dispositivo móvil
-    const checkMobile = () => {
-      const isTouchDevice =
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        window.matchMedia('(pointer: coarse)').matches;
-      setIsMobile(isTouchDevice);
-    };
+    // This check ensures we don't run this on pure touch devices like phones.
+    // It checks if a fine pointer (like a mouse) is available.
+    const hasFinePointer = window.matchMedia('(any-pointer: fine)').matches;
 
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
+    if (!hasFinePointer) {
+      setIsCursorVisible(false);
+      return;
+    }
+
+    const showCursor = () => setIsCursorVisible(true);
+    const hideCursor = () => setIsCursorVisible(false);
+
+    // Show cursor on mouse move, hide on touch
+    window.addEventListener('mousemove', showCursor);
+    window.addEventListener('touchstart', hideCursor);
+
+    // Initial check in case the component mounts without a mouse move
+    setIsCursorVisible(true);
 
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('mousemove', showCursor);
+      window.removeEventListener('touchstart', hideCursor);
     };
   }, []);
 
   useEffect(() => {
-    // Si es móvil, no inicializar el cursor
-    if (isMobile) return;
+    if (!isCursorVisible) return;
 
     const cursor = cursorRef.current;
     const follower = followerRef.current;
@@ -93,6 +101,7 @@ const CyberCursor = () => {
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      // Ensure cleanup is safe
       document.body.removeEventListener('mouseenter', () => {
         gsap.to([cursor, follower], { autoAlpha: 1, duration: 0.3 });
       });
@@ -104,10 +113,9 @@ const CyberCursor = () => {
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
-  }, [isMobile]);
+  }, [isCursorVisible]);
 
-  // No renderizar nada si es móvil
-  if (isMobile) {
+  if (!isCursorVisible) {
     return null;
   }
 
@@ -115,12 +123,12 @@ const CyberCursor = () => {
     <>
       <div
         ref={cursorRef}
-        className="fixed w-2 h-2 bg-sage-accent dark:bg-emerald-accent rounded-full pointer-events-none z-[9999] opacity-0 hidden md:block"
+        className="fixed w-2 h-2 bg-sage-accent dark:bg-emerald-accent rounded-full pointer-events-none z-[9999] opacity-1"
         style={{ transform: 'translate(-50%, -50%)' }}
       />
       <div
         ref={followerRef}
-        className="fixed w-6 h-6 border-2 border-sage-accent dark:border-emerald-accent rounded-full pointer-events-none z-[9999] opacity-0 transition-transform duration-300 hidden md:block"
+        className="fixed w-6 h-6 border-2 border-sage-accent dark:border-emerald-accent rounded-full pointer-events-none z-[9999] opacity-1 transition-transform duration-300"
       />
     </>
   );
