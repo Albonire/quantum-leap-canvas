@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import ContactForm from "./ContactForm";
+import { CV_URL } from "@/lib/utils";
 
 const ContactSection = () => {
   const [terminalHistory, setTerminalHistory] = useState([
@@ -23,9 +24,8 @@ const ContactSection = () => {
   const [historyIndex, setHistoryIndex] = useState(-1);
 
   const downloadCV = () => {
-    // Simulate CV download
     const link = document.createElement("a");
-    link.href = "https://icedrive.net/s/gghN1jxzVwV9t8BVBkPQgxD8a4i3"; // In production, this would be the actual CV URL
+    link.href = CV_URL;
     link.download = "Anderson_Gonzalez_CV.pdf";
     link.click();
   };
@@ -256,7 +256,7 @@ Response: 24h maximum`;
 └── Lines of code: 500,000+ 💻`;
         break;
       case "ping":
-        response = `🏓 PING anderson-dev.com:
+        response = `🏓 PING anderdev-one.velcel.app:
 ├── 64 bytes from anderson: icmp_seq=1 ttl=64 time=0.1ms ✅
 ├── 64 bytes from anderson: icmp_seq=2 ttl=64 time=0.1ms ✅
 ├── 64 bytes from anderson: icmp_seq=3 ttl=64 time=0.1ms ✅

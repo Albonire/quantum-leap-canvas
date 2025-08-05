@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import GlitchText from './GlitchText';
 import CyberButton from './CyberButton';
+import { CV_URL } from '@/lib/utils';
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,14 +23,10 @@ const HeroSection = () => {
   };
 
   const downloadCV = () => {
-    // Simular descarga del CV
     const link = document.createElement('a');
-    link.href = '#'; // En producción, aquí iría la URL real del CV
+    link.href = CV_URL;
     link.download = 'Anderson_Gonzalez_CV.pdf';
     link.click();
-    
-    // Mostrar mensaje de confirmación
-    alert('CV descargado exitosamente!');
   };
 
   return (

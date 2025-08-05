@@ -11,9 +11,11 @@ const CyberCursor = () => {
   useEffect(() => {
     // Detectar si es un dispositivo móvil
     const checkMobile = () => {
-      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      const isSmallScreen = window.innerWidth < 768;
-      setIsMobile(isTouchDevice || isSmallScreen);
+      const isTouchDevice =
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(pointer: coarse)').matches;
+      setIsMobile(isTouchDevice);
     };
 
     checkMobile();
