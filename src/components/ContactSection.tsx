@@ -249,7 +249,7 @@ Response: 24h maximum`;
       }
       case "uptime":
         response = `⏱️ Anderson System v2024:
-├── Active time: 5+ years of experience
+├── Active time: 2+ years of experience
 ├── Last update: Continuous development
 ├── Availability: 99.9% uptime
 ├── Coffee consumed: ∞ cups ☕
