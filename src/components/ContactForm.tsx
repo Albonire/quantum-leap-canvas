@@ -16,8 +16,8 @@ export default function ContactForm() {
   useEffect(() => {
     if (state.succeeded) {
       toast({
-        title: '¡Mensaje enviado!',
-        description: 'Tu mensaje ha sido enviado correctamente. Te responderé pronto.',
+        title: 'Message Sent!',
+        description: 'Your message has been sent successfully. I will get back to you soon.',
       });
     }
     if (state.errors) {
@@ -25,7 +25,7 @@ export default function ContactForm() {
         if (formErrors.length > 0) {
             toast({
                 title: 'Error',
-                description: 'Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.',
+                description: 'There was a problem sending your message. Please try again.',
                 variant: 'destructive',
             });
         }
@@ -38,10 +38,10 @@ export default function ContactForm() {
         <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-3 sm:p-4 md:p-6 flex flex-col h-[350px] sm:h-[400px] md:h-[500px] lg:h-[650px] shadow-lg items-center justify-center text-center">
             <CheckCircle className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-sage-accent dark:text-cyber-lime mb-3 sm:mb-4" />
             <h3 className="text-lg sm:text-xl md:text-2xl font-space-grotesk font-bold text-sage-accent dark:text-cyber-lime mb-2">
-                ¡Gracias por tu mensaje!
+                Thank you for your message!
             </h3>
             <p className="text-gray-800 dark:text-quantum-silver font-medium text-xs sm:text-sm md:text-base px-2">
-                Me pondré en contacto contigo pronto.
+                I will get in touch with you shortly.
             </p>
       </div>
     );
@@ -51,10 +51,10 @@ export default function ContactForm() {
     <div className="bg-sage-accent/20 dark:bg-neural-gray/30 backdrop-blur-md border-2 border-sage-accent dark:border-cyber-lime/20 rounded-lg p-3 sm:p-4 md:p-6 flex flex-col h-[350px] sm:h-[400px] md:h-[500px] lg:h-[650px] shadow-lg">
       <div className="mb-3 sm:mb-4 md:mb-6">
         <h3 className="text-lg sm:text-xl md:text-2xl font-space-grotesk font-bold text-sage-accent dark:text-cyber-lime mb-1 sm:mb-2">
-          Envíame un mensaje
+          Send me a message
         </h3>
         <p className="text-gray-800 dark:text-quantum-silver font-medium text-xs sm:text-sm md:text-base leading-relaxed">
-          ¿Tienes algún proyecto en mente? Me encantaría escuchar tus ideas
+          Have a project in mind? I would love to hear your ideas.
         </p>
       </div>
 
@@ -63,14 +63,14 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
           <div className="space-y-1 sm:space-y-2">
             <Label htmlFor="name" className="text-gray-900 dark:text-quantum-silver font-medium text-xs sm:text-sm md:text-base">
-              Nombre
+              Name
             </Label>
             <Input
               id="name"
               type="text"
               name="name"
               className="bg-white/50 dark:bg-neural-gray/40 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 text-xs sm:text-sm md:text-base h-8 sm:h-9 md:h-10"
-              placeholder="Tu nombre completo"
+              placeholder="Your full name"
             />
             <ValidationError 
               prefix="Name" 
@@ -89,7 +89,7 @@ export default function ContactForm() {
               type="email"
               name="email"
               className="bg-white/50 dark:bg-neural-gray/40 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 text-xs sm:text-sm md:text-base h-8 sm:h-9 md:h-10"
-              placeholder="tu@email.com"
+              placeholder="you@email.com"
             />
             <ValidationError 
               prefix="Email" 
@@ -103,13 +103,13 @@ export default function ContactForm() {
         {/* Message textarea */}
         <div className="space-y-1 sm:space-y-2 flex-1 flex flex-col">
           <Label htmlFor="message" className="text-gray-900 dark:text-quantum-silver font-medium text-xs sm:text-sm md:text-base">
-            Mensaje
+            Message
           </Label>
           <Textarea
             id="message"
             name="message"
             className="bg-white/50 dark:bg-neural-gray/40 border-sage-accent/30 dark:border-cyber-lime/30 focus:border-sage-accent dark:focus:border-cyber-lime text-gray-900 dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 text-xs sm:text-sm md:text-base flex-1 min-h-[60px] sm:min-h-[80px] md:min-h-[120px] resize-none"
-            placeholder="Escribe tu mensaje aquí..."
+            placeholder="Write your message here..."
           />
           <ValidationError 
             prefix="Message" 
@@ -129,14 +129,14 @@ export default function ContactForm() {
           {state.submitting ? (
             <>
               <Loader2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
-              <span className="hidden sm:inline">Enviando...</span>
-              <span className="sm:hidden">Enviando</span>
+              <span className="hidden sm:inline">Sending...</span>
+              <span className="sm:hidden">Sending</span>
             </>
           ) : (
             <>
               <Send className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden sm:inline">Enviar Mensaje</span>
-              <span className="sm:hidden">Enviar</span>
+              <span className="hidden sm:inline">Send Message</span>
+              <span className="sm:hidden">Send</span>
             </>
           )}
         </Button>
