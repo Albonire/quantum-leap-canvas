@@ -8,7 +8,7 @@ const loadingSteps = [
   'Compiling files...',
   'Rendering information...',
   'Desploying interface...',
-  '¡Conexión establecida!'
+  'Stablished connection'
 ];
 
 const LoadingScreen = () => {
