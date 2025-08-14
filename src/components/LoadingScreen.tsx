@@ -7,7 +7,7 @@ const loadingSteps = [
   'Initilizing portfolio...',
   'Compiling files...',
   'Rendering information...',
-  'Desploying...',
+  'Desploying interface...',
   '¡Conexión establecida!'
 ];
 
