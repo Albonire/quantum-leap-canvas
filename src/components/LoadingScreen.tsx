@@ -4,10 +4,10 @@ import { useState, useEffect, useMemo } from 'react';
 import GlitchText from './GlitchText';
 
 const loadingSteps = [
-  'Inicializando sistemas...',
-  'Compilando shaders cuánticos...',
-  'Renderizando pixeles de neón...',
-  'Desplegando interfaz holográfica...',
+  'Initilizing portfolio...',
+  'Compiling files...',
+  'Rendering information...',
+  'Desploying...',
   '¡Conexión establecida!'
 ];
 
