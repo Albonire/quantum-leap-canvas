@@ -100,9 +100,8 @@ const HeroSection = () => {
                 me especializo en construir aplicaciones web escalables y experiencias de usuario excepcionales.
               </p>
               <p className="text-base md:text-lg text-gray-700 dark:text-silver-mist/90 font-inter leading-relaxed font-medium">
-                Mi enfoque se centra en la calidad del código, las mejores prácticas de desarrollo 
-                y la colaboración efectiva en equipos multidisciplinarios. Siempre busco aprender 
-                nuevas tecnologías y enfrentar desafíos que me permitan crecer profesionalmente.
+              I'm passionate about writing clean, efficient code and following the best practices in development. I enjoy working with diverse teams and believe that collaborating across disciplines makes projects better. I'm always eager to learn new tech and take on challenges that help me grow as a developer.
+
               </p>
             </div>
           </div>
