@@ -94,10 +94,10 @@ const HeroSection = () => {
             {/* Content */}
             <div className="relative z-10">
               <p className="text-lg md:text-xl text-gray-900 dark:text-pearl-white/95 font-inter leading-relaxed mb-4 font-medium">
-                Soy un desarrollador apasionado por crear soluciones digitales innovadoras. 
-                Con experiencia en tecnologías modernas como <span className="text-sage-accent dark:text-cyber-lime font-semibold">React</span>, 
-                <span className="text-sage-accent dark:text-cyber-lime font-semibold"> Node.js</span> y <span className="text-sage-accent dark:text-cyber-lime font-semibold">Python</span>, 
-                me especializo en construir aplicaciones web escalables y experiencias de usuario excepcionales.
+              I am a developer with a keen interest in creating innovative digital solutions. 
+              I possess extensive experience with modern technologies such as <span className="text-sage-accent dark:text-cyber-lime font-semibold">React</span>, 
+                <span className="text-sage-accent dark:text-cyber-lime font-semibold"> Node.js</span> & <span className="text-sage-accent dark:text-cyber-lime font-semibold">Python</span>, 
+                allowing me to deliver scalable web applications and exceptional user experiences.
               </p>
               <p className="text-base md:text-lg text-gray-700 dark:text-silver-mist/90 font-inter leading-relaxed font-medium">
               I'm passionate about writing clean, efficient code and following the best practices in development. I enjoy working with diverse teams and believe that collaborating across disciplines makes projects better. I'm always eager to learn new tech and take on challenges that help me grow as a developer.
