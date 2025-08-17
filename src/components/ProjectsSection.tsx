@@ -75,7 +75,7 @@ const ProjectsSection = () => {
             Digital Cosmos
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-900 dark:text-quantum-silver font-medium">
-            Explorando el cosmos digital a través de soluciones innovadoras que transforman ideas en realidades tecnológicas
+            Innovative Solutions Where Ideas Become Reality
           </p>
         </div>
 
