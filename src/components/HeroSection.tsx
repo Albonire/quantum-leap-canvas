@@ -54,7 +54,7 @@ const HeroSection = () => {
           <p className={`text-lg md:text-xl text-gray-700 dark:text-quantum-silver font-inter mb-4 tracking-wide font-medium transition-all duration-700 delay-200 ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
           }`}>
-            Hola, soy
+            Hi, I'm
           </p>
           <h1 className={`text-5xl md:text-7xl lg:text-8xl font-space-grotesk font-bold mb-4 text-gray-900 dark:text-quantum-silver transition-all duration-700 delay-300 ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
@@ -75,12 +75,12 @@ const HeroSection = () => {
           }`}>
             <div className="inline-block bg-sage-accent/20 dark:bg-cyber-lime/10 border border-sage-accent/50 dark:border-cyber-lime/30 rounded-full px-6 py-3">
               <p className="text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold text-lg">
-                Desarrollador Full Stack
+                FullStack developer
               </p>
             </div>
             <div className="inline-block bg-sage-accent/20 dark:bg-cyber-lime/10 border border-sage-accent/50 dark:border-cyber-lime/30 rounded-full px-6 py-3">
               <p className="text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold text-lg">
-                Ingeniero en Sistemas
+                Systems Engineer
               </p>
             </div>
           </div>
@@ -100,7 +100,9 @@ const HeroSection = () => {
                 allowing me to deliver scalable web applications and exceptional user experiences.
               </p>
               <p className="text-base md:text-lg text-gray-700 dark:text-silver-mist/90 font-inter leading-relaxed font-medium">
-              I'm passionate about writing clean, efficient code and following the best practices in development. I enjoy working with diverse teams and believe that collaborating across disciplines makes projects better. I'm always eager to learn new tech and take on challenges that help me grow as a developer.
+              I'm passionate about writing clean, efficient code and following the best practices in development. 
+              I enjoy working with diverse teams and believe that collaborating across disciplines makes projects better. 
+              I'm always eager to learn new tech and take on challenges that help me grow as a developer.
 
               </p>
             </div>
