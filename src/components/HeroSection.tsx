@@ -118,7 +118,7 @@ const HeroSection = () => {
             onClick={() => scrollToSection('projects')}
             className="group transform hover:scale-105 transition-all duration-300"
           >
-            <span>Ver mis proyectos</span>
+            <span>View my projects</span>
             <div className="w-2 h-2 bg-sage-accent dark:bg-cyber-lime rounded-full animate-pulse ml-2" />
           </CyberButton>
           
