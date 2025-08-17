@@ -129,10 +129,10 @@ const EducationSection = () => {
         {/* Section header */}
         <div className="text-center mb-6 sm:mb-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-space-grotesk font-bold text-gray-900 dark:text-cyber-lime mb-2 sm:mb-3">
-            Mi Formación
+            My Education
           </h2>
           <p className="text-sm sm:text-base text-gray-600 dark:text-quantum-silver/80 max-w-2xl mx-auto font-medium px-2">
-            El camino del aprendizaje continuo en tecnología
+            My Tech & Academic Background
           </p>
         </div>
 
