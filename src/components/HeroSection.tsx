@@ -128,7 +128,7 @@ const HeroSection = () => {
             onClick={downloadCV}
             className="transform hover:scale-105 transition-all duration-300"
           >
-            <span>Descargar CV</span>
+            <span>Download CV</span>
             <div className="w-2 h-2 bg-sage-accent dark:bg-cyber-lime rounded-full animate-pulse ml-2" />
           </CyberButton>
           
@@ -138,7 +138,7 @@ const HeroSection = () => {
             onClick={() => scrollToSection('contact')}
             className="transform hover:scale-105 transition-all duration-300"
           >
-            Trabajemos juntos
+            Let's work together
           </CyberButton>
         </div>
 
