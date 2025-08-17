@@ -71,7 +71,7 @@ const TechSection = () => {
             Technology Stack
           </h2>
           <p className="text-xl text-gray-600 dark:text-quantum-silver max-w-2xl mx-auto font-medium">
-            The technologies that drive the future of digital 
+            Tech I Speak Fluently: Full-Stack Expertise
           </p>
         </div>
 
