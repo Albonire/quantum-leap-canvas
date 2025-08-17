@@ -72,7 +72,7 @@ const ProjectsSection = () => {
         {/* Section header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold mb-6 text-sage-accent dark:text-cyber-lime">
-            Galaxia de Proyectos
+            Digital Cosmos
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-900 dark:text-quantum-silver font-medium">
             Explorando el cosmos digital a través de soluciones innovadoras que transforman ideas en realidades tecnológicas
