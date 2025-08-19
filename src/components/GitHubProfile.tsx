@@ -124,7 +124,7 @@ const GitHubProfile = () => {
             <div className="flex items-center justify-center">
               <div className="w-8 h-8 border-4 border-sage-accent dark:border-cyber-lime border-t-transparent rounded-full animate-spin"></div>
               <span className="ml-3 text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold">
-                Cargando perfil de GitHub...
+                Loading GitHub profile...
               </span>
             </div>
           </div>
