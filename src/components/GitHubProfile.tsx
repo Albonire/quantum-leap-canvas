@@ -201,7 +201,7 @@ const GitHubProfile = () => {
                 <div className="flex items-center gap-3">
                   <Book className="w-4 h-4 sm:w-5 sm:h-5 text-sage-accent dark:text-cyber-lime" />
                   <span className="text-gray-900 dark:text-quantum-silver font-medium text-sm sm:text-base">
-                    {user.public_repos} repositorios públicos
+                    {user.public_repos} public repositories
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
