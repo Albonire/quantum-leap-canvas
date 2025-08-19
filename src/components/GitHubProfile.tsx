@@ -236,8 +236,8 @@ const GitHubProfile = () => {
               className="group text-xs sm:text-sm w-full sm:w-auto"
             >
               <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-              <span className="hidden sm:inline">Ver perfil completo</span>
-              <span className="sm:hidden">Ver perfil</span>
+              <span className="hidden sm:inline">View full profile</span>
+              <span className="sm:hidden">View profile</span>
               <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
             </CyberButton>
           </div>
