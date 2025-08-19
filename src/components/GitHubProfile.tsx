@@ -250,7 +250,7 @@ const GitHubProfile = () => {
             : 'scale-110 opacity-0'
         }`}>
           <h3 className="text-2xl font-space-grotesk font-bold text-gray-900 dark:text-quantum-silver mb-6 text-center">
-            Repositorios Recientes
+            Recent Repositories
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {repos.map((repo, index) => (
