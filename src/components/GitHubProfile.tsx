@@ -159,7 +159,7 @@ const GitHubProfile = () => {
             : 'scale-110 opacity-0'
         }`}>
           <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold mb-6 text-sage-accent dark:text-cyber-lime">
-            Mi GitHub
+            My GitHub
           </h2>
           <p className="text-xl max-w-2xl mx-auto font-medium text-black dark:text-quantum-silver">
             Explora mis proyectos y contribuciones en el código
