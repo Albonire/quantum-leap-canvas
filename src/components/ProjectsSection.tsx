@@ -158,7 +158,7 @@ const ProjectsSection = () => {
                 <div className="flex gap-4">
                   {project.demoUrl && (
                     <CyberButton size="sm" onClick={() => window.open(project.demoUrl, '_blank')}>
-                      Ver Demo
+                      View Demo
                     </CyberButton>
                   )}
                   {project.githubUrl && (
