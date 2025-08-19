@@ -200,7 +200,7 @@ const EducationSection = () => {
                           className="min-w-0 px-2 sm:px-3 h-7 sm:h-8"
                         >
                           <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
-                          <span className="hidden sm:inline ml-1 text-xs">Ver</span>
+                          <span className="hidden sm:inline ml-1 text-xs">Check</span>
                         </CyberButton>
                       )}
                     </div>
