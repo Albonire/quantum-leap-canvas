@@ -167,7 +167,7 @@ const ProjectsSection = () => {
                       size="sm" 
                       onClick={() => window.open(project.githubUrl, '_blank')}
                     >
-                      Código
+                      Source Code
                     </CyberButton>
                   )}
                 </div>
