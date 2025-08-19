@@ -139,7 +139,7 @@ const GitHubProfile = () => {
         <div className="max-w-7xl mx-auto">
           <div className="bg-red-100 dark:bg-red-900/20 border-2 border-red-500 rounded-lg p-8">
             <p className="text-red-600 dark:text-red-400 text-center font-space-grotesk font-semibold">
-              Error al cargar el perfil: {error}
+              Error loading profile: {error}
             </p>
           </div>
         </div>
