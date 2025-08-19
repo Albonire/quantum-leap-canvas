@@ -91,7 +91,7 @@ const ProjectsSection = () => {
                   : 'bg-gray-200/80 dark:bg-neural-gray/50 text-gray-800 dark:text-quantum-silver hover:bg-sage-accent/20 dark:hover:bg-cyber-lime/20 hover:text-sage-accent dark:hover:text-cyber-lime border border-transparent hover:border-sage-accent/50 dark:hover:border-cyber-lime/50'
               }`}
             >
-              {category === 'all' ? 'Todos' : category.toUpperCase()}
+              {category === 'all' ? 'All' : category.toUpperCase()}
             </button>
           ))}
         </div>
