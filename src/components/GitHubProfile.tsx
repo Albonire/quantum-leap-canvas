@@ -162,7 +162,7 @@ const GitHubProfile = () => {
             My GitHub
           </h2>
           <p className="text-xl max-w-2xl mx-auto font-medium text-black dark:text-quantum-silver">
-            Explora mis proyectos y contribuciones en el código
+            Showcasing my projects and open-source contributions
           </p>
         </div>
 
