@@ -184,13 +184,13 @@ const ProjectsSection = () => {
         {/* Call to action */}
         <div className="text-center mt-16">
           <p className="text-xl mb-8 font-inter font-medium text-gray-900 dark:text-quantum-silver">
-            ¿Listo para crear algo extraordinario juntos?
+            Ready to create something extraordinary together?
           </p>
           <CyberButton 
             size="lg"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Iniciar Proyecto
+            Start Project
           </CyberButton>
         </div>
       </div>
