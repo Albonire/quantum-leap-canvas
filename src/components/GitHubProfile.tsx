@@ -221,7 +221,7 @@ const GitHubProfile = () => {
                 <div className="flex items-center gap-3">
                   <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-sage-accent dark:text-cyber-lime" />
                   <span className="text-gray-900 dark:text-quantum-silver font-medium text-sm sm:text-base">
-                    Desde {formatDate(user.created_at)}
+                    Since {formatDate(user.created_at)}
                   </span>
                 </div>
               </div>
