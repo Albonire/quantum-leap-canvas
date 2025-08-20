@@ -37,7 +37,7 @@ const educationData: Education[] = [
   {
     id: 3,
     year: '2021',
-    title: 'Desarrollo Full Stack',
+    title: 'FullStack development',
     institution: 'Programming Academy',
     description: 'JavaScript, React, Node.js y bases de datos',
     type: 'course',
