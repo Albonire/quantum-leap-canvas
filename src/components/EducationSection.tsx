@@ -46,7 +46,7 @@ const educationData: Education[] = [
   {
     id: 4,
     year: '2022',
-    title: 'Ingeniería en Sistemas',
+    title: 'Systems Engineering',
     institution: 'Pamplona University',
     description: 'Carrera universitaria en desarrollo de software',
     type: 'ongoing degree',
