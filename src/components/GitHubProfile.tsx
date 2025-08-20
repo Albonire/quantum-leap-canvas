@@ -93,7 +93,7 @@ const GitHubProfile = () => {
         const userData = await fetchWithRetry<GitHubUser>('https://api.github.com/users/Albonire');
         setUser(userData);
 
-        // Fetch repositories
+        
         const reposData = await fetchWithRetry<GitHubRepo[]>('https://api.github.com/users/Albonire/repos?sort=updated&per_page=6');
         setRepos(reposData);
 
