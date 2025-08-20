@@ -20,7 +20,7 @@ const educationData: Education[] = [
     id: 1,
     year: '2017',
     title: 'IT Technician',
-    institution: 'Centro de Formación Digital',
+    institution: 'SENA (Colombian National Apprenticeship Service)',
     description: 'Hardaware % Networking',
     type: 'certification',
     certificateUrl: 'https://example.com/certificate2'
