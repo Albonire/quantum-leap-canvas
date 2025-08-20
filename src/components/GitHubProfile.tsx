@@ -89,7 +89,6 @@ const GitHubProfile = () => {
 
     const fetchGitHubData = async () => {
       try {
-        // Fetch user data
         const userData = await fetchWithRetry<GitHubUser>('https://api.github.com/users/Albonire');
         setUser(userData);
 
