@@ -48,7 +48,7 @@ const educationData: Education[] = [
     year: '2022',
     title: 'Systems Engineering',
     institution: 'Pamplona University',
-    description: 'Carrera universitaria en desarrollo de software',
+    description: 'Formal education in software engineering and computer science principles.',
     type: 'ongoing degree',
     certificateUrl: 'https://example.com/certificate4'
   },
