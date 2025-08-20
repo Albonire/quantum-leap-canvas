@@ -18,21 +18,21 @@ interface Education {
 const educationData: Education[] = [
   {
     id: 1,
+    year: '2017',
+    title: 'IT Technician',
+    institution: 'Centro de Formación Digital',
+    description: 'Hardaware % Networking',
+    type: 'certification',
+    certificateUrl: 'https://example.com/certificate2'
+  },
+  {
+    id: 2,
     year: '2019',
     title: 'Bachiller Técnico',
     institution: 'Francisco de Paula Santander Industrial Technical Institute',
     description: 'Focus on electronics and industrial mechanics',
     type: 'degree',
     certificateUrl: 'https://example.com/certificate1'
-  },
-  {
-    id: 2,
-    year: '2017',
-    title: 'Técnico en Programación',
-    institution: 'Centro de Formación Digital',
-    description: 'Hardaware % Networking',
-    type: 'certification',
-    certificateUrl: 'https://example.com/certificate2'
   },
   {
     id: 3,
