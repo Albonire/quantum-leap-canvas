@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Navbar from '@/components/Navbar';
 import CyberCursor from '@/components/CyberCursor';
 import StarryBackground from '@/components/StarryBackground';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -43,15 +44,16 @@ const Index = () => {
         <StarryBackground />
         <CyberCursor />
         <ThemeToggle />
+        <Navbar />
         
         {/* Main content with reduced spacing */}
         <main className="relative z-10 space-y-8">
-          <HeroSection />
-          <EducationSection />
-          <TechSection />
-          <ProjectsSection />
-          <GitHubProfile />
-          <ContactSection />
+          <div id="hero"><HeroSection /></div>
+          <div id="education"><EducationSection /></div>
+          <div id="tech"><TechSection /></div>
+          <div id="projects"><ProjectsSection /></div>
+          <div id="github"><GitHubProfile /></div>
+          <div id="contact"><ContactSection /></div>
         </main>
         
         {/* Footer */}
