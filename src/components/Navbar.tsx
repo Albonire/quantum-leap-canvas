@@ -52,9 +52,9 @@ const Navbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: isMounted ? 0 : -100, opacity: isMounted ? 1 : 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-4 left-[20%] -translate-x-1/2 z-50 p-1 rounded-full bg-white/5 dark:bg-black/10 border border-sage-accent/20 dark:border-cyber-lime/20 backdrop-blur-xl group"
+      className="fixed top-4 left-4 sm:left-6 md:left-[20%] -translate-x-0 md:-translate-x-1/2 z-50 p-1 rounded-full bg-white/5 dark:bg-black/10 border border-sage-accent/20 dark:border-cyber-lime/20 backdrop-blur-xl group"
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 xs:gap-1.5 sm:gap-2">
         {navItems.map((item) => (
           <MagneticIcon key={item.id} item={item} isActive={activeSection === item.id} onClick={() => scrollToSection(item.id)} />
         ))}
@@ -64,6 +64,16 @@ const Navbar = () => {
 };
 
 const MagneticIcon = ({ item, isActive, onClick }: { item: any, isActive: boolean, onClick: () => void }) => {
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -90,15 +100,15 @@ const MagneticIcon = ({ item, isActive, onClick }: { item: any, isActive: boolea
       onMouseLeave={reset}
       animate={{ x, y }}
       transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
-      className="relative z-10 flex flex-col items-center justify-center gap-1 cursor-pointer p-1 rounded-lg"
+      className="relative z-10 flex flex-col items-center justify-center gap-0.5 xs:gap-0.5 sm:gap-1 cursor-pointer p-0.5 xs:p-0.75 sm:p-1 rounded-lg"
     >
       <div
-        className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-300 ${isActive ? 'text-sage-accent dark:text-cyber-lime' : 'text-gray-800 dark:text-quantum-silver'}`}
+        className={`w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full transition-colors duration-300 ${isActive ? 'text-sage-accent dark:text-cyber-lime' : 'text-gray-800 dark:text-quantum-silver'}`}
       >
-        <item.icon size={22} />
+        <item.icon size={windowWidth < 480 ? 16 : windowWidth < 640 ? 18 : windowWidth < 768 ? 20 : 22} />
       </div>
       <span
-        className={`text-xs font-bold transition-all duration-300 ease-in-out max-h-0 opacity-0 group-hover:max-h-5 group-hover:opacity-100 overflow-hidden ${isActive ? 'text-sage-accent dark:text-cyber-lime' : 'text-gray-700 dark:text-silver-mist'}`}
+        className={`hidden md:block text-[10px] sm:text-xs font-bold transition-all duration-300 ease-in-out max-h-0 opacity-0 group-hover:max-h-5 group-hover:opacity-100 overflow-hidden ${isActive ? 'text-sage-accent dark:text-cyber-lime' : 'text-gray-700 dark:text-silver-mist'}`}
       >
         {item.tooltip}
       </span>
