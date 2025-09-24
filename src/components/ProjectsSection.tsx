@@ -19,11 +19,11 @@ const projects: Project[] = [
   {
     id: 1,
     title: "Task Manager",
-    description: "Plataforma de comercio electrónico con IA para recomendaciones personalizadas y análisis predictivo de ventas.",
+    description: "Plataforma de gestión de tareas con pomodoro technique integration con su propia base de datos y autenticación de usuarios.",
     technologies: ["Django 5.2.1", "JavaScript", "Python", "HTML5 & CSS3", "SQLite3"],
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop",
     demoUrl: "https://demo.example.com",
-    githubUrl: "https://github.com/example",
+    githubUrl: "https://github.com/Albonire/ToDo-List1.0",
     category: "web"
   },
   {
