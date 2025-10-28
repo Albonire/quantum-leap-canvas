@@ -12,18 +12,15 @@ import LoadingScreen from '@/components/LoadingScreen';
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const mountTimer = setTimeout(() => setIsMounted(true), 100);
     const loadTimer = setTimeout(() => {
       setLoading(false);
     }, 1200);
 
     return () => {
-      clearTimeout(mountTimer);
       clearTimeout(loadTimer);
     };
   }, []);
@@ -52,10 +49,11 @@ const Index = () => {
       {/* Global components with their own rendering context */}
       <StarryBackground />
       <CyberCursor />
-      <Header isVisible={isVisible} isMounted={isMounted} />
+      <Header isVisible={isVisible} isLoaded={!loading} />
 
-      <div className={`min-h-screen relative transition-colors duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}>
-        {/* Main content with reduced spacing */}
+                        <div className={`min-h-screen relative transition-colors duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}>
+
+                          {/* Main content with reduced spacing */}
         <main className="relative z-10 space-y-8">
           <div id="hero"><HeroSection /></div>
           <div id="education"><EducationSection /></div>
