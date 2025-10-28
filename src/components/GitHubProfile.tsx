@@ -62,51 +62,30 @@ const GitHubProfile = () => {
   }, []);
 
   useEffect(() => {
-    const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN || process.env.VITE_GITHUB_TOKEN;
-
-    const fetchWithRetry = async <T,>(url: string, retries = 3, delay = 1000): Promise<T> => {
-      let lastError: Error | null = null;
-      for (let i = 0; i < retries; i++) {
-        try {
-          const response = await fetch(url, {
-            headers: {
-              Authorization: `token ${GITHUB_TOKEN}`,
-            },
-          });
-          if (response.ok) {
-            return response.json();
-          }
-          lastError = new Error(`Request failed with status ${response.status}`);
-        } catch (error) {
-          lastError = error instanceof Error ? error : new Error('Unknown fetch error');
-        }
-        if (i < retries - 1) {
-          await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
-        }
-      }
-      throw lastError || new Error('Failed to fetch data after multiple retries');
-    };
-
     const fetchGitHubData = async () => {
       try {
-        const userData = await fetchWithRetry<GitHubUser>('https://api.github.com/users/Albonire');
-        setUser(userData);
-
+        const response = await fetch('/api/github');
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`);
+        }
+        const { userData, reposData } = await response.json();
         
-        const reposData = await fetchWithRetry<GitHubRepo[]>('https://api.github.com/users/Albonire/repos?sort=updated&per_page=6');
+        setUser(userData);
         setRepos(reposData);
 
-        setLoading(false);
       } catch (err) {
         const errorId = Math.random().toString(36).substring(7);
         const errorMessage = err instanceof Error ? err.message : 'Unknown error';
         setError(`${errorMessage} (Ref: ${errorId})`);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchGitHubData();
-  }, []);
+    if (isVisible) {
+      fetchGitHubData();
+    }
+  }, [isVisible]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('es-ES', {
