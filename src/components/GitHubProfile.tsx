@@ -62,7 +62,7 @@ const GitHubProfile = () => {
   }, []);
 
   useEffect(() => {
-    const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+    const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN || process.env.VITE_GITHUB_TOKEN;
 
     const fetchWithRetry = async <T,>(url: string, retries = 3, delay = 1000): Promise<T> => {
       let lastError: Error | null = null;
