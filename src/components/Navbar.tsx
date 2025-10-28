@@ -51,10 +51,10 @@ const Navbar = ({ isVisible }: { isVisible: boolean }) => {
     <>
       {/* Desktop Navbar (No longer motion, positioned by Header) */}
       <nav
-        className={`hidden md:flex absolute top-4 left-0 z-50 p-1 rounded-full border group transition-all duration-300 ${
+        className={`hidden md:flex absolute top-4 left-0 z-50 p-1 rounded-full border group transition-all duration-300 shadow-inner shadow-black/10 dark:shadow-white/10 ${
           isScrolled
-            ? 'bg-white/20 dark:bg-black/50 border-sage-accent/50 dark:border-cyber-lime/50 backdrop-blur-2xl shadow-lg shadow-sage-accent/10 dark:shadow-cyber-lime/10'
-            : 'bg-white/5 dark:bg-black/10 border-sage-accent/20 dark:border-cyber-lime/20 backdrop-blur-xl'
+            ? 'bg-white/30 dark:bg-black/60 border-sage-accent/60 dark:border-cyber-lime/60 backdrop-blur-2xl shadow-lg shadow-sage-accent/20 dark:shadow-cyber-lime/20'
+            : 'bg-white/20 dark:bg-black/30 border-sage-accent/40 dark:border-cyber-lime/40 backdrop-blur-xl'
         }`}
       >
         <div className="flex items-center gap-1 xs:gap-1.5 sm:gap-2">
