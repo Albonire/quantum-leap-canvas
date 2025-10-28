@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import Navbar from '@/components/Navbar';
-import CyberCursor from '@/components/CyberCursor';
+import { useState, useEffect, useRef } from 'react';
+import Header from '@/components/Header';
 import StarryBackground from '@/components/StarryBackground';
-import ThemeToggle from '@/components/ThemeToggle';
+import CyberCursor from '@/components/CyberCursor';
 import HeroSection from '@/components/HeroSection';
 import EducationSection from '@/components/EducationSection';
 import TechSection from '@/components/TechSection';
@@ -13,26 +12,36 @@ import LoadingScreen from '@/components/LoadingScreen';
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
-  const [opacity, setOpacity] = useState(1);
+  const [isMounted, setIsMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const mountTimer = setTimeout(() => setIsMounted(true), 100);
+    const loadTimer = setTimeout(() => {
       setLoading(false);
-    }, 1200); 
+    }, 1200);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(mountTimer);
+      clearTimeout(loadTimer);
+    };
   }, []);
 
   useEffect(() => {
     if (loading) return;
 
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const newOpacity = Math.max(0, 1 - scrollY / 500);
-      setOpacity(newOpacity);
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading]);
 
@@ -43,8 +52,7 @@ const Index = () => {
         {/* Background effects */}
         <StarryBackground />
         <CyberCursor />
-        <ThemeToggle />
-        <Navbar />
+        <Header isVisible={isVisible} isMounted={isMounted} />
         
         {/* Main content with reduced spacing */}
         <main className="relative z-10 space-y-8">
