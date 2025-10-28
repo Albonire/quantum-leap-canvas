@@ -48,12 +48,13 @@ const Index = () => {
   return (
     <>
       {loading && <LoadingScreen />}
+      
+      {/* Global components with their own rendering context */}
+      <StarryBackground />
+      <CyberCursor />
+      <Header isVisible={isVisible} isMounted={isMounted} />
+
       <div className={`min-h-screen relative transition-colors duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}>
-        {/* Background effects */}
-        <StarryBackground />
-        <CyberCursor />
-        <Header isVisible={isVisible} isMounted={isMounted} />
-        
         {/* Main content with reduced spacing */}
         <main className="relative z-10 space-y-8">
           <div id="hero"><HeroSection /></div>

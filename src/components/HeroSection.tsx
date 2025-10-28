@@ -1,9 +1,7 @@
-
-'use client';
-
 import { useState, useEffect } from 'react';
 import GlitchText from './GlitchText';
 import CyberButton from './CyberButton';
+import TypingTitle from './TypingTitle';
 import { CV_URL } from '@/lib/utils';
 
 const HeroSection = () => {
@@ -31,17 +29,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Enhanced geometric floating shapes */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 left-20 w-20 h-20 border border-sage-accent dark:border-cyber-lime rotate-45 animate-spin-slow opacity-30" />
-        <div className="absolute top-40 right-32 w-16 h-16 bg-sage-accent/10 dark:bg-cyber-lime/10 rotate-12 animate-pulse" />
-        <div className="absolute bottom-32 left-1/4 w-24 h-24 border-2 border-sage-accent dark:border-matrix-green rounded-full animate-bounce opacity-20" />
-        <div className="absolute bottom-20 right-20 w-32 h-1 bg-gradient-to-r from-transparent via-sage-accent dark:via-cyber-lime to-transparent animate-pulse" />
-        
-        {/* New professional accents */}
-        <div className="absolute top-1/2 left-10 w-2 h-40 bg-gradient-to-b from-sage-accent/0 dark:from-cyber-lime/0 via-sage-accent/50 dark:via-cyber-lime/50 to-sage-accent/0 dark:to-cyber-lime/0 animate-pulse" />
-        <div className="absolute top-1/3 right-16 w-12 h-12 border-2 border-sage-accent dark:border-cyber-lime rounded-full animate-ping opacity-20" />
-      </div>
+      {/* Background effects removed, now handled by Index.tsx */}
 
       {/* Main content with zoom in effect */}
       <div className={`relative z-10 text-center max-w-5xl mx-auto px-6 mt-24 transition-all duration-1000 ease-out ${
@@ -69,20 +57,10 @@ const HeroSection = () => {
             González
           </h2>
           
-          {/* Professional titles with enhanced styling */}
-          <div className={`flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 transition-all duration-700 delay-500 ${
+          <div className={`flex justify-center items-center mb-8 transition-all duration-700 delay-500 ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}>
-            <div className="inline-block bg-sage-accent/20 dark:bg-cyber-lime/10 border border-sage-accent/50 dark:border-cyber-lime/30 rounded-full px-6 py-3">
-              <p className="text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold text-lg">
-                FullStack developer
-              </p>
-            </div>
-            <div className="inline-block bg-sage-accent/20 dark:bg-cyber-lime/10 border border-sage-accent/50 dark:border-cyber-lime/30 rounded-full px-6 py-3">
-              <p className="text-sage-accent dark:text-cyber-lime font-space-grotesk font-semibold text-lg">
-                Systems Engineer
-              </p>
-            </div>
+            <TypingTitle titles={["FullStack Developer", "Systems Engineer", "React Specialist", "Python Expert"]} />
           </div>
         </div>
 
