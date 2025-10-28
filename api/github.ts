@@ -1,11 +1,16 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+export const config = {
+  runtime: 'edge',
+};
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const GITHUB_TOKEN = process.env.VITE_GITHUB_TOKEN;
+export default async function handler(request: Request) {
+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   const USERNAME = 'Albonire';
 
   if (!GITHUB_TOKEN) {
-    return res.status(500).json({ error: 'GitHub token not configured' });
+    return new Response(JSON.stringify({ error: 'GitHub token not configured' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   const headers = {
@@ -14,34 +19,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   };
 
   try {
-    // Fetch user data and repositories in parallel
     const [userResponse, reposResponse] = await Promise.all([
       fetch(`https://api.github.com/users/${USERNAME}`, { headers }),
       fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=6`, { headers }),
     ]);
 
     if (!userResponse.ok || !reposResponse.ok) {
-      // Handle potential errors for each request
-      const userError = !userResponse.ok ? await userResponse.text() : null;
-      const repoError = !reposResponse.ok ? await reposResponse.text() : null;
-      return res.status(500).json({
+      const errorBody = {
         error: 'Failed to fetch data from GitHub',
         userStatus: userResponse.status,
         repoStatus: reposResponse.status,
-        userError,
-        repoError,
+      };
+      return new Response(JSON.stringify(errorBody), {
+        status: 502, // Bad Gateway, as we are a proxy
+        headers: { 'Content-Type': 'application/json' },
       });
     }
 
     const userData = await userResponse.json();
     const reposData = await reposResponse.json();
 
-    // Set cache headers to reduce API calls on Vercel's side
-    res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate'); // Cache for 1 hour
-
-    return res.status(200).json({ userData, reposData });
+    return new Response(JSON.stringify({ userData, reposData }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 's-maxage=3600, stale-while-revalidate',
+      },
+    });
 
   } catch (error) {
-    return res.status(500).json({ error: error instanceof Error ? error.message : 'Unknown error' });
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
