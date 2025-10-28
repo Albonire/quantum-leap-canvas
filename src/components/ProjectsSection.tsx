@@ -28,30 +28,47 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "FinTech Quantum",
-    description: "Aplicación financiera con blockchain para transacciones seguras y análisis de mercado en tiempo real.",
-    technologies: ["Next.js", "Solidity", "Web3", "Chart.js", "MongoDB"],
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
-    demoUrl: "https://demo.example.com",
-    githubUrl: "https://github.com/example",
+    title: "BDI-GB-ZOO",
+    description: "Sistema de gestión para un zoológico, con administración de animales, hábitats y cuidadores a través de una API RESTful y una interfaz web.",
+    technologies: ["Python", "FastAPI", "PostgreSQL", "JavaScript", "Bootstrap", "Docker"],
+    image: "https://images.unsplash.com/photo-1550854043-ee4c44b62035?w=600&h=400&fit=crop",
+    githubUrl: "https://github.com/Albonire/BDI-GB-ZOO",
     category: "web"
   },
   {
     id: 3,
-    title: "AI Humanizer",
-    description: "Asistente de código inteligente que utiliza machine learning para sugerir optimizaciones y detectar errores.",
-    technologies: ["Python", "OpenAI", "FastAPI", "React", "Docker"],
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop",
-    demoUrl: "https://demo.example.com",
-    githubUrl: "https://github.com/example",
+    title: "IA Humanizer",
+    description: "Orquestador para la humanización de textos generados por IA, transformándolos en versiones más naturales y humanas.",
+    technologies: ["Vite", "TypeScript", "React", "shadcn-ui", "Tailwind CSS"],
+    image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=600&h=400&fit=crop",
+    githubUrl: "https://github.com/Albonire/ia-humanizer",
     category: "ai"
   },
   {
     id: 4,
-    title: "IoT Dashboard",
-    description: "Dashboard en tiempo real para monitoreo de dispositivos IoT con alertas inteligentes y análisis de datos.",
-    technologies: ["Vue.js", "Node.js", "MQTT", "InfluxDB", "Grafana"],
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop",
+    title: "Home Button (GNOME Extension)",
+    description: "Extensión para GNOME Shell que añade un botón para minimizar todas las ventanas y mostrar el escritorio con un solo clic.",
+    technologies: ["JavaScript", "GNOME Shell", "GJS"],
+    image: "https://images.unsplash.com/photo-1588507914493-59603a45a0e4?w=600&h=400&fit=crop",
+    githubUrl: "https://github.com/Albonire/home-button",
+    category: "desktop"
+  },
+    {
+    id: 5,
+    title: "Cupido App (Full-Stack)",
+    description: "Aplicación de citas full-stack. Frontend desarrollado con React y Vite, y backend API RESTful construido con Python, Django y DRF.",
+    technologies: ["React", "Vite", "TypeScript", "Python", "Django", "DRF"],
+    image: "https://images.unsplash.com/photo-1527719327859-c6ce80353573?w=600&h=400&fit=crop",
+    githubUrl: "https://github.com/cupidoUP-App",
+    category: "web"
+  },
+  {
+    id: 6,
+    title: "Quantum Leap Canvas",
+    description: "Mi portafolio web de alto rendimiento para mostrar habilidades, proyectos y experiencia profesional como desarrollador Full Stack.",
+    technologies: ["Vite", "TypeScript", "React", "shadcn-ui", "Tailwind CSS"],
+    image: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=600&h=400&fit=crop",
+    githubUrl: "https://github.com/Albonire/quantum-leap-canvas",
     category: "web"
   },
 ];
