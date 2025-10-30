@@ -40,7 +40,7 @@ const StarryBackground = () => {
           baseY: baseY,
           vx: 0,
           vy: 0,
-          radius: Math.random() * 1.5 + 0.3,
+          radius: Math.random() * 1.9 + 0.32,
           alpha: Math.random() * 0.8 + 0.2,
           twinkleSpeed: Math.random() * 0.04 + 0.02,
           twinklePhase: Math.random() * Math.PI * 2,
