@@ -10,11 +10,32 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     setIsTouchDevice(touch);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -31,10 +52,21 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     }
   }, []);
 
-  const isCardActive = (!isTouchDevice && isHovered) || (isTouchDevice && isPlaying);
+  const isCardActive = (!isTouchDevice && isHovered) || (isTouchDevice && isInView);
+
+  useEffect(() => {
+    if (isCardActive) {
+      videoRef.current?.play().catch(() => {
+        // Autoplay was blocked
+      });
+    } else {
+      videoRef.current?.pause();
+    }
+  }, [isCardActive]);
 
   return (
     <div
+      ref={cardRef}
       className="group relative bg-white/90 dark:bg-neural-gray/30 backdrop-blur-md border border-gray-300 dark:border-cyber-lime/20 rounded-xl overflow-hidden hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-500 shadow-lg"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -46,7 +78,6 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             ref={videoRef}
             src={project.video}
             poster={project.image}
-            autoPlay
             loop
             muted
             playsInline
