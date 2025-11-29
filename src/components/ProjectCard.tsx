@@ -1,18 +1,18 @@
 import { useState, useRef, useEffect } from 'react';
 import CyberButton from './CyberButton';
 import { Project } from '@/data/projects';
+import { useVideoPlayback } from '@/contexts/VideoPlaybackContext';
 
 interface ProjectCardProps {
   project: Project;
 }
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const [isInView, setIsInView] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  const { currentPlayingId, register, unregister, hoverPlay } = useVideoPlayback();
 
   useEffect(() => {
     const touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -22,9 +22,13 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsInView(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          register(project.id, entry.intersectionRatio);
+        } else {
+          unregister(project.id);
+        }
       },
-      { threshold: 0.1 }
+      { threshold: Array.from({ length: 21 }, (_, i) => i * 0.05) }
     );
 
     if (cardRef.current) {
@@ -35,41 +39,36 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       if (cardRef.current) {
         observer.unobserve(cardRef.current);
       }
+      unregister(project.id);
     };
-  }, []);
+  }, [project.id, register, unregister]);
+
+  const isActive = currentPlayingId === project.id;
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      const onPlay = () => setIsPlaying(true);
-      const onPause = () => setIsPlaying(false);
-      video.addEventListener('play', onPlay);
-      video.addEventListener('pause', onPause);
-      return () => {
-        video.removeEventListener('play', onPlay);
-        video.removeEventListener('pause', onPause);
-      };
-    }
-  }, []);
-
-  const isCardActive = (!isTouchDevice && isHovered) || (isTouchDevice && isInView);
-
-  useEffect(() => {
-    if (isCardActive) {
+    if (isActive) {
       videoRef.current?.play().catch(() => {
         // Autoplay was blocked
       });
     } else {
       videoRef.current?.pause();
     }
-  }, [isCardActive]);
+  }, [isActive]);
 
   return (
     <div
       ref={cardRef}
       className="group relative bg-white/90 dark:bg-neural-gray/30 backdrop-blur-md border border-gray-300 dark:border-cyber-lime/20 rounded-xl overflow-hidden hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-500 shadow-lg"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => {
+        if (!isTouchDevice) {
+          hoverPlay(project.id);
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isTouchDevice) {
+          hoverPlay(null);
+        }
+      }}
     >
       {/* Project media (Image or Video) */}
       <div className="relative aspect-video overflow-hidden">
@@ -81,20 +80,20 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             loop
             muted
             playsInline
-            className={`w-full h-full object-contain bg-black transition-transform duration-500 ${isCardActive ? 'scale-100' : 'scale-110'}`}
+            className={`w-full h-full object-contain bg-black transition-transform duration-500 ${isActive ? 'scale-100' : 'scale-110'}`}
           />
         ) : (
           <img
             src={project.image}
             alt={project.title}
-            className={`w-full h-full object-cover transition-transform duration-500 ${isCardActive ? 'scale-100' : 'scale-110'}`}
+            className={`w-full h-full object-cover transition-transform duration-500 ${isActive ? 'scale-100' : 'scale-110'}`}
           />
         )}
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-void-black/90 via-void-black/50 to-transparent" />
         
         {/* Hover effects */}
-        {isHovered && (
+        {isActive && !isTouchDevice && ( // Show only on active hover
           <>
             <div className="absolute inset-0 bg-sage-accent/10 dark:bg-cyber-lime/10" />
             <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-sage-accent dark:border-cyber-lime animate-pulse" />
@@ -152,7 +151,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       </div>
 
       {/* Scanning line effect */}
-      {isHovered && (
+      {isActive && !isTouchDevice && ( // Show only on active hover
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sage-accent dark:via-cyber-lime to-transparent animate-cyber-scan" />
       )}
     </div>
