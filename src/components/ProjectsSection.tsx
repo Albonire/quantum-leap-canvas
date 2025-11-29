@@ -8,7 +8,6 @@ import { projects } from '@/data/projects';
 
 const ProjectsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  // zoom mode toggle removed: keep a single smooth hover behavior for consistency
 
   const categories = ['all', 'web', 'mobile', 'desktop', 'ai'];
   
@@ -45,8 +44,6 @@ const ProjectsSection = () => {
             </button>
           ))}
         </div>
-
-        {/* Zoom mode toggle removed to keep a single smooth hover animation */}
 
         {/* Projects grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
