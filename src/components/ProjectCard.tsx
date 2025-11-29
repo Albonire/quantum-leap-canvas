@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import CyberButton from './CyberButton';
 import { Project } from '@/data/projects';
 
@@ -9,6 +8,30 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setIsTouchDevice(touch);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const onPlay = () => setIsPlaying(true);
+      const onPause = () => setIsPlaying(false);
+      video.addEventListener('play', onPlay);
+      video.addEventListener('pause', onPause);
+      return () => {
+        video.removeEventListener('play', onPlay);
+        video.removeEventListener('pause', onPause);
+      };
+    }
+  }, []);
+
+  const isCardActive = (!isTouchDevice && isHovered) || (isTouchDevice && isPlaying);
 
   return (
     <div
@@ -20,19 +43,20 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       <div className="relative aspect-video overflow-hidden">
         {project.video ? (
           <video
+            ref={videoRef}
             src={project.video}
             poster={project.image}
             autoPlay
             loop
             muted
             playsInline
-            className="w-full h-full object-contain bg-black transition-transform duration-500 group-hover:scale-110"
+            className={`w-full h-full object-contain bg-black transition-transform duration-500 ${isCardActive ? 'scale-100' : 'scale-110'}`}
           />
         ) : (
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className={`w-full h-full object-cover transition-transform duration-500 ${isCardActive ? 'scale-100' : 'scale-110'}`}
           />
         )}
         {/* Overlay gradient */}

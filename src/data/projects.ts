@@ -25,7 +25,7 @@ export const projects: Project[] = [
     ],
     image:
       "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop",
-    video: "/Screencast From 2025-11-27 10-00-02.mp4",
+    video: "/home_screencast.mp4",
     demoUrl: "https://demo.example.com",
     githubUrl: "https://github.com/Albonire/To-DoList1.0",
     category: "web",
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     image:
       "https://images.unsplash.com/photo-1550854043-ee4c44b62035?w=600&h=400&fit=crop",
     githubUrl: "https://github.com/Albonire/BDI-GB-ZOO",
-    video: "/Screencastbdi From 2025-11-27 11-20-18.mp4",
+    video: "/bdi_screencast.mp4",
     demoUrl: "https://bdi-gb-zoo.vercel.app/",
     category: "web",
   },
@@ -59,7 +59,7 @@ export const projects: Project[] = [
     image:
       "https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=600&h=400&fit=crop",
     githubUrl: "https://github.com/Albonire/ia-humanizer",
-    video: "/Screencasthumanizer From 2025-11-27 11-02-33.mp4",
+    video: "/humanizer_screencast.mp4",
     demoUrl: "https://ia-humanizer-neon.vercel.app/",
     category: "ai",
   },
@@ -71,6 +71,7 @@ export const projects: Project[] = [
     technologies: ["JavaScript", "GNOME Shell", "GJS"],
     image:
       "https://images.unsplash.com/photo-1588507914493-59603a45a0e4?w=600&h=400&fit=crop",
+    video: "/homebutton_screencast.mp4",
     githubUrl: "https://github.com/Albonire/home-button",
     category: "desktop",
   },
@@ -82,7 +83,7 @@ export const projects: Project[] = [
     technologies: ["React", "Vite", "TypeScript", "Python", "Django", "DRF"],
     image:
       "https://images.unsplash.com/photo-1527719327859-c6ce80353573?w=600&h=400&fit=crop",
-    video: "/ScreencastCupido From 2025-11-27 10-40-27.mp4",
+    video: "/cupido_screencast.mp4",
     demoUrl: "https://cupido-sandy.vercel.app/",
     githubUrl: "https://github.com/cupidoUP-App",
     category: "web",
