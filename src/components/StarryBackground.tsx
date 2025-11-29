@@ -25,7 +25,20 @@ const StarryBackground = () => {
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    const stars: Array<any> = [];
+    interface Star {
+      x: number;
+      y: number;
+      baseX: number;
+      baseY: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      alpha: number;
+      twinkleSpeed: number;
+      twinklePhase: number;
+      brightness: number;
+    }
+    const stars: Star[] = [];
 
     const createStars = () => {
       const numStars = Math.floor((canvas.width * canvas.height) / 4000);

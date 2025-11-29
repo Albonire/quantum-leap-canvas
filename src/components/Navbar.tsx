@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Home, User, Code, Briefcase, Mail, Github } from 'lucide-react';
 
 // Re-add sub-components that were previously deleted by mistake
-const MagneticIcon = ({ item, isActive, isNavbarVisible, onClick }: { item: any, isActive: boolean, isNavbarVisible: boolean, onClick: () => void }) => {
+type NavItem = { id: string; icon: React.ElementType; tooltip: string };
+const MagneticIcon = ({ item, isActive, isNavbarVisible, onClick }: { item: NavItem; isActive: boolean; isNavbarVisible: boolean; onClick: () => void }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -61,7 +62,7 @@ const HamburgerButton = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (i
   );
 };
 
-const navItems = [
+const navItems: NavItem[] = [
   { id: 'hero', icon: Home, tooltip: 'Home' },
   { id: 'education', icon: User, tooltip: 'Education' },
   { id: 'tech', icon: Code, tooltip: 'Tech' },
