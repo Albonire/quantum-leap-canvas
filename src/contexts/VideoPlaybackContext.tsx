@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useContext, useMemo, useState, useCallback, useEffect } from 'react';
 
 type VideoPlaybackContextType = {
   currentPlayingId: number | null;
@@ -6,17 +6,17 @@ type VideoPlaybackContextType = {
   unregister: (id: number) => void;
 };
 
-const VideoPlaybackContext = React.createContext<VideoPlaybackContextType | undefined>(undefined);
+const VideoPlaybackContext = createContext<VideoPlaybackContextType | undefined>(undefined);
 
 export const VideoPlaybackProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
-  const [visibleCards, setVisibleCards] = React.useState<Map<number, number>>(new Map());
-  const [currentPlayingId, setCurrentPlayingId] = React.useState<number | null>(null);
+  const [visibleCards, setVisibleCards] = useState<Map<number, number>>(new Map());
+  const [currentPlayingId, setCurrentPlayingId] = useState<number | null>(null);
 
-  const register = React.useCallback((id: number, ratio: number) => {
+  const register = useCallback((id: number, ratio: number) => {
     setVisibleCards(prev => new Map(prev).set(id, ratio));
   }, []);
 
-  const unregister = React.useCallback((id: number) => {
+  const unregister = useCallback((id: number) => {
     setVisibleCards(prev => {
       const newMap = new Map(prev);
       newMap.delete(id);
@@ -24,7 +24,7 @@ export const VideoPlaybackProvider: React.FC<{ children?: React.ReactNode }> = (
     });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (visibleCards.size === 0) {
       setCurrentPlayingId(null);
       return;
@@ -44,13 +44,13 @@ export const VideoPlaybackProvider: React.FC<{ children?: React.ReactNode }> = (
 
   }, [visibleCards]);
 
-  const value = React.useMemo(() => ({ currentPlayingId, register, unregister }), [currentPlayingId, register, unregister]);
+  const value = useMemo(() => ({ currentPlayingId, register, unregister }), [currentPlayingId, register, unregister]);
   
   return <VideoPlaybackContext.Provider value={value}>{children}</VideoPlaybackContext.Provider>;
 };
 
 export function useVideoPlayback() {
-  const ctx = React.useContext(VideoPlaybackContext);
+  const ctx = useContext(VideoPlaybackContext);
   if (!ctx) throw new Error('useVideoPlayback must be used within a VideoPlaybackProvider');
   return ctx;
 }
