@@ -17,7 +17,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Project media (Image or Video) */}
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative aspect-video overflow-hidden">
         {project.video ? (
           <video
             src={project.video}
