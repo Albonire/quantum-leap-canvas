@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import CyberButton from './CyberButton';
 import { Project } from '@/data/projects';
 import { useVideoPlayback } from '@/contexts/VideoPlaybackContext';
@@ -57,7 +58,12 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   }, [isActive]);
 
   return (
-    <div
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3 }}
       ref={cardRef}
       className="group relative bg-white/90 dark:bg-neural-gray/30 backdrop-blur-md border border-gray-300 dark:border-cyber-lime/20 rounded-xl overflow-hidden hover:border-sage-accent dark:hover:border-cyber-lime transition-all duration-500 shadow-lg"
       onMouseEnter={() => {
@@ -77,7 +83,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           <video
             ref={videoRef}
             src={project.video}
-            poster={project.image} // Use the static thumbnail
+            poster={project.image}
             loop
             muted
             playsInline
@@ -94,7 +100,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-void-black/90 via-void-black/50 to-transparent" />
         
         {/* Hover effects */}
-        {isActive && !isTouchDevice && ( // Show only on active hover
+        {isActive && !isTouchDevice && (
           <>
             <div className="absolute inset-0 bg-sage-accent/10 dark:bg-cyber-lime/10" />
             <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-sage-accent dark:border-cyber-lime animate-pulse" />
@@ -152,10 +158,10 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       </div>
 
       {/* Scanning line effect */}
-      {isActive && !isTouchDevice && ( // Show only on active hover
+      {isActive && !isTouchDevice && (
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sage-accent dark:via-cyber-lime to-transparent animate-cyber-scan" />
       )}
-    </div>
+    </motion.div>
   );
 };
 
