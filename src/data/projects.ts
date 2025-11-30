@@ -23,8 +23,7 @@ export const projects: Project[] = [
       "HTML5 & CSS3",
       "SQLite3",
     ],
-    image:
-      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop",
+    image: "/thumbnails/home_screencast_thumb.jpg",
     video: "/home_screencast.mp4",
     demoUrl: "https://demo.example.com",
     githubUrl: "https://github.com/Albonire/To-DoList1.0",
@@ -43,8 +42,7 @@ export const projects: Project[] = [
       "Bootstrap",
       "Docker",
     ],
-    image:
-      "https://images.unsplash.com/photo-1550854043-ee4c44b62035?w=600&h=400&fit=crop",
+    image: "/thumbnails/bdi_screencast_thumb.jpg",
     githubUrl: "https://github.com/Albonire/BDI-GB-ZOO",
     video: "/bdi_screencast.mp4",
     demoUrl: "https://bdi-gb-zoo.vercel.app/",
@@ -56,8 +54,7 @@ export const projects: Project[] = [
     description:
       "Orquestador para la humanización de textos generados por IA, transformándolos en versiones más naturales y humanas.",
     technologies: ["Vite", "TypeScript", "React", "shadcn-ui", "Tailwind CSS"],
-    image:
-      "https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=600&h=400&fit=crop",
+    image: "/thumbnails/humanizer_screencast_thumb.jpg",
     githubUrl: "https://github.com/Albonire/ia-humanizer",
     video: "/humanizer_screencast.mp4",
     demoUrl: "https://ia-humanizer-neon.vercel.app/",
@@ -69,8 +66,7 @@ export const projects: Project[] = [
     description:
       "Extensión para GNOME Shell que añade un botón para minimizar todas las ventanas y mostrar el escritorio con un solo clic.",
     technologies: ["JavaScript", "GNOME Shell", "GJS"],
-    image:
-      "https://images.unsplash.com/photo-1588507914493-59603a45a0e4?w=600&h=400&fit=crop",
+    image: "/thumbnails/homebutton_screencast_thumb.jpg",
     video: "/homebutton_screencast.mp4",
     githubUrl: "https://github.com/Albonire/home-button",
     category: "desktop",
@@ -81,8 +77,7 @@ export const projects: Project[] = [
     description:
       "Aplicación de citas full-stack. Frontend desarrollado con React y Vite, y backend API RESTful construido con Python, Django y DRF.",
     technologies: ["React", "Vite", "TypeScript", "Python", "Django", "DRF"],
-    image:
-      "https://images.unsplash.com/photo-1527719327859-c6ce80353573?w=600&h=400&fit=crop",
+    image: "/thumbnails/cupido_screencast_thumb.jpg",
     video: "/cupido_screencast.mp4",
     demoUrl: "https://cupido-sandy.vercel.app/",
     githubUrl: "https://github.com/cupidoUP-App",

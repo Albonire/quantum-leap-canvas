@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import CyberButton from './CyberButton';
 import { Project } from '@/data/projects';
 import { useVideoPlayback } from '@/contexts/VideoPlaybackContext';
-import { useVideoThumbnail } from '@/hooks/useVideoThumbnail'; // Import the new hook
 
 interface ProjectCardProps {
   project: Project;
@@ -14,7 +13,6 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const { currentPlayingId, register, unregister, hoverPlay } = useVideoPlayback();
-  const videoThumbnail = useVideoThumbnail(project.video, project.id.toString()); // Use the hook here
 
   useEffect(() => {
     const touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -79,7 +77,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           <video
             ref={videoRef}
             src={project.video}
-            poster={videoThumbnail || project.image} // Use the generated thumbnail or fallback
+            poster={project.image} // Use the static thumbnail
             loop
             muted
             playsInline
