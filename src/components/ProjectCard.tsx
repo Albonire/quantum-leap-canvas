@@ -33,13 +33,14 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       { threshold: Array.from({ length: 21 }, (_, i) => i * 0.05) }
     );
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
+    const currentCard = cardRef.current;
+    if (currentCard) {
+      observer.observe(currentCard);
     }
 
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
+      if (currentCard) {
+        observer.unobserve(currentCard);
       }
       unregister(project.id);
     };
@@ -82,7 +83,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             loop
             muted
             playsInline
-            className={`w-full h-full object-contain bg-black transition-transform duration-500 ${isActive ? 'scale-100' : 'scale-110'}`}
+            className={`w-full h-full object-cover transition-transform duration-500 ${isActive ? 'scale-100' : 'scale-110'}`}
           />
         ) : (
           <img
